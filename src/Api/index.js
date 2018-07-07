@@ -93,9 +93,10 @@ class Api {
     if (!res) return res;
     const employee = res.employee;
     if (!employee) return res;
-    this.employee = createEmployee(employee);
-    this.saveToken(employee.token);
-    employee.is_authenticated = true;
+    if (res.user_token) this.saveToken(res.user_token);
+    if (employee.token) {
+      this.employee = createEmployee({ ...employee, is_authenticated: true });
+    }
     return res;
   };
 

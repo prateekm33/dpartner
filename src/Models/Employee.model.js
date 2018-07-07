@@ -7,7 +7,6 @@ export class Employee extends DataModel {
   static validProperties = {
     first_name: { type: String, default: "" },
     last_name: { type: String, default: "" },
-    token: { type: String, default: null },
     is_authenticated: { type: Boolean, default: false },
     phone_number: {
       type: String,

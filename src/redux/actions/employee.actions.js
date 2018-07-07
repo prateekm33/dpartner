@@ -6,6 +6,20 @@ import loading_types from "../types/loading.types";
 import vendor_types from "../types/vendor.types";
 import { dispatchErrorActionOfType } from ".";
 
+export const logoutAction = () => dispatch => {
+  dispatch({ type: loading_types.LOGGING_OUT_EMPLOYEE, loading: true });
+  return Api.logout()
+    .then(done => {
+      dispatch({ type: loading_types.LOGGING_OUT_EMPLOYEE, loading: false });
+      return done;
+    })
+    .catch(error => {
+      dispatch({ type: loading_types.LOGGING_OUT_EMPLOYEE, loading: false });
+      dispatchErrorActionOfType(error_types.LOGGING_OUT_EMPLOYEE_ERROR)(error);
+      return false;
+    });
+};
+
 export const loginAction = creds => (dispatch, getState) => {
   dispatch({ type: loading_types.LOGGING_IN_EMPLOYEE, loading: true });
   return Api.loginEmployee(creds)
@@ -57,7 +71,9 @@ export const saveEmployeeData = employee => {
     email: employee.email,
     vendor_uuid: employee.vendor_uuid
   };
-  if (employee.token) _employee.token = employee.token;
+
+  if (Api.token) _employee.token = Api.token;
+  // if (employee.token) _employee.token = employee.token;
   AsyncStorage.mergeItem("employee", JSON.stringify(_employee));
   return {
     type: employee_types.SAVE_EMPLOYEE_DATA,

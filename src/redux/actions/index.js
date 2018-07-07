@@ -35,8 +35,10 @@ export const initAction = () => dispatch => {
   return loadDataFromStorage()
     .then(Api.getEmployee)
     .then(employee => {
-      if (employee) dispatch(saveEmployeeData(employee));
-      dispatch(getMyOrgAction(employee.vendor_uuid));
+      if (employee) {
+        dispatch(saveEmployeeData({ ...employee, is_authenticated: true }));
+        dispatch(getMyOrgAction(employee.vendor_uuid));
+      }
       dispatch({ type: loading_types.INITIALIZING_APP, loading: false });
       return employee;
     })

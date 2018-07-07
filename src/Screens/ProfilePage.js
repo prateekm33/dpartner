@@ -51,6 +51,8 @@ class ProfilePage extends Component {
   changeLastName = last_name => this.setState({ last_name });
   changeEmail = email => this.setState({ email });
 
+  logout = () => this.props.dispatch(logoutAction());
+
   render() {
     const { employee, vendor } = this.props;
     return (
@@ -95,6 +97,7 @@ class ProfilePage extends Component {
           />
           <A_Button value="SAVE" onPress={this.savePersonalInfo} />
         </A_View>
+        <A_Button onPress={this.logout} value="Logout" />
       </ScreenContainer>
     );
   }
