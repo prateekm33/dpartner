@@ -1,13 +1,11 @@
 import React, { Component } from "react";
-import { View } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { withNavigation } from "react-navigation";
-import {
-  A_Icon_Delete,
-  A_Icon_Pause,
-  A_Icon_View,
-  A_Button_Opacity
-} from "../Atoms";
+import { connect } from "../redux";
+import { A_Icon_Delete, A_Icon_Pause, A_Icon_View } from "../Atoms";
 import { SCREEN_NAMES } from "../AppNavigator";
+import { getResponsiveCSSFrom8 } from "../utils";
+import { USER_ROLES } from "../utils/constants";
 
 class M_Deal_Card_Options_Pre extends Component {
   constructor(props) {
@@ -28,15 +26,30 @@ class M_Deal_Card_Options_Pre extends Component {
 
   render() {
     return (
-      <View>
-        <A_Icon_View onPress={this.viewDeal} />
-        <A_Icon_Delete onPress={this.deleteDeal} />
-        <A_Icon_Pause onPress={this.pauseDeal} />
+      <View style={style.cardOptionsContainerStyle}>
+        <A_Icon_View
+          onPress={this.viewDeal}
+          style={style.cardOptionsIconStyle}
+        />
+        {this.props.employee.role === USER_ROLES.VENDOR_ADMIN && (
+          <A_Icon_Delete
+            onPress={this.deleteDeal}
+            style={style.cardOptionsIconStyle}
+          />
+        )}
+        {this.props.employee.role === USER_ROLES.VENDOR_ADMIN && (
+          <A_Icon_Pause
+            onPress={this.pauseDeal}
+            style={style.cardOptionsIconStyle}
+          />
+        )}
       </View>
     );
   }
 }
-const M_Deal_Card_Options = withNavigation(M_Deal_Card_Options_Pre);
+const M_Deal_Card_Options = connect(state => ({ employee: state.employee }))(
+  withNavigation(M_Deal_Card_Options_Pre)
+);
 
 class M_LoyaltyReward_Card_Options_Pre extends Component {
   constructor(props) {
@@ -57,16 +70,37 @@ class M_LoyaltyReward_Card_Options_Pre extends Component {
 
   render() {
     return (
-      <View>
-        <A_Icon_View onPress={this.viewReward} />
-        <A_Icon_Delete onPress={this.deleteReward} />
-        <A_Icon_Pause onPress={this.pauseReward} />
+      <View style={style.cardOptionsContainerStyle}>
+        <A_Icon_View
+          onPress={this.viewReward}
+          style={style.cardOptionsIconStyle}
+        />
+        {this.props.employee.role === USER_ROLES.VENDOR_ADMIN && (
+          <A_Icon_Delete
+            onPress={this.deleteReward}
+            style={style.cardOptionsIconStyle}
+          />
+        )}
+        {this.props.employee.role === USER_ROLES.VENDOR_ADMIN && (
+          <A_Icon_Pause
+            onPress={this.pauseReward}
+            style={style.cardOptionsIconStyle}
+          />
+        )}
       </View>
     );
   }
 }
-const M_LoyaltyReward_Card_Options = withNavigation(
-  M_LoyaltyReward_Card_Options_Pre
-);
+const M_LoyaltyReward_Card_Options = connect(state => ({
+  employee: state.employee
+}))(withNavigation(M_LoyaltyReward_Card_Options_Pre));
 
 export { M_Deal_Card_Options, M_LoyaltyReward_Card_Options };
+
+const style = StyleSheet.create({
+  cardOptionsContainerStyle: { flexDirection: "row", flexWrap: "nowrap" },
+  cardOptionsIconStyle: {
+    width: getResponsiveCSSFrom8(10).width,
+    height: getResponsiveCSSFrom8(10).height
+  }
+});

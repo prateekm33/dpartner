@@ -1,10 +1,11 @@
 import DataModel from "./Data.model";
 import { Vendor, createVendor } from "./Vendor.model";
 import uuid from "uuid/v1";
+import moment from "moment";
 
 export class Deal extends DataModel {
   static validProperties = {
-    title: { type: String, default: "" },
+    name: { type: String, default: "" },
     short_desc: { type: String, default: "" },
     long_desc: { type: String, default: "" },
     vendor: {
@@ -15,8 +16,29 @@ export class Deal extends DataModel {
       }
     },
     vendor_uuid: { type: Number, default: null },
-    code: { type: String, default: "" }
+    code: { type: String, default: "" },
+    created_at: {
+      type: moment,
+      default: val => {
+        if (!val) return null;
+        const date = moment(val);
+        if (date.isValid()) return date;
+        return null;
+      }
+    },
+    expiration: {
+      type: moment,
+      default: val => {
+        if (!val) return null;
+        const date = moment(val);
+        if (!date.isValid()) return null;
+        return date;
+      }
+    }
   };
+
+  getFormattedExpiration = format =>
+    this.expiration ? this.expiration.format(format || "MM/DD/YY") : null;
 }
 export const createDeal = params => new Deal(params);
 

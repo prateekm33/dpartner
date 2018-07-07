@@ -3,7 +3,13 @@ import { connect } from "../redux";
 import PropTypes from "prop-types";
 import { StyleSheet, View } from "react-native";
 
-import { A_Button_Opacity } from "../Atoms";
+import {
+  A_Button_Opacity,
+  A_Icon_Dashboard,
+  A_Icon_Manage,
+  A_Icon_Scan,
+  A_Icon_Profile
+} from "../Atoms";
 
 import { getResponsiveCSSFrom8 } from "../utils";
 import { SCREEN_NAMES, UNAUTH_ROUTES } from "../AppNavigator";
@@ -41,7 +47,12 @@ class O_MenuBar_Main_Pre extends Component {
     };
   }
 
-  getInitialItems = () => [];
+  getInitialItems = () => [
+    A_Icon_Dashboard,
+    A_Icon_Manage,
+    A_Icon_Scan,
+    A_Icon_Profile
+  ];
   setActiveIdx = idx => {
     if (this.state.activeIdx === idx) return;
     this.setState({ activeIdx: idx });
@@ -50,9 +61,24 @@ class O_MenuBar_Main_Pre extends Component {
     this.setActiveIdx(0);
     this.props.navigation.resetTo(SCREEN_NAMES.Dashboard);
   };
+  navigateToManagePage = () => {
+    this.setActiveIdx(1);
+    this.props.navigation.resetTo(SCREEN_NAMES.Deals_RewardsPage);
+  };
+  navigateToManageEmployeesPage = () => {
+    this.setActiveIdx(2);
+    this.props.navigation.resetTo(SCREEN_NAMES.ManageEmployeesPage);
+  };
+  navigateToProfilePage = () => {
+    this.setActiveIdx(3);
+    this.props.navigation.resetTo(SCREEN_NAMES.ProfilePage);
+  };
 
   onItemSelect = idx => {
     if (idx === 0) return this.navigateToDashboard();
+    if (idx === 1) return this.navigateToManagePage();
+    if (idx === 2) return this.navigateToManageEmployeesPage();
+    if (idx === 3) return this.navigateToProfilePage();
   };
   render() {
     const current_route = this.props.navigation.state.routeName;

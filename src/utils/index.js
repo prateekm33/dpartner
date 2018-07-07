@@ -35,3 +35,11 @@ export const generateQRCode = data => {};
 
 export const employeeIsAuthenticated = employee =>
   !!employee && employee.is_authenticated && !!employee.uuid;
+
+export const stringMatches = (str, ...matches) => {
+  if (!str) return false;
+  for (let i = 0; i < matches.length; i++) {
+    if (matches[i].substr(0, str.length) === str) return true;
+  }
+  return false;
+};

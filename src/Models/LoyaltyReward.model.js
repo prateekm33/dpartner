@@ -1,6 +1,7 @@
 import DataModel from "./Data.model";
 import { Vendor } from "./Vendor.model";
 import uuid from "uuid/v1";
+import moment from "moment";
 
 export class LoyaltyReward extends DataModel {
   static validProperties = {
@@ -9,7 +10,16 @@ export class LoyaltyReward extends DataModel {
     long_desc: { type: String, default: "" },
     vendor: { type: Vendor, default: () => new Vendor() },
     vendor_uuid: { type: Number, default: null },
-    code: { type: String, default: "" }
+    code: { type: String, default: "" },
+    created_at: {
+      type: moment,
+      default: val => {
+        if (!val) return null;
+        const date = moment(val);
+        if (date.isValid()) return date;
+        return null;
+      }
+    }
   };
 }
 export const createLoyaltyReward = params => new LoyaltyReward(params);

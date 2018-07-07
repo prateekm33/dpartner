@@ -13,8 +13,8 @@ const M_Card_Deal_Mini = withNavigation(props => {
     <A_Button
       onPress={() => props.navigation.navigate(SCREEN_NAMES.DealPage, { deal })}
     >
-      {deal.image && <A_Image source={deal.image.source} />}
-      <A_Text strong>{deal.title}</A_Text>
+      {deal.image && <A_Image source={deal.image} />}
+      <A_Text strong>{deal.name}</A_Text>
       <M_Deal_Card_Options deal={deal} />
     </A_Button>
   );
@@ -28,8 +28,8 @@ const M_Card_LoyaltyReward_Mini = withNavigation(props => {
         props.navigation.navigate(SCREEN_NAMES.LoyaltyRewardPage, { reward })
       }
     >
-      {reward.image && <A_Image source={reward.image.source} />}
-      <A_Text strong>{reward.title}</A_Text>
+      {reward.image && <A_Image source={reward.image} />}
+      <A_Text strong>{reward.name}</A_Text>
       <M_LoyaltyReward_Card_Options reward={reward} />
     </A_Button>
   );

@@ -9,6 +9,7 @@ const A_ListContainer = props => {
         data={props.data}
         renderItem={props.renderItem}
         keyExtractor={props.keyExtractor}
+        extraData={props.extraData}
       />
     </View>
   );

@@ -59,9 +59,11 @@ class Api {
 
   post = (url, body, options) => {
     return this.fetch(url, {
+      ...(options || {}),
       method: "post",
       headers: {
-        "content-type": "application/json"
+        "content-type": "application/json",
+        ...((options || {}).headers || {})
       },
       body: JSON.stringify(body)
     });
@@ -119,27 +121,48 @@ class Api {
   };
 
   signupEmployee = employee => {
-    return this.post(config.api.employees.root, { employee })
+    return this.post(config.api.vendors.employees, { employee })
       .then(this.saveTokenAndEmployeeFromResponse)
       .then(res => createEmployee(res.employee));
   };
 
-  getEmployee = employee =>
-    this.get(
-      config.api.employees.root +
-        "/" +
-        employee.vendor_uuid +
-        "/" +
-        employee.uuid
-    ).then(res => createEmployee(res.employee));
+  getEmployee = employee => {
+    let vendor_uuid;
+    if (employee) vendor_uuid = employee.vendor_uuid;
+    else if (this.employee) vendor_uuid = this.employee.vendor_uuid;
+    let url = config.api.vendors.employees + "/" + vendor_uuid;
+    if (employee && employee.uuid) url += "/" + employee.uuid;
+    return this.get(url).then(res => {
+      if (res.employee) return createEmployee(res.employee);
+      else if (res.employees) return res.employees.map(createEmployee);
+    });
+  };
 
-  updateEmployee = updates =>
-    this.put(config.api.employees.root + "/" + this.employee.uuid, {
-      updates
-    }).then(res => createEmployee(res.employee));
+  updateEmployee = (updates, employee) => {
+    let uuid;
+    if (employee) {
+      uuid = employee.uuid;
+    } else uuid = this.employee.uuid;
+    return this.put(
+      config.api.vendors.employees +
+        "/" +
+        this.employee.vendor_uuid +
+        "/" +
+        uuid,
+      {
+        updates
+      }
+    ).then(res => createEmployee(res.employee));
+  };
 
   deleteEmployee = () =>
-    this.delete(config.api.employees.root + "/" + this.employee.uuid);
+    this.delete(
+      config.api.vendors.employees +
+        "/" +
+        this.employee.vendor_uuid +
+        "/" +
+        this.employee.uuid
+    );
 
   getMyOrganization = () =>
     this.get(config.api.vendors.root + "/" + this.employee.vendor_uuid).then(
@@ -156,33 +179,48 @@ class Api {
     url += `?limit=${limit}&offset=${offset}`;
     return this.get(url).then(res => {
       if (res.deal)
-        return createDeal({
-          ...res.deal.data.deal,
-          vendor: res.deal.data.vendor
-        });
+        return {
+          ...res,
+          deal: createDeal({
+            ...res.deal.data.deal,
+            vendor: res.deal.data.vendor
+          })
+        };
       else if (res.deals)
-        return res.deals.map(deal => {
-          return createDeal({ ...deal.data.deal, vendor: deal.data.vendor });
-        });
+        return {
+          ...res,
+          deals: res.deals.map(deal => {
+            return createDeal({ ...deal.data.deal, vendor: deal.data.vendor });
+          })
+        };
     });
   };
 
-  getOrgLoyaltyRewards = ({ loyalty_reward_uuid }) => {
+  getOrgLoyaltyRewards = ({ loyalty_reward_uuid, limit, offset }) => {
     let url = config.api.vendors.rewards + "/" + this.employee.vendor_uuid;
     if (loyalty_reward_uuid) url += "/" + loyalty_reward_uuid;
+    limit = +limit || 20;
+    limit = +offset || 0;
+    url += `?limit=${limit}&offset=${offset}`;
     return this.get(url).then(res => {
       if (res.loyalty_reward)
-        return createLoyaltyReward({
-          ...res.loyalty_reward.data.loyalty_reward,
-          vendor: res.loyalty_reward.data.vendor
-        });
-      else if (res.loyalty_rewards)
-        return res.loyalty_rewards.map(reward =>
-          createLoyaltyReward({
-            ...reward.data.loyalty_reward,
-            vendor: reward.data.vendor
+        return {
+          ...res,
+          loyalty_reward: createLoyaltyReward({
+            ...res.loyalty_reward.data.loyalty_reward,
+            vendor: res.loyalty_reward.data.vendor
           })
-        );
+        };
+      else if (res.loyalty_rewards)
+        return {
+          ...res,
+          loyalty_rewards: res.loyalty_rewards.map(reward =>
+            createLoyaltyReward({
+              ...reward.data.loyalty_reward,
+              vendor: reward.data.vendor
+            })
+          )
+        };
     });
   };
 
@@ -236,8 +274,7 @@ class Api {
         "/" +
         customer_uuid +
         "/" +
-        "62e8a150-7fae-11e8-ba59-eb1e22dbd828" +
-        // this.employee.vendor_uuid +
+        this.employee.vendor_uuid +
         "/" +
         deal_uuid
     ).then(res =>
@@ -251,6 +288,16 @@ class Api {
     this.get(config.api.customers.root + "/" + customer_uuid).then(res =>
       createCustomer(res.customer)
     );
+
+  createNewDeal = deal =>
+    this.post(config.api.vendors.deals + "/" + this.employee.vendor_uuid, {
+      deal
+    }).then(res => createDeal(res.deal));
+
+  createNewLoyaltyProgram = loyalty_reward =>
+    this.post(config.api.vendors.rewards + "/" + this.employee.vendor_uuid, {
+      loyalty_reward
+    }).then(res => createLoyaltyReward(res.loyalty_reward));
 }
 
 export default new Api(config.api.root);

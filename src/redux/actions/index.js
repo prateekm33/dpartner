@@ -3,7 +3,7 @@ import loading_types from "../types/loading.types";
 import error_types from "../types/error.types";
 import notification_types from "../types/notification.types";
 import PushNotifications from "../../utils/PushNotifications";
-import { saveEmployeeData } from "./employee.actions";
+import { saveEmployeeData, getMyOrgAction } from "./employee.actions";
 import Api from "../../Api";
 import store from "../store";
 
@@ -19,7 +19,6 @@ export const loadDataFromStorage = () => {
       return AsyncStorage.setItem("employee", JSON.stringify({}));
     }
     const employee = JSON.parse(stored_employee);
-
     Api.saveToken(employee.token);
     return employee;
   });
@@ -36,9 +35,8 @@ export const initAction = () => dispatch => {
   return loadDataFromStorage()
     .then(Api.getEmployee)
     .then(employee => {
-      if (employee) {
-        dispatch(saveEmployeeData(employee));
-      }
+      if (employee) dispatch(saveEmployeeData(employee));
+      dispatch(getMyOrgAction(employee.vendor_uuid));
       dispatch({ type: loading_types.INITIALIZING_APP, loading: false });
       return employee;
     })

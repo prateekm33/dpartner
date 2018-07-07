@@ -14,18 +14,15 @@ export class Vendor extends DataModel {
     //     return value instanceof Location ? value : new Location(value);
     //   }
     // },
-    phone_number: {
+    business_phone: {
       type: String,
       default: "",
       verifyValue: value => phone(value)[0]
     },
-    email: { type: String, default: "" },
+    business_email: { type: String, default: "" },
     rating: {
       type: Rating,
-      default: new Rating(),
-      verifyValue: value => {
-        return value instanceof Rating ? value : new Rating(value);
-      }
+      default: () => new Rating()
     },
     deals: {
       type: Array,
@@ -41,7 +38,9 @@ export class Vendor extends DataModel {
       type: Array,
       default: () => [],
       verifyValue: value => {
-        value.map(hour => (hour instanceof Hour ? hour : new Hour(hour)));
+        return value.map(
+          hour => (hour instanceof Hour ? hour : new Hour(hour))
+        );
       }
     }
   };

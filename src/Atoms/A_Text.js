@@ -1,4 +1,5 @@
 import React from "react";
+import { Linking } from "react-native";
 import { Text, StyleSheet } from "react-native";
 import { withNavigation } from "react-navigation";
 import { WEIGHT } from "../styles/defaults";
@@ -35,6 +36,17 @@ const A_Text_Vendor_Name_Pre = props => {
 const A_Text_Vendor_Name = withNavigation(A_Text_Vendor_Name_Pre);
 
 export { A_Text_Vendor_Name };
+
+const openEmailClient = email => {
+  Linking.openURL("mailto:" + email);
+};
+export const A_Text_Email = props => {
+  return (
+    <A_Button_Opacity onPress={() => openEmailClient(props.children)}>
+      <A_Text {...props} style={{ color: "blue" }} />
+    </A_Button_Opacity>
+  );
+};
 
 const style = StyleSheet.create({
   strong: {

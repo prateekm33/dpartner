@@ -52,6 +52,8 @@
 		</dict>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>Allow access to use camera to scan loyalty rewards cards and discounts</string>
+	<string>Allow access to use camera to scan QR codes and upload photos</string>
+  <key>NSPhotoLibraryUsageDescription</key>
+  <string>Select an existing photo.</string>
 </dict>
 </plist>
