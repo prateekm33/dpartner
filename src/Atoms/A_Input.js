@@ -188,6 +188,13 @@ class A_Input_Dropdown_Role extends Component {
   };
 
   render() {
+    if (this.props.role === USER_ROLES.VENDOR_ACCOUNT_OWNER)
+      return (
+        <A_View>
+          <A_Text strong>Role</A_Text>
+          <A_Text>{this.props.role}</A_Text>
+        </A_View>
+      );
     return (
       <A_Input_Dropdown
         title="ROLE"

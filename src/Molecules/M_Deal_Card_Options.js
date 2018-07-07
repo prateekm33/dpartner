@@ -31,13 +31,13 @@ class M_Deal_Card_Options_Pre extends Component {
           onPress={this.viewDeal}
           style={style.cardOptionsIconStyle}
         />
-        {this.props.employee.role === USER_ROLES.VENDOR_ADMIN && (
+        {this.props.employee.isAccountAdmin() && (
           <A_Icon_Delete
             onPress={this.deleteDeal}
             style={style.cardOptionsIconStyle}
           />
         )}
-        {this.props.employee.role === USER_ROLES.VENDOR_ADMIN && (
+        {this.props.employee.isAccountAdmin() && (
           <A_Icon_Pause
             onPress={this.pauseDeal}
             style={style.cardOptionsIconStyle}
@@ -75,13 +75,13 @@ class M_LoyaltyReward_Card_Options_Pre extends Component {
           onPress={this.viewReward}
           style={style.cardOptionsIconStyle}
         />
-        {this.props.employee.role === USER_ROLES.VENDOR_ADMIN && (
+        {this.props.employee.isAccountAdmin() && (
           <A_Icon_Delete
             onPress={this.deleteReward}
             style={style.cardOptionsIconStyle}
           />
         )}
-        {this.props.employee.role === USER_ROLES.VENDOR_ADMIN && (
+        {this.props.employee.isAccountAdmin() && (
           <A_Icon_Pause
             onPress={this.pauseReward}
             style={style.cardOptionsIconStyle}

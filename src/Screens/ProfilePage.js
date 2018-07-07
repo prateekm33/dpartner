@@ -8,7 +8,8 @@ import {
   A_Button,
   A_Input_Dropdown,
   A_View,
-  A_Text_Email
+  A_Text_Email,
+  A_Input_Dropdown_Role
 } from "../Atoms";
 import { USER_ROLES } from "../utils/constants";
 import { M_VendorHours } from "../Molecules";
@@ -42,7 +43,7 @@ class ProfilePage extends Component {
     // this.props.dispatch();
   };
 
-  changeRole = role => {
+  changeRole = (role, employee, idx) => {
     this.setState({ role });
   };
 
@@ -82,11 +83,9 @@ class ProfilePage extends Component {
             defaultValue={employee.last_name}
             onChangeText={this.changeLastName}
           />
-          <A_Input_Dropdown
-            title="ROLE"
-            values={[ADMIN_DROPDOWN_OPTION, EMPLOYEE_DROPDOWN_OPTION]}
-            onValueSelected={this.changeRole}
-            selectedValue={this.state.role}
+          <A_Input_Dropdown_Role
+            role={employee.role}
+            changeRole={role => this.changeRole(role, employee, idx)}
           />
           <A_Text strong>Email</A_Text>
           <A_Input

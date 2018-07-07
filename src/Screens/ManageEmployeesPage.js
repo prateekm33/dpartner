@@ -78,7 +78,6 @@ class ManageEmployeesPage extends Component {
   };
 
   renderEmployee = (employee, idx) => {
-    console.warn(this.state.updates[idx]);
     return (
       <A_View>
         {}
