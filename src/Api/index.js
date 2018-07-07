@@ -101,6 +101,7 @@ class Api {
     if (!valExists(token) || this.token === token) return;
     this.token = token;
     this.headers.authorization = `Bearer ${this.token}`;
+    console.warn("--------token : ", token);
     AsyncStorage.mergeItem("employee", JSON.stringify({ token }));
   };
 
@@ -111,7 +112,7 @@ class Api {
     // return this.get(config.api.logout);
   };
 
-  login = employee => {
+  loginEmployee = employee => {
     return this.post(config.api.employees.login, { employee })
       .then(this.saveTokenAndEmployeeFromResponse)
       .then(res => createEmployee(res.employee));
@@ -123,10 +124,14 @@ class Api {
       .then(res => createEmployee(res.employee));
   };
 
-  getEmployee = () =>
-    this.get(config.api.employees.root + "/" + this.employee.uuid).then(res =>
-      createEmployee(res.employee)
-    );
+  getEmployee = employee =>
+    this.get(
+      config.api.employees.root +
+        "/" +
+        employee.vendor_uuid +
+        "/" +
+        employee.uuid
+    ).then(res => createEmployee(res.employee));
 
   updateEmployee = updates =>
     this.put(config.api.employees.root + "/" + this.employee.uuid, {

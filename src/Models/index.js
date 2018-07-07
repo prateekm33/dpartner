@@ -22,6 +22,7 @@ import {
 } from "./Notifications.model";
 import { Rating, createRating, updateRating } from "./Rating.model";
 import { Vendor, createVendor, updateVendor } from "./Vendor.model";
+import { Employee, createEmployee, updateEmployee } from "./Employee.model";
 
 export {
   DataModel,
@@ -47,5 +48,8 @@ export {
   updateVendor,
   CustomerDeal,
   createCustomerDeal,
-  updateCustomerDeal
+  updateCustomerDeal,
+  Employee,
+  createEmployee,
+  updateEmployee
 };

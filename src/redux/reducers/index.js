@@ -1,6 +1,7 @@
 import { combineReducers } from "redux";
-import loading_reducers from "./loading_reducers";
-import navigation_types from "../types/navigation_types";
+import loading_reducers from "./loading.reducers";
+import employee_reducers from "./employee.reducers";
+import navigation_types from "../types/navigation.types";
 import user_types from "../types/user_types";
 
 const default_reducers = {
@@ -18,5 +19,6 @@ const default_reducers = {
 
 export default combineReducers({
   ...default_reducers,
-  ...loading_reducers
+  ...loading_reducers,
+  ...employee_reducers
 });

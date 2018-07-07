@@ -2,11 +2,11 @@ import React from "react";
 import { View } from "react-native";
 import { StackNavigator, NavigationActions } from "react-navigation";
 import store from "./redux/store";
-import navigation_types from "./redux/types/navigation_types";
+import navigation_types from "./redux/types/navigation.types";
 
 export const SCREEN_NAMES = {
   SplashScreen: "SplashScreen",
-  Login: "Login",
+  LoginPage: "LoginPage",
   Dashboard: "Dashboard",
   DealPage: "DealPage",
   ManageDeals_RewardsPage: "ManageDeals_RewardsPage",
@@ -16,24 +16,24 @@ export const SCREEN_NAMES = {
   LoyaltyRewardPage: "LoyaltyRewardPage"
 };
 
-export const INITIAL_ROUTE_NAME = SCREEN_NAMES.ScanPage;
+export const INITIAL_ROUTE_NAME = SCREEN_NAMES.SplashScreen;
 export const BACKLESS_ROUTES = {
   SplashScreen: true,
-  Login: true
+  LoginPage: true
 };
 export const BURGERLESS = {};
 export const HEADERLESS_ROUTES = {
   SplashScreen: true,
-  Login: true
+  LoginPage: true
 };
 export const UNAUTH_ROUTES = {
-  Login: true,
+  LoginPage: true,
   SplashScreen: true
 };
 
 const Screens = [
   [SCREEN_NAMES.SplashScreen, require("./Screens/SplashScreen")],
-  [SCREEN_NAMES.Login, require("./Screens/Login")],
+  [SCREEN_NAMES.LoginPage, require("./Screens/LoginPage")],
   [SCREEN_NAMES.Dashboard, require("./Screens/Dashboard")],
   [SCREEN_NAMES.DealPage, require("./Screens/DealPage")],
   [

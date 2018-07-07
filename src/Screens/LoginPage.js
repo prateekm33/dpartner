@@ -4,6 +4,8 @@ import { connect } from "../redux";
 import ScreenContainer from "../Templates/ScreenContainer";
 import { M_Form } from "../Molecules";
 import { A_Text, A_Button_Opacity } from "../Atoms";
+import { loginAction } from "../redux/actions/employee.actions";
+import { SCREEN_NAMES } from "../AppNavigator";
 
 class Login extends Component {
   constructor(props) {
@@ -15,7 +17,8 @@ class Login extends Component {
       },
       {
         placeholder: "password",
-        required: true
+        required: true,
+        secureTextEntry: true
       }
     ];
     this.signup_inputs = [
@@ -49,7 +52,14 @@ class Login extends Component {
   login = inputs => {
     const [username, password] = inputs.map(input => input._lastNativeText);
     const credentials = { username, password };
-    console.warn("-----TODO LOGIN VENDOR...");
+    this.props
+      .dispatch(loginAction(credentials))
+      .then(employee => employee && this.navigateToDashboard(employee));
+  };
+
+  navigateToDashboard = employee => {
+    if (!employee) return;
+    this.props.navigation.resetTo(SCREEN_NAMES.Dashboard);
   };
 
   signup = inputs => {

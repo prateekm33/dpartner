@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "../redux";
+import { View } from "react-native";
 import ScreenContainer from "../Templates/ScreenContainer";
 import { A_Text } from "../Atoms";
+import { M_Stat } from "../Molecules";
 
 class Dashboard extends Component {
   constructor(props) {
