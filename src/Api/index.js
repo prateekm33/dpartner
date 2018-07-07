@@ -101,7 +101,7 @@ class Api {
     if (!valExists(token) || this.token === token) return;
     this.token = token;
     this.headers.authorization = `Bearer ${this.token}`;
-    console.warn("--------token : ", token);
+
     AsyncStorage.mergeItem("employee", JSON.stringify({ token }));
   };
 

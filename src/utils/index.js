@@ -33,7 +33,5 @@ export const getResponsiveCSSFrom8 = pixel => {
 
 export const generateQRCode = data => {};
 
-export const employeeIsAuthenticated = employee => {
-  console.warn("----employee : ", employee.is_authenticated);
-  return !!employee && employee.is_authenticated && !!employee.uuid;
-};
+export const employeeIsAuthenticated = employee =>
+  !!employee && employee.is_authenticated && !!employee.uuid;

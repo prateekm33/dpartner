@@ -19,7 +19,7 @@ export const loadDataFromStorage = () => {
       return AsyncStorage.setItem("employee", JSON.stringify({}));
     }
     const employee = JSON.parse(stored_employee);
-    console.warn("----stored : ", employee.uuid);
+
     Api.saveToken(employee.token);
     return employee;
   });
