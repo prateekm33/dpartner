@@ -43,6 +43,9 @@ class M_Search extends Component {
             `search-list-${this.props.label}-item-${idx}`
           }
           extraData={this.props.extraData}
+          containerStyle={this.props.containerStyle}
+          listContainerStyle={this.props.listContainerStyle}
+          contentContainerStyle={this.props.listContentContainerStyle}
         />
       </A_View>
     );

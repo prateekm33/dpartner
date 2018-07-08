@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "../redux";
+import { StyleSheet } from "react-native";
 import ScreenContainer from "../Templates/ScreenContainer";
-import { stringMatches } from "../utils";
+import { stringMatches, getResponsiveCSSFrom8 } from "../utils";
 import { M_Search } from "../Molecules";
 import {
   getOrgEmployeesAction,
@@ -13,10 +14,12 @@ import {
   A_Text,
   A_Input_Dropdown_Role,
   A_Button_Opacity,
-  A_Icon_Delete
+  A_Icon_Delete,
+  A_Button
 } from "../Atoms";
 import { isAccountAdmin } from "../Models/Employee.model";
 import { USER_ROLES } from "../utils/constants";
+import { SCREEN_NAMES } from "../AppNavigator";
 
 class ManageEmployeesPage extends Component {
   constructor(props) {
@@ -44,13 +47,16 @@ class ManageEmployeesPage extends Component {
 
   componentWillReceiveProps = nextProps => {
     if (nextProps.employee.uuid === this.props.employee.uuid) return;
-    this.props
-      .dispatch(getOrgEmployeesAction(nextProps.employee.vendor_uuid))
+    this.getOrgEmployees(nextProps);
+  };
+
+  getOrgEmployees = (props = this.props) =>
+    props
+      .dispatch(getOrgEmployeesAction(props.employee.vendor_uuid))
       .then(employees => {
         if (!employees) return;
         this.setState({ employees });
       });
-  };
 
   onSearch = value => {
     return this.state.employees.filter(employee => {
@@ -140,6 +146,11 @@ class ManageEmployeesPage extends Component {
     );
   };
 
+  showNewEmployeeForm = () =>
+    this.props.navigation.navigate(SCREEN_NAMES.NewEmployeeFormPage, {
+      onDone: () => this.getOrgEmployees()
+    });
+
   renderUnauthDisplay = () => {
     return (
       <A_View>
@@ -156,17 +167,35 @@ class ManageEmployeesPage extends Component {
         {!this.props.employee.isAccountAdmin() ? (
           this.renderUnauthDisplay()
         ) : (
-          <M_Search
-            onSearch={this.onSearch}
-            data={this.state.employees}
-            renderItem={this.renderEmployee}
-            extraData={{ updates: this.state.updates }}
-          />
+          <A_View>
+            <A_Button value="NEW" onPress={this.showNewEmployeeForm} />
+            <M_Search
+              onSearch={this.onSearch}
+              data={this.state.employees}
+              renderItem={this.renderEmployee}
+              extraData={{ updates: this.state.updates }}
+              listContainerStyle={style.listContainerStyle}
+              listContentContainerStyle={style.listContentContainerStyle}
+              containerStyle={style.containerStyle}
+            />
+          </A_View>
         )}
       </ScreenContainer>
     );
   }
 }
 
-const mapStateToProps = state => ({ employee: state.employee });
+const mapStateToProps = state => ({
+  employee: state.employee,
+  employees: state.employees
+});
 export default connect(mapStateToProps)(ManageEmployeesPage);
+
+const style = StyleSheet.create({
+  containerStyle: {
+    // paddingBottom: getResponsiveCSSFrom8(100).height,
+    marginBottom: getResponsiveCSSFrom8(200).height
+  },
+  listContainerStyle: {},
+  listContentContainerStyle: {}
+});

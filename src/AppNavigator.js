@@ -19,7 +19,8 @@ export const SCREEN_NAMES = {
   RewardFormPageTwo: "RewardFormPageTwo",
   DealFormPageOne: "DealFormPageOne",
   DealFormPageTwo: "DealFormPageTwo",
-  ManageEmployeesPage: "ManageEmployeesPage"
+  ManageEmployeesPage: "ManageEmployeesPage",
+  NewEmployeeFormPage: "NewEmployeeFormPage"
 };
 
 export const INITIAL_ROUTE_NAME = SCREEN_NAMES.SplashScreen;
@@ -51,7 +52,8 @@ const Screens = [
   [SCREEN_NAMES.RewardFormPageTwo, require("./Screens/RewardFormPageTwo")],
   [SCREEN_NAMES.DealFormPageOne, require("./Screens/DealFormPageOne")],
   [SCREEN_NAMES.DealFormPageTwo, require("./Screens/DealFormPageTwo")],
-  [SCREEN_NAMES.ManageEmployeesPage, require("./Screens/ManageEmployeesPage")]
+  [SCREEN_NAMES.ManageEmployeesPage, require("./Screens/ManageEmployeesPage")],
+  [SCREEN_NAMES.NewEmployeeFormPage, require("./Screens/NewEmployeeFormPage")]
 ];
 
 const SCREENS = Screens.reduce(

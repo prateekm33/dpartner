@@ -4,12 +4,21 @@ import { getResponsiveCSSFrom8 } from "../utils";
 
 const A_ListContainer = props => {
   return (
-    <View style={{ padding: getResponsiveCSSFrom8(10).width }}>
+    <View
+      style={[
+        {
+          padding: getResponsiveCSSFrom8(10).width
+        },
+        props.containerStyle
+      ]}
+    >
       <FlatList
         data={props.data}
         renderItem={props.renderItem}
         keyExtractor={props.keyExtractor}
         extraData={props.extraData}
+        style={props.listContainerStyle}
+        contentContainerStyle={props.contentContainerStyle}
       />
     </View>
   );

@@ -94,7 +94,7 @@ class Api {
     const employee = res.employee;
     if (!employee) return res;
     if (res.user_token) this.saveToken(res.user_token);
-    if (employee.token) {
+    if (employee.uuid === res.user_uuid) {
       this.employee = createEmployee({ ...employee, is_authenticated: true });
     }
     return res;
@@ -111,7 +111,7 @@ class Api {
   logout = () => {
     this.employee = null;
     AsyncStorage.removeItem("employee");
-    return Promise.resolve();
+    return Promise.resolve(true);
     // return this.get(config.api.logout);
   };
 
@@ -298,6 +298,11 @@ class Api {
     this.post(config.api.vendors.rewards + "/" + this.employee.vendor_uuid, {
       loyalty_reward
     }).then(res => createLoyaltyReward(res.loyalty_reward));
+
+  createNewEmployee = employee =>
+    this.post(config.api.vendors.employees + "/" + this.employee.vendor_uuid, {
+      employee
+    }).then(res => createEmployee(res.employee));
 }
 
 export default new Api(config.api.root);

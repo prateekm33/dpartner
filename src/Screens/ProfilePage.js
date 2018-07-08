@@ -13,6 +13,8 @@ import {
 } from "../Atoms";
 import { USER_ROLES } from "../utils/constants";
 import { M_VendorHours } from "../Molecules";
+import { logoutAction } from "../redux/actions/employee.actions";
+import { SCREEN_NAMES } from "../AppNavigator";
 
 const ADMIN_DROPDOWN_OPTION = {
   text: "ADMIN",
@@ -51,7 +53,10 @@ class ProfilePage extends Component {
   changeLastName = last_name => this.setState({ last_name });
   changeEmail = email => this.setState({ email });
 
-  logout = () => this.props.dispatch(logoutAction());
+  logout = () =>
+    this.props.dispatch(logoutAction()).then(() => {
+      this.props.navigation.resetTo(SCREEN_NAMES.SplashScreen);
+    });
 
   render() {
     const { employee, vendor } = this.props;

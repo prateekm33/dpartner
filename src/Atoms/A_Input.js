@@ -169,8 +169,7 @@ class A_Input_Dropdown_Role extends Component {
     super(props);
     let role;
     if (props.role === USER_ROLES.VENDOR_ADMIN) role = ADMIN_DROPDOWN_OPTION;
-    else if (props.role === USER_ROLES.VENDOR_EMPLOYEE)
-      role = EMPLOYEE_DROPDOWN_OPTION;
+    else role = EMPLOYEE_DROPDOWN_OPTION;
     this.state = {
       role
     };

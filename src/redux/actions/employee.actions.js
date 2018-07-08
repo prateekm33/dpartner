@@ -139,3 +139,17 @@ export const deleteEmployeeAction = employee => dispatch => {
       return false;
     });
 };
+
+export const createNewEmployeeAction = data => dispatch => {
+  dispatch({ type: loading_types.CREATING_NEW_EMPLOYEE, loading: true });
+  return Api.createNewEmployee(data)
+    .then(employee => {
+      dispatch({ type: loading_types.CREATING_NEW_EMPLOYEE, loading: false });
+      return employee;
+    })
+    .catch(error => {
+      dispatch({ type: loading_types.CREATING_NEW_EMPLOYEE, loading: false });
+      dispatchErrorActionOfType(error_types.CREATING_NEW_EMPLOYEE_ERROR)(error);
+      return false;
+    });
+};
