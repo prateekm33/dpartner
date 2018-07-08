@@ -102,7 +102,6 @@ class PostScanRewardPage_Pre extends Component {
   redeem = () => {
     // TODO....only redeem the num of points that the customer requests
     // --- this.props.reward.points_to_redeem
-    console.warn("-----TODO....redeem loyalty rewards");
     this.props
       .dispatch(
         redeemCustomerRewardPointsAction(
@@ -119,28 +118,32 @@ class PostScanRewardPage_Pre extends Component {
   reward = () => {
     this.props.dispatch(
       rewardCustomerRewardPointsAction(
-        this.state.num_points_to_redeem,
+        this.state.points_to_reward,
         this.state.reward
       )
     );
   };
 
-  setNumOfPointsToReward = pts => {
-    this.setState({ num_points_to_redeem: pts });
+  setAmountSpent = amnt => {
+    const points_to_reward = Math.round(
+      this.state.amount_spent * this.state.reward.points_reward_ratio
+    );
+    this.setState({ amount_spent: amnt, points_to_reward });
   };
 
   render() {
     const code_type = this.state.reward.type.toLowerCase();
     return (
       <ScreenContainer noHeader>
-        {}
         {/* <A_Avatar /> */}
-        {/* <A_Text strong>{this.state.reward.customer.fullName()}</A_Text> */}
+        <A_Text strong>{this.state.customer.fullName()}</A_Text>
         <View>
           {/* <A_Logo /> */}
-          {/* <A_Text>Member Since {this.state.reward.customer.memberSince()}</A_Text> */}
+          <A_Text>
+            Member Since {this.state.reward.created_at.format("MMM DD YYYY")}
+          </A_Text>
         </View>
-        {/* <M_Stat_CustomerRewards customer={this.state.reward.customer} /> */}
+        {/* <M_Stat_CustomerRewards customer={this.state.customer} /> */}
         {code_type === "reward_redeem" && (
           <View
             style={{
@@ -161,11 +164,16 @@ class PostScanRewardPage_Pre extends Component {
               justifyContent: "space-between"
             }}
           >
+            <A_Text strong>POIINTS CALCULATOR</A_Text>
             <A_Input
-              placeholder="Num of Points"
-              value={this.state.num_points_to_redeem}
-              onChangeText={this.setNumOfPointsToReward}
+              placeholder="Amount spent"
+              value={this.state.amount_spent}
+              onChangeText={this.setAmountSpent}
             />
+            <A_Text>
+              <A_Text strong>POINTS EARNED : </A_Text>
+              <A_Text>{this.state.points_to_reward}</A_Text>
+            </A_Text>
             <A_Button
               onPress={this.reward}
               value="REWARD"

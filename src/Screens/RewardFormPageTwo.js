@@ -10,8 +10,10 @@ class RewardFormPageTwo extends Component {
   constructor(props) {
     super(props);
     console.warn("-----image uploader...TODO...");
+    const data = props.navigation.state.params.data;
     this.state = {
-      ...props.navigation.state.params.data,
+      ...data,
+      points_reward_ratio: data.points_rewarded / data.amount_spent,
       image: null
     };
   }

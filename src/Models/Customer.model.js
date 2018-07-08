@@ -1,4 +1,5 @@
 import DataModel from "./Data.model";
+import moment from "moment";
 
 export class Customer extends DataModel {
   static validProperties = {
@@ -7,11 +8,6 @@ export class Customer extends DataModel {
   };
 
   fullName = () => (this.first_name || "") + (this.last_name || "");
-
-  memberSince = () => {
-    console.warn("----TODO...");
-    return;
-  };
 }
 
 export const createCustomer = options => new Customer(options);
