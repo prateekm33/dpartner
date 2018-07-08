@@ -96,9 +96,9 @@ export const getMyOrgAction = vendor_uuid => dispatch => {
     });
 };
 
-export const getOrgEmployeesAction = () => dispatch => {
+export const getOrgEmployeesAction = vendor_uuid => dispatch => {
   dispatch({ type: loading_types.FETCHING_ORG_EMPLOYEES, loading: true });
-  return Api.getEmployee()
+  return Api.getEmployee(null, vendor_uuid)
     .then(employees => {
       dispatch({ type: loading_types.FETCHING_ORG_EMPLOYEES, loading: false });
       return employees;
@@ -122,6 +122,20 @@ export const updateEmployeeAction = (employee, updates) => dispatch => {
     .catch(error => {
       dispatch({ type: loading_types.UPDATING_EMPLOYEE, loading: false });
       dispatchErrorActionOfType(error_types.UPDATING_EMPLOYEE_ERROR)(error);
+      return false;
+    });
+};
+
+export const deleteEmployeeAction = employee => dispatch => {
+  dispatch({ type: loading_types.DELETING_EMPLOYEE, loading: true });
+  return Api.deleteEmployee(employee)
+    .then(employee => {
+      dispatch({ type: loading_types.DELETING_EMPLOYEE, loading: false });
+      return employee;
+    })
+    .catch(error => {
+      dispatch({ type: loading_types.DELETING_EMPLOYEE, loading: false });
+      dispatchErrorActionOfType(error_types.DELETING_EMPLOYEE_ERROR)(error);
       return false;
     });
 };

@@ -4,7 +4,10 @@ import uuid from "uuid/v1";
 export default class DataModel {
   static validProperties = {
     id: { type: Number, default: null },
-    uuid: { type: String, default: () => uuid() }
+    uuid: {
+      type: String,
+      default: () => uuid()
+    }
   };
   constructor(props) {
     initClassValidProps.call(this, this.constructor, props);
@@ -16,7 +19,10 @@ export default class DataModel {
   };
 
   isValidProp = key => {
-    return key in this.constructor.validProperties;
+    return (
+      key in
+      { ...DataModel.validProperties, ...this.constructor.validProperties }
+    );
   };
 
   renew = (options, extraOptions) => {
@@ -34,7 +40,9 @@ export default class DataModel {
         newParams[key] = options[key];
       }
     }
-    return new this.constructor(newParams, extraOptions);
+
+    const a = new this.constructor(newParams, extraOptions);
+    return a;
   };
 }
 

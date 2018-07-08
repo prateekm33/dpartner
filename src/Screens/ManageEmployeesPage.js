@@ -5,15 +5,17 @@ import { stringMatches } from "../utils";
 import { M_Search } from "../Molecules";
 import {
   getOrgEmployeesAction,
-  updateEmployeeAction
+  updateEmployeeAction,
+  deleteEmployeeAction
 } from "../redux/actions/employee.actions";
 import {
   A_View,
   A_Text,
   A_Input_Dropdown_Role,
-  A_Button,
-  A_Button_Opacity
+  A_Button_Opacity,
+  A_Icon_Delete
 } from "../Atoms";
+import { isAccountAdmin } from "../Models/Employee.model";
 import { USER_ROLES } from "../utils/constants";
 
 class ManageEmployeesPage extends Component {
@@ -26,11 +28,28 @@ class ManageEmployeesPage extends Component {
   }
 
   componentDidMount = () => {
-    if (this.props.employee.role !== USER_ROLES.VENDOR_ADMIN) return;
-    this.props.dispatch(getOrgEmployeesAction()).then(employees => {
-      if (!employees) return;
-      this.setState({ employees });
-    });
+    if (
+      !isAccountAdmin(this.props.employee.role) ||
+      !this.props.employee.vendor_uuid
+    )
+      return;
+
+    this.props
+      .dispatch(getOrgEmployeesAction(this.props.employee.vendor_uuid))
+      .then(employees => {
+        if (!employees) return;
+        this.setState({ employees });
+      });
+  };
+
+  componentWillReceiveProps = nextProps => {
+    if (nextProps.employee.uuid === this.props.employee.uuid) return;
+    this.props
+      .dispatch(getOrgEmployeesAction(nextProps.employee.vendor_uuid))
+      .then(employees => {
+        if (!employees) return;
+        this.setState({ employees });
+      });
   };
 
   onSearch = value => {
@@ -77,14 +96,33 @@ class ManageEmployeesPage extends Component {
       });
   };
 
+  deleteEmployee = (employee, idx) => {
+    this.props.dispatch(deleteEmployeeAction(employee)).then(done => {
+      if (!done) return;
+      this.state.updates.splice(idx, 1);
+      this.setState({
+        employees: this.state.employees.filter(e => e.uuid !== employee.uuid),
+        updates: this.state.updates
+      });
+    });
+  };
+
   renderEmployee = (employee, idx) => {
+    const full_name = employee.fullName();
     return (
       <A_View>
-        {}
-        <A_Text strong>Name</A_Text>
-        <A_Text>{employee.fullName()}</A_Text>
-        <A_Text strong>Email</A_Text>
-        <A_Text>{employee.email}</A_Text>
+        {full_name && (
+          <A_View>
+            <A_Text strong>Name</A_Text>
+            <A_Text>{full_name}</A_Text>
+          </A_View>
+        )}
+        {employee.email && (
+          <A_View>
+            <A_Text strong>Email</A_Text>
+            <A_Text>{employee.email}</A_Text>
+          </A_View>
+        )}
         <A_Input_Dropdown_Role
           role={employee.role}
           changeRole={role => this.changeRole(role, employee, idx)}
@@ -94,6 +132,9 @@ class ManageEmployeesPage extends Component {
             value="SAVE"
             onPress={() => this.saveEmployeeUpdates(employee, idx)}
           />
+        )}
+        {employee.role !== USER_ROLES.VENDOR_ACCOUNT_OWNER && (
+          <A_Icon_Delete onPress={() => this.deleteEmployee(employee, idx)} />
         )}
       </A_View>
     );
@@ -112,7 +153,7 @@ class ManageEmployeesPage extends Component {
   render() {
     return (
       <ScreenContainer title="Employees">
-        {this.props.employee.role !== USER_ROLES.VENDOR_ADMIN ? (
+        {!this.props.employee.isAccountAdmin() ? (
           this.renderUnauthDisplay()
         ) : (
           <M_Search

@@ -37,8 +37,13 @@ export const initAction = () => dispatch => {
     .then(employee => {
       if (employee) {
         dispatch(saveEmployeeData({ ...employee, is_authenticated: true }));
-        dispatch(getMyOrgAction(employee.vendor_uuid));
+        return dispatch(getMyOrgAction(employee.vendor_uuid)).then(
+          () => employee
+        );
       }
+      return employee;
+    })
+    .then(employee => {
       dispatch({ type: loading_types.INITIALIZING_APP, loading: false });
       return employee;
     })

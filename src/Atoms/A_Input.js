@@ -192,7 +192,12 @@ class A_Input_Dropdown_Role extends Component {
       return (
         <A_View>
           <A_Text strong>Role</A_Text>
-          <A_Text>{this.props.role}</A_Text>
+          <A_Text>
+            {this.props.role
+              .split("_")
+              .slice(1)
+              .join(" ")}
+          </A_Text>
         </A_View>
       );
     return (

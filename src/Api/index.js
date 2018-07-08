@@ -127,8 +127,7 @@ class Api {
       .then(res => createEmployee(res.employee));
   };
 
-  getEmployee = employee => {
-    let vendor_uuid;
+  getEmployee = (employee, vendor_uuid) => {
     if (employee) vendor_uuid = employee.vendor_uuid;
     else if (this.employee) vendor_uuid = this.employee.vendor_uuid;
     let url = config.api.vendors.employees + "/" + vendor_uuid;
@@ -156,19 +155,19 @@ class Api {
     ).then(res => createEmployee(res.employee));
   };
 
-  deleteEmployee = () =>
+  deleteEmployee = employee =>
     this.delete(
       config.api.vendors.employees +
         "/" +
-        this.employee.vendor_uuid +
+        (employee || this.employee).vendor_uuid +
         "/" +
-        this.employee.uuid
+        (employee.uuid || this.employee.uuid)
     );
 
-  getMyOrganization = () =>
-    this.get(config.api.vendors.root + "/" + this.employee.vendor_uuid).then(
-      res => createVendor(res.vendor)
-    );
+  getMyOrganization = vendor_uuid =>
+    this.get(
+      config.api.vendors.root + "/" + (vendor_uuid || this.employee.vendor_uuid)
+    ).then(res => createVendor(res.vendor));
 
   getOrgDeals = ({ deal_uuid, limit, offset }) => {
     let url = config.api.vendors.deals + "/" + this.employee.vendor_uuid;
