@@ -40,7 +40,11 @@ class Api {
           );
           throw err;
         } else {
-          console.warn("----backend server down error : ", url, err);
+          console.warn(
+            "----backend server down error : ",
+            config.api.root + "/" + url,
+            err
+          );
           throw { message: "Backend server is down." };
         }
       });
@@ -132,6 +136,7 @@ class Api {
     else if (this.employee) vendor_uuid = this.employee.vendor_uuid;
     let url = config.api.vendors.employees + "/" + vendor_uuid;
     if (employee && employee.uuid) url += "/" + employee.uuid;
+    // if (!vendor_uuid) return Promise.reject();
     return this.get(url).then(res => {
       if (res.employee) return createEmployee(res.employee);
       else if (res.employees) return res.employees.map(createEmployee);
