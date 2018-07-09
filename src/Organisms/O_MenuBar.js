@@ -1,22 +1,25 @@
 import React, { Component } from "react";
 import { connect } from "../redux";
 import PropTypes from "prop-types";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, TouchableWithoutFeedback } from "react-native";
 
 import {
   A_Button_Opacity,
   A_Icon_Dashboard,
   A_Icon_Manage,
   A_Icon_Scan,
-  A_Icon_Profile
+  A_Icon_Profile,
+  A_View,
+  A_Text
 } from "../Atoms";
 
 import { getResponsiveCSSFrom8 } from "../utils";
 import { SCREEN_NAMES, UNAUTH_ROUTES } from "../AppNavigator";
+import { TEAL_DARK_ONE } from "../styles/Colors";
 
 const O_MenuBar = props => {
   return (
-    <View style={props.containerStyle}>
+    <A_View style={[props.containerStyle]}>
       {props.items.map((Item, idx) => (
         <A_Button_Opacity
           onPress={() => props.onItemSelect(idx, Item)}
@@ -29,7 +32,7 @@ const O_MenuBar = props => {
           <Item idx={idx} />
         </A_Button_Opacity>
       ))}
-    </View>
+    </A_View>
   );
 };
 O_MenuBar.propTypes = {
@@ -43,7 +46,8 @@ class O_MenuBar_Main_Pre extends Component {
     super(props);
     this.state = {
       activeIdx: 0,
-      items: this.getInitialItems()
+      items: this.getInitialItems(),
+      menu_inactive: true
     };
   }
 
@@ -80,16 +84,29 @@ class O_MenuBar_Main_Pre extends Component {
     if (idx === 2) return this.navigateToManageEmployeesPage();
     if (idx === 3) return this.navigateToProfilePage();
   };
+
+  activateMenu = () => {
+    if (this.state.menu_inactive) this.setState({ menu_inactive: false });
+    else return;
+  };
+  deactivateMenu = () => this.setState({ menu_inactive: true });
   render() {
     const current_route = this.props.navigation.state.routeName;
     if (current_route in UNAUTH_ROUTES) return null;
-    const containerStyle = [style.mainFlavorContainer];
-    containerStyle.push(style.horizontalContainer);
+    // const containerStyle = [style.mainFlavorContainer];
+    // containerStyle.push(style.horizontalContainer);
+    if (this.state.menu_inactive)
+      return (
+        <TouchableWithoutFeedback onPress={this.activateMenu}>
+          <A_View style={style.peekabooContainer} />
+        </TouchableWithoutFeedback>
+      );
     return (
       <O_MenuBar
         activeItem={this.state.activeIdx}
         items={this.state.items}
-        containerStyle={containerStyle}
+        containerStyle={[style.mainContainerStyle]}
+        onPress={this.activateMenu}
         label="main"
         onItemSelect={this.onItemSelect}
       />
@@ -104,29 +121,46 @@ const O_MenuBar_Main = connect(state => ({
 }))(O_MenuBar_Main_Pre);
 
 const style = StyleSheet.create({
-  horizontalContainer: {
-    width: "100%",
-    height: getResponsiveCSSFrom8(50).height,
-    bottom: 0,
-    alignSelf: "center",
-    display: "flex",
-    flexDirection: "row",
-    flexWrap: "nowrap",
-    paddingBottom: getResponsiveCSSFrom8(50).height,
-    borderTopWidth: 1,
-    borderTopColor: "lightgrey"
-  },
-  menuItem: {
-    flex: 1,
-    alignItems: "center"
-  },
-  activeMenuItem: {
-    borderWidth: 1.5
-  },
-  mainFlavorContainer: {
+  peekabooContainer: {
     position: "absolute",
-    backgroundColor: "white"
+    top: 0,
+    bottom: 0,
+    right: getResponsiveCSSFrom8(-10).width,
+    width: getResponsiveCSSFrom8(20).width,
+    backgroundColor: TEAL_DARK_ONE
+  },
+
+  mainContainerStyle: {
+    position: "absolute",
+    top: 0,
+    bottom: 0,
+    right: 0,
+    backgroundColor: TEAL_DARK_ONE,
+    paddingTop: getResponsiveCSSFrom8(100).height
   }
+  // horizontalContainer: {
+  //   width: "100%",
+  //   height: getResponsiveCSSFrom8(50).height,
+  //   bottom: 0,
+  //   alignSelf: "center",
+  //   display: "flex",
+  //   flexDirection: "row",
+  //   flexWrap: "nowrap",
+  //   paddingBottom: getResponsiveCSSFrom8(50).height,
+  //   borderTopWidth: 1,
+  //   borderTopColor: "lightgrey"
+  // },
+  // menuItem: {
+  //   flex: 1,
+  //   alignItems: "center"
+  // },
+  // activeMenuItem: {
+  //   borderWidth: 1.5
+  // },
+  // mainFlavorContainer: {
+  //   position: "absolute",
+  //   backgroundColor: "white"
+  // }
 });
 
 export { O_MenuBar, O_MenuBar_Main };

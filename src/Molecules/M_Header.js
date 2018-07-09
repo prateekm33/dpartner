@@ -6,7 +6,7 @@ import { getResponsiveCSSFrom8 } from "../utils";
 const M_Header = props => {
   return (
     <View style={[style.header, props.headerContainerStyle]}>
-      {props.StatusBar && <props.StatusBar />}
+      {/* {props.StatusBar && <props.StatusBar />} */}
       <A_Text
         strong
         style={[style.headerTitleText, props.headerTitleTextStyle]}
@@ -19,7 +19,7 @@ const M_Header = props => {
 
 const M_Header_Main = props => (
   <View style={style.headerMainContainerStyle}>
-    <StatusBar barStyle="dark-content" />
+    {/* <StatusBar barStyle="dark-content" /> */}
     <A_Text strong style={style.headerMainTitleTextStyle}>
       {props.title}
     </A_Text>

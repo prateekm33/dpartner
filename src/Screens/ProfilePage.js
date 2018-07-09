@@ -1,20 +1,22 @@
 import React, { Component } from "react";
 import { connect } from "../redux";
+import { StyleSheet } from "react-native";
 import config from "../../config";
 import ScreenContainer from "../Templates/ScreenContainer";
 import {
   A_Text,
   A_Input,
   A_Button,
-  A_Input_Dropdown,
   A_View,
   A_Text_Email,
-  A_Input_Dropdown_Role
+  A_Input_Dropdown_Role,
+  A_View_Scroll
 } from "../Atoms";
 import { USER_ROLES } from "../utils/constants";
 import { M_VendorHours } from "../Molecules";
 import { logoutAction } from "../redux/actions/employee.actions";
 import { SCREEN_NAMES } from "../AppNavigator";
+import { getResponsiveCSSFrom8 } from "../utils";
 
 const ADMIN_DROPDOWN_OPTION = {
   text: "ADMIN",
@@ -61,7 +63,11 @@ class ProfilePage extends Component {
   render() {
     const { employee, vendor } = this.props;
     return (
-      <ScreenContainer title="Profile">
+      <ScreenContainer
+        title="Profile"
+        scrollView
+        containerStyle={style.containerStyle}
+      >
         <A_View>
           <A_Text strong>BUSINESS INFORMATION</A_Text>
           <A_Text>
@@ -112,3 +118,9 @@ export default connect(state => ({
   employee: state.employee,
   vendor: state.vendor
 }))(ProfilePage);
+
+const style = StyleSheet.create({
+  containerStyle: {
+    marginBottom: getResponsiveCSSFrom8(100).height
+  }
+});

@@ -8,9 +8,10 @@ import { loginAction } from "../redux/actions/employee.actions";
 import { SCREEN_NAMES } from "../AppNavigator";
 import { getResponsiveCSSFrom8 } from "../utils";
 import {
-  APP_BACKGROUND_COLOR_LIGHT,
-  APP_BACKGROUND_COLOR_DARK_ONE,
-  APP_BACKGROUND_COLOR_DARK_TWO
+  TEAL_LIGHT,
+  TEAL_DARK_ONE,
+  TEAL_DARK_TWO,
+  TEAL
 } from "../styles/Colors";
 
 class Login extends Component {
@@ -137,7 +138,8 @@ export default connect()(Login);
 const style = StyleSheet.create({
   screenContainerStyle: {
     justifyContent: "center",
-    paddingHorizontal: getResponsiveCSSFrom8(30).width
+    paddingHorizontal: getResponsiveCSSFrom8(30).width,
+    backgroundColor: TEAL
   },
   titleStyles: {
     fontSize: getResponsiveCSSFrom8(30).height,
@@ -152,14 +154,14 @@ const style = StyleSheet.create({
   submitButtonStyles: {
     marginTop: getResponsiveCSSFrom8(20).height,
     width: getResponsiveCSSFrom8(280).width,
-    backgroundColor: APP_BACKGROUND_COLOR_DARK_TWO
+    backgroundColor: TEAL_DARK_TWO
   },
   submitButtonTextStyles: {
     color: "white"
   },
   inputStyles: {
     textAlign: "center",
-    color: APP_BACKGROUND_COLOR_DARK_ONE
+    color: TEAL_DARK_ONE
   },
   switchFormContainerStyles: {
     marginTop: getResponsiveCSSFrom8(20).height,
@@ -180,5 +182,5 @@ const style = StyleSheet.create({
 });
 
 const inputProps = {
-  placeholderTextColor: APP_BACKGROUND_COLOR_LIGHT
+  placeholderTextColor: TEAL_LIGHT
 };

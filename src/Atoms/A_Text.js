@@ -49,9 +49,7 @@ export const A_Text_Email = props => {
 };
 
 const style = StyleSheet.create({
-  text: {
-    color: "white"
-  },
+  text: {},
   strong: {
     fontWeight: WEIGHT.BOLD
   },

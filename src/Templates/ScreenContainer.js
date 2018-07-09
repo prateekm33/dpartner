@@ -1,6 +1,6 @@
 import React from "react";
 import { View, StyleSheet, ScrollView } from "react-native";
-import { APP_BACKGROUND_COLOR } from "../styles/Colors";
+import { TEAL } from "../styles/Colors";
 import { M_Header_Main } from "../Molecules";
 import { O_MenuBar_Main } from "../Organisms";
 import { getResponsiveCSSFrom8 } from "../utils";
@@ -13,12 +13,11 @@ export default props => (
     ) : (
       props.children
     )}
-    <O_MenuBar_Main />
   </View>
 );
 const style = StyleSheet.create({
   container: {
-    backgroundColor: APP_BACKGROUND_COLOR,
+    backgroundColor: "white",
     height: "100%",
     width: "100%",
     padding: getResponsiveCSSFrom8(10).width
