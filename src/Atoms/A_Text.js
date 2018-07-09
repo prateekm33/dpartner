@@ -8,7 +8,7 @@ import { A_Button_Opacity } from "./A_Button";
 import { SCREEN_NAMES } from "../AppNavigator";
 
 const A_Text = props => {
-  let styles_array = [];
+  let styles_array = [style.text];
   if (props.strong) styles_array.push(style.strong);
   styles_array = styles_array.concat(props.style);
   if (props.color) styles_array.push({ color: props.color });
@@ -49,6 +49,9 @@ export const A_Text_Email = props => {
 };
 
 const style = StyleSheet.create({
+  text: {
+    color: "white"
+  },
   strong: {
     fontWeight: WEIGHT.BOLD
   },

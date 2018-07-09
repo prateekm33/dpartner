@@ -6,9 +6,17 @@ import moment from "moment";
 import { A_Button_Opacity } from "./A_Button";
 import { A_Icon_DropdownToggle } from "./A_Icon";
 import { USER_ROLES } from "../utils/constants";
+import { getResponsiveCSSFrom8 } from "../utils";
 
 const A_Input = props => {
-  return <TextInput {...props} ref={props.inputRef} />;
+  return (
+    <TextInput
+      placeholderTextColor="grey"
+      {...props}
+      style={[style.inputStyles, props.style]}
+      ref={props.inputRef}
+    />
+  );
 };
 A_Input.propTypes = {
   ...TextInput.propTypes,
@@ -213,6 +221,12 @@ class A_Input_Dropdown_Role extends Component {
 export { A_Input, A_Input_Date, A_Input_Dropdown, A_Input_Dropdown_Role };
 
 const style = StyleSheet.create({
+  inputStyles: {
+    borderRadius: getResponsiveCSSFrom8(8).width,
+    paddingVertical: getResponsiveCSSFrom8(20).height,
+    paddingHorizontal: getResponsiveCSSFrom8(10).width,
+    fontSize: getResponsiveCSSFrom8(20).height
+  },
   dropdownInputContainer: {
     flexDirection: "row",
     flexWrap: "nowrap"

@@ -23,9 +23,13 @@ export const fetchOrgRewardsAction = (limit, offset) => dispatch => {
     });
 };
 
-export const rewardCustomerRewardPointsAction = (pts, reward) => dispatch => {
+export const rewardCustomerRewardPointsAction = (
+  points_to_reward,
+  amount_spent,
+  reward
+) => dispatch => {
   dispatch({ type: loading_types.REWARDING_POINTS_TO_CUSTOMER, loading: true });
-  return Api.rewardCustomerRewardPoints(pts, reward)
+  return Api.rewardCustomerRewardPoints(points_to_reward, amount_spent, reward)
     .then(loyalty_reward => {
       dispatch({
         type: loading_types.REWARDING_POINTS_TO_CUSTOMER,
@@ -45,12 +49,15 @@ export const rewardCustomerRewardPointsAction = (pts, reward) => dispatch => {
     });
 };
 
-export const redeemCustomerRewardPointsAction = (pts, reward) => dispatch => {
+export const redeemCustomerRewardPointsAction = (
+  points_to_redeem,
+  reward
+) => dispatch => {
   dispatch({
     type: loading_types.REDEEMING_CUSTOMER_REWARD_POINTS,
     loading: true
   });
-  return Api.redeemCustomerRewardPoints(pts, reward)
+  return Api.redeemCustomerRewardPoints(points_to_redeem, reward)
     .then(loyalty_reward => {
       dispatch({
         type: loading_types.REDEEMING_CUSTOMER_REWARD_POINTS,

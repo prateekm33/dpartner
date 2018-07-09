@@ -52,7 +52,8 @@ class Api {
 
   checkResponseForErrors = unprocessedResponse => {
     return unprocessedResponse.json().then(res => {
-      if (!res || res.error) throw res;
+      if (res && res.error) throw res;
+      if (res === false) throw res;
       return res;
     });
   };
@@ -233,8 +234,15 @@ class Api {
     return this.post(config.api.notifications.register, { device_token });
   };
 
-  updateCustomerRewardPoints = (points, reward) =>
-    this.put(
+  updateCustomerRewardPoints = (points, num_points_redeemed, reward, type) => {
+    const updates = {
+      points
+    };
+
+    if (!!num_points_redeemed)
+      updates.num_points_redeemed = num_points_redeemed;
+
+    return this.put(
       config.api.customers.rewards +
         "/" +
         reward.customer.uuid +
@@ -243,19 +251,39 @@ class Api {
         "/" +
         reward.uuid,
       {
-        updates: {
-          points
-        }
+        updates,
+        type
       }
     ).then(res =>
       createCustomerLoyaltyRewardCard(...reward, ...res.loyalty_reward)
     );
+  };
 
-  rewardCustomerRewardPoints = (points, reward) =>
-    this.updateCustomerRewardPoints(reward.customer.points + points, reward);
+  // TODO...add in API to save amount_spent under PurchaseHistory table for customer
+  rewardCustomerRewardPoints = (points_to_reward, amount_spent, reward) =>
+    this.updateCustomerRewardPoints(
+      reward.customer.points + points_to_reward,
+      null,
+      reward,
+      "earn"
+    );
 
-  redeemCustomerRewardPoints = (points, reward) =>
-    this.updateCustomerRewardPoints(reward.customer.points - points, reward);
+  redeemCustomerRewardPoints = (points_to_redeem, reward) =>
+    this.updateCustomerRewardPoints(
+      reward.customer.points - points_to_redeem,
+      reward.customer.num_points_redeemed + points_to_redeem,
+      reward,
+      "redeem"
+    );
+
+  redeemCustomerDeal = (deal_uuid, customer_uuid) =>
+    this.put(
+      config.api.customers.deals +
+        "/redeem/" +
+        customer_uuid +
+        this.employee.vendor_uuid +
+        deal_uuid
+    );
 
   fetchCustomerRewardDetails = ({ loyalty_reward_uuid, customer_uuid }) =>
     this.get(

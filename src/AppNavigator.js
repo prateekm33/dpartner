@@ -11,16 +11,16 @@ export const SCREEN_NAMES = {
   Dashboard: "Dashboard",
   DealPage: "DealPage",
   Deals_RewardsPage: "Deals_RewardsPage",
-  PostScanPage: "PostScanPage",
-  ScanPage: "ScanPage",
+  PostScanPage: "PostScanPage", // TODO - break this out into the modal navigator
+  ScanPage: "ScanPage", // TODO - break this out into the modal navigator
   ProfilePage: "ProfilePage",
   LoyaltyRewardPage: "LoyaltyRewardPage",
-  RewardFormPageOne: "RewardFormPageOne",
-  RewardFormPageTwo: "RewardFormPageTwo",
-  DealFormPageOne: "DealFormPageOne",
-  DealFormPageTwo: "DealFormPageTwo",
+  RewardFormPageOne: "RewardFormPageOne", // TODO - break this out into the modal navigator
+  RewardFormPageTwo: "RewardFormPageTwo", // TODO - break this out into the modal navigator
+  DealFormPageOne: "DealFormPageOne", // TODO - break this out into the modal navigator
+  DealFormPageTwo: "DealFormPageTwo", // TODO - break this out into the modal navigator
   ManageEmployeesPage: "ManageEmployeesPage",
-  NewEmployeeFormPage: "NewEmployeeFormPage"
+  NewEmployeeFormPage: "NewEmployeeFormPage" // TODO - break this out into the modal navigator
 };
 
 export const INITIAL_ROUTE_NAME = SCREEN_NAMES.SplashScreen;

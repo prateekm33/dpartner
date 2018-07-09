@@ -19,7 +19,8 @@ export class LoyaltyReward extends DataModel {
         if (date.isValid()) return date;
         return null;
       }
-    }
+    },
+    points_reward_ratio: { type: Number, default: 0 }
   };
 }
 export const createLoyaltyReward = params => new LoyaltyReward(params);

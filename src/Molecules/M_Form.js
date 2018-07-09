@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { View } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { A_Input, A_Button, A_Text } from "../Atoms";
+import { getResponsiveCSSFrom8 } from "../utils";
 
 class M_Form extends Component {
   constructor(props) {
@@ -71,20 +72,39 @@ class M_Form extends Component {
   render() {
     const inputs = this.wrappedInputs(this.props.inputs);
     return (
-      <View>
-        {this.props.title && <A_Text strong>{this.props.title}</A_Text>}
+      <View style={[this.props.formContainerStyles]}>
+        {this.props.title && (
+          <A_Text strong style={[style.titleStyles, this.props.titleStyles]}>
+            {this.props.title}
+          </A_Text>
+        )}
         {inputs.map((input, idx) => {
           return (
-            <View key={`form-${this.props.label}-input-${input.name || idx}`}>
-              <A_Input {...input} />
+            <View
+              key={`form-${this.props.label}-input-${input.name || idx}`}
+              style={this.props.inputContainerStyles}
+            >
+              <A_Input
+                {...input}
+                {...this.props.inputProps}
+                style={[style.inputStyles, this.props.inputStyles]}
+              />
               {this.renderInputErrors(this.state.errors[idx], idx)}
             </View>
           );
         })}
         {this.props.children}
-        <A_Button onPress={this.handleSubmit}>
-          <A_Text strong>Submit</A_Text>
-        </A_Button>
+        <A_Button
+          onPress={this.handleSubmit}
+          style={[style.submitButtonStyles, this.props.submitButtonStyles]}
+          value={this.props.button_text || "Submit"}
+          buttonTextStyles={[
+            style.submitButtonTextStyles,
+            this.props.submitButtonTextStyles
+          ]}
+          strong
+          {...this.props.submitButtonProps}
+        />
       </View>
     );
   }
@@ -96,3 +116,15 @@ M_Form.propTypes = {
 };
 
 export { M_Form };
+
+const style = StyleSheet.create({
+  titleStyles: {
+    textAlign: "center",
+    fontSize: getResponsiveCSSFrom8(20).height
+  },
+  submitButtonStyles: {},
+  submitButtonTextStyles: {
+    fontSize: getResponsiveCSSFrom8(20).height,
+    textAlign: "center"
+  }
+});

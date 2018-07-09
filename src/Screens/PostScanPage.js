@@ -119,6 +119,7 @@ class PostScanRewardPage_Pre extends Component {
     this.props.dispatch(
       rewardCustomerRewardPointsAction(
         this.state.points_to_reward,
+        this.state.amount_spent,
         this.state.reward
       )
     );
