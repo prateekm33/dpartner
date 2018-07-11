@@ -135,7 +135,7 @@ const style = StyleSheet.create({
   containerHandleBar: {
     width: getResponsiveCSSFrom8(50).width,
     height: getResponsiveCSSFrom8(10).height,
-    backgroundColor: TEAL_DARK_THREE,
+    backgroundColor: "grey",
     marginTop: getResponsiveCSSFrom8(5).height,
     alignSelf: "center",
     borderRadius: getResponsiveCSSFrom8(5).width,
