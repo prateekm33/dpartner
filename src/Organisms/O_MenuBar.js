@@ -132,7 +132,14 @@ const style = StyleSheet.create({
     height: getResponsiveCSSFrom8(30).width,
     backgroundColor: "white",
     borderTopWidth: 0.5,
-    borderTopColor: "#bdbdbd"
+    borderTopColor: "#bdbdbd",
+    shadowRadius: getResponsiveCSSFrom8(3).width,
+    shadowOffset: {
+      width: 0,
+      height: getResponsiveCSSFrom8(-2).height
+    },
+    shadowColor: "lightgrey",
+    shadowOpacity: 1
   },
 
   containerHandleBar: {
