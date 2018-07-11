@@ -21,6 +21,8 @@ class Dashboard extends Component {
         scrollView
         title="Dashboard"
         containerStyle={style.screenContainerStyle}
+        headerMainTitleTextStyle={style.headerMainTitleTextStyle}
+        headerMainContainerStyle={style.headerMainContainerStyle}
       >
         <M_Stat
           title="At a Glance"
@@ -135,5 +137,7 @@ const style = StyleSheet.create({
   },
   statInnerContentTextStyle: {
     fontSize: getResponsiveCSSFrom8(40).height
-  }
+  },
+  headerMainContainerStyle: {},
+  headerMainTitleTextStyle: {}
 });

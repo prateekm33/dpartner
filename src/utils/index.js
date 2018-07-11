@@ -23,7 +23,7 @@ const { height, width } = dims;
  *                     responsiveness on active device
  */
 export const getResponsiveCSSFrom8 = pixel => {
-  if (pixel === undefined || pixel === null) return null;
+  if (pixel === undefined || pixel === null) return { height: 0, width: 0 };
   pixel = +pixel;
   return {
     height: (pixel / 667) * height,

@@ -129,7 +129,10 @@ const O_MenuBar_Main = connect(state => ({
 
 const style = StyleSheet.create({
   peekabooContainer: {
-    height: getResponsiveCSSFrom8(20).width
+    height: getResponsiveCSSFrom8(30).width,
+    backgroundColor: "white",
+    borderTopWidth: 0.5,
+    borderTopColor: "#bdbdbd"
   },
 
   containerHandleBar: {
