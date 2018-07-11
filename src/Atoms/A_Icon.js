@@ -64,6 +64,12 @@ const A_Icon_DropdownToggle = props => (
     Icon={<Image {...props} source={require("../assets/pause_icon.png")} />}
   />
 );
+const A_Icon_Employees = props => (
+  <A_Icon
+    {...props}
+    Icon={<Image {...props} source={require("../assets/pause_icon.png")} />}
+  />
+);
 
 export {
   A_Icon_View,
@@ -74,5 +80,6 @@ export {
   A_Icon_Scan,
   A_Icon_Profile,
   A_Icon_Close,
-  A_Icon_DropdownToggle
+  A_Icon_DropdownToggle,
+  A_Icon_Employees
 };

@@ -10,7 +10,7 @@ import {
   A_Icon_Scan,
   A_Icon_Profile,
   A_View,
-  A_Text
+  A_Icon_Employees
 } from "../Atoms";
 
 import { getResponsiveCSSFrom8 } from "../utils";
@@ -60,6 +60,7 @@ class O_MenuBar_Main_Pre extends Component {
     A_Icon_Dashboard,
     A_Icon_Manage,
     A_Icon_Scan,
+    A_Icon_Employees,
     A_Icon_Profile
   ];
   setActiveIdx = idx => {
@@ -74,20 +75,25 @@ class O_MenuBar_Main_Pre extends Component {
     this.setActiveIdx(1);
     this.props.navigation.resetTo(SCREEN_NAMES.Deals_RewardsPage);
   };
-  navigateToManageEmployeesPage = () => {
+  navigateToScanPage = () => {
     this.setActiveIdx(2);
+    this.props.navigation.resetTo(SCREEN_NAMES.ScanPage);
+  };
+  navigateToManageEmployeesPage = () => {
+    this.setActiveIdx(3);
     this.props.navigation.resetTo(SCREEN_NAMES.ManageEmployeesPage);
   };
   navigateToProfilePage = () => {
-    this.setActiveIdx(3);
+    this.setActiveIdx(4);
     this.props.navigation.resetTo(SCREEN_NAMES.ProfilePage);
   };
 
   onItemSelect = idx => {
     if (idx === 0) return this.navigateToDashboard();
     if (idx === 1) return this.navigateToManagePage();
-    if (idx === 2) return this.navigateToManageEmployeesPage();
-    if (idx === 3) return this.navigateToProfilePage();
+    if (idx === 2) return this.navigateToScanPage();
+    if (idx === 3) return this.navigateToManageEmployeesPage();
+    if (idx === 4) return this.navigateToProfilePage();
   };
 
   toggleMenu = () => {
