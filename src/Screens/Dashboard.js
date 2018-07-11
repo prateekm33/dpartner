@@ -90,7 +90,8 @@ class Dashboard extends Component {
           title="Deals Performance"
           statContainerStyle={[
             style.genericStatContainerStyle,
-            style.cardShadowStyle
+            style.cardShadowStyle,
+            { marginBottom: getResponsiveCSSFrom8(20).height }
           ]}
           statTitleStyle={{
             backgroundColor: "#0270a5", //"#154e7f", // "#77f59e",

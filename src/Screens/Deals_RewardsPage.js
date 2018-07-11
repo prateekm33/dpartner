@@ -11,6 +11,7 @@ import { fetchOrgDealsAction } from "../redux/actions/deal.actions";
 import { fetchOrgRewardsAction } from "../redux/actions/reward.actions";
 import { withEventDispatcher } from "../HOCs/EventDispatcher";
 import { SCREEN_NAMES } from "../AppNavigator";
+import { getResponsiveCSSFrom8 } from "../utils";
 
 class Deals_RewardsPage extends Component {
   constructor(props) {
@@ -87,6 +88,7 @@ class Deals_RewardsPage extends Component {
             data={this.state.data}
             keyExtractor={item => `deal-${item.code}`}
             renderItem={this.renderDeal}
+            listContainerStyle={{}}
           />
         );
         break;
@@ -101,7 +103,7 @@ class Deals_RewardsPage extends Component {
         break;
     }
     return (
-      <ScreenContainer title="Deals">
+      <ScreenContainer title="-- ? --">
         <M_TabOptions
           label="deals-rewards-tabs"
           tabs={this.tabHeaders}

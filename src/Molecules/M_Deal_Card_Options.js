@@ -22,11 +22,16 @@ class M_Deal_Card_Options_Pre extends Component {
     console.warn("----TODO...delete deal...");
   };
 
-  pauseDeal = () => console.warn("------TODO...pause deal...");
+  // pauseDeal = () => console.warn("------TODO...pause deal...");
 
   render() {
     return (
-      <View style={style.cardOptionsContainerStyle}>
+      <View
+        style={[
+          style.cardOptionsContainerStyle,
+          this.props.cardOptionsContainerStyle
+        ]}
+      >
         <A_Icon_View
           onPress={this.viewDeal}
           style={style.cardOptionsIconStyle}
@@ -37,12 +42,12 @@ class M_Deal_Card_Options_Pre extends Component {
             style={style.cardOptionsIconStyle}
           />
         )}
-        {this.props.employee.isAccountAdmin() && (
+        {/* {this.props.employee.isAccountAdmin() && (
           <A_Icon_Pause
             onPress={this.pauseDeal}
             style={style.cardOptionsIconStyle}
           />
-        )}
+        )} */}
       </View>
     );
   }
@@ -66,8 +71,6 @@ class M_LoyaltyReward_Card_Options_Pre extends Component {
     console.warn("----TODO...delete loyalty reward...");
   };
 
-  pauseReward = () => console.warn("------TODO...pause loyalty reward...");
-
   render() {
     return (
       <View style={style.cardOptionsContainerStyle}>
@@ -81,12 +84,12 @@ class M_LoyaltyReward_Card_Options_Pre extends Component {
             style={style.cardOptionsIconStyle}
           />
         )}
-        {this.props.employee.isAccountAdmin() && (
+        {/* {this.props.employee.isAccountAdmin() && (
           <A_Icon_Pause
             onPress={this.pauseReward}
             style={style.cardOptionsIconStyle}
           />
-        )}
+        )} */}
       </View>
     );
   }
@@ -98,9 +101,13 @@ const M_LoyaltyReward_Card_Options = connect(state => ({
 export { M_Deal_Card_Options, M_LoyaltyReward_Card_Options };
 
 const style = StyleSheet.create({
-  cardOptionsContainerStyle: { flexDirection: "row", flexWrap: "nowrap" },
+  cardOptionsContainerStyle: {
+    flexDirection: "row",
+    flexWrap: "nowrap"
+  },
   cardOptionsIconStyle: {
-    width: getResponsiveCSSFrom8(10).width,
-    height: getResponsiveCSSFrom8(10).height
+    width: getResponsiveCSSFrom8(30).width,
+    height: getResponsiveCSSFrom8(30).height,
+    marginRight: getResponsiveCSSFrom8(20).width
   }
 });

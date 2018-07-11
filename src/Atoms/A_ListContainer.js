@@ -1,27 +1,23 @@
 import React from "react";
-import { FlatList, View } from "react-native";
+import { FlatList, View, StyleSheet } from "react-native";
 import { getResponsiveCSSFrom8 } from "../utils";
 
 const A_ListContainer = props => {
   return (
-    <View
-      style={[
-        {
-          padding: getResponsiveCSSFrom8(10).width
-        },
-        props.containerStyle
-      ]}
-    >
-      <FlatList
-        data={props.data}
-        renderItem={props.renderItem}
-        keyExtractor={props.keyExtractor}
-        extraData={props.extraData}
-        style={props.listContainerStyle}
-        contentContainerStyle={props.contentContainerStyle}
-      />
-    </View>
+    <FlatList
+      data={props.data}
+      renderItem={props.renderItem}
+      keyExtractor={props.keyExtractor}
+      extraData={props.extraData}
+      style={[style.listContainerStyle, props.listContainerStyle]}
+    />
   );
 };
 
 export { A_ListContainer };
+
+const style = StyleSheet.create({
+  listContainerStyle: {
+    height: "100%"
+  }
+});

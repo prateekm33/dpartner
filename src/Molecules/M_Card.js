@@ -6,16 +6,43 @@ import {
   M_LoyaltyReward_Card_Options
 } from "./M_Deal_Card_Options";
 import { SCREEN_NAMES } from "../AppNavigator";
+import { getResponsiveCSSFrom8 } from "../utils";
 
 const M_Card_Deal_Mini = withNavigation(props => {
   const deal = props.deal;
   return (
     <A_Button
       onPress={() => props.navigation.navigate(SCREEN_NAMES.DealPage, { deal })}
+      style={[
+        {
+          marginVertical: getResponsiveCSSFrom8(10).height,
+          minHeight: getResponsiveCSSFrom8(150).height,
+          justifyContent: "flex-end",
+          shadowRadius: getResponsiveCSSFrom8(5).width,
+          shadowColor: "lightgrey",
+          shadowOpacity: 1,
+          shadowOffset: {
+            width: 0,
+            height: 0
+          }
+        },
+        props.containerStyle
+      ]}
     >
       {deal.image && <A_Image source={deal.image} />}
-      <A_Text strong>{deal.name}</A_Text>
-      <M_Deal_Card_Options deal={deal} />
+      <A_Text
+        strong
+        style={[
+          {
+            fontSize: getResponsiveCSSFrom8(20).height
+          },
+          props.nameStyles
+        ]}
+      >
+        {deal.name}
+      </A_Text>
+      <A_Text>{deal.short_desc}</A_Text>
+      <M_Deal_Card_Options deal={deal} cardOptionsContainerStyle={{}} />
     </A_Button>
   );
 });
