@@ -23,7 +23,7 @@ export const SCREEN_NAMES = {
   NewEmployeeFormPage: "NewEmployeeFormPage" // TODO - break this out into the modal navigator
 };
 
-export const INITIAL_ROUTE_NAME = SCREEN_NAMES.SplashScreen;
+export const INITIAL_ROUTE_NAME = SCREEN_NAMES.DealFormPageOne;
 export const BACKLESS_ROUTES = {
   SplashScreen: true,
   LoginPage: true

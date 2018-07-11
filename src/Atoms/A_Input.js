@@ -75,36 +75,42 @@ class A_Input_Date extends Component {
   };
   render() {
     return (
-      <A_View
-        style={{
-          flexDirection: "row",
-          flexWrap: "nowrap",
-          justifyContent: "space-around"
-        }}
-      >
-        <A_Input
-          placeholder="MM"
-          onChangeText={this.updateMonth}
-          keyboardType="numeric"
-          maxLength={2}
-          inputRef={el => (this.monthEl = el)}
-        />
-        <A_Text>/</A_Text>
-        <A_Input
-          placeholder="DD"
-          onChangeText={this.updateDay}
-          keyboardType="numeric"
-          maxLength={2}
-          inputRef={el => (this.dayEl = el)}
-        />
-        <A_Text>/</A_Text>
-        <A_Input
-          placeholder="YYYY"
-          onChangeText={this.udpateYear}
-          keyboardType="numeric"
-          maxLength={4}
-          inputRef={el => (this.yearEl = el)}
-        />
+      <A_View style={{ marginVertical: getResponsiveCSSFrom8(10).height }}>
+        <A_Text strong style={{ fontSize: getResponsiveCSSFrom8(20).height }}>
+          Expires on
+        </A_Text>
+        <A_View
+          style={{
+            flexDirection: "row",
+            flexWrap: "nowrap",
+            justifyContent: "space-around",
+            alignItems: "center"
+          }}
+        >
+          <A_Input
+            placeholder="MM"
+            onChangeText={this.updateMonth}
+            keyboardType="numeric"
+            maxLength={2}
+            inputRef={el => (this.monthEl = el)}
+          />
+          <A_Text>/</A_Text>
+          <A_Input
+            placeholder="DD"
+            onChangeText={this.updateDay}
+            keyboardType="numeric"
+            maxLength={2}
+            inputRef={el => (this.dayEl = el)}
+          />
+          <A_Text>/</A_Text>
+          <A_Input
+            placeholder="YYYY"
+            onChangeText={this.udpateYear}
+            keyboardType="numeric"
+            maxLength={4}
+            inputRef={el => (this.yearEl = el)}
+          />
+        </A_View>
       </A_View>
     );
   }
