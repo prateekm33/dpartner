@@ -11,7 +11,8 @@ import {
   TEAL_LIGHT,
   TEAL_DARK_ONE,
   TEAL_DARK_TWO,
-  TEAL
+  TEAL,
+  TEAL_DARK_THREE
 } from "../styles/Colors";
 
 class Login extends Component {
@@ -143,7 +144,8 @@ const style = StyleSheet.create({
   },
   titleStyles: {
     fontSize: getResponsiveCSSFrom8(30).height,
-    marginBottom: getResponsiveCSSFrom8(50).height
+    marginBottom: getResponsiveCSSFrom8(50).height,
+    color: TEAL_DARK_THREE
   },
   formContainerStyles: {
     alignSelf: "center",

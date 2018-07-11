@@ -101,7 +101,11 @@ class Api {
     if (res.user_token) this.saveToken(res.user_token);
     if (employee.uuid === res.user_uuid) {
       this.employee = createEmployee({ ...employee, is_authenticated: true });
-    }
+    } else if (!this.employee && res.employee)
+      this.employee = createEmployee({
+        ...res.employee,
+        is_authenticated: true
+      });
     return res;
   };
 

@@ -15,7 +15,12 @@ import {
 
 import { getResponsiveCSSFrom8 } from "../utils";
 import { SCREEN_NAMES, UNAUTH_ROUTES } from "../AppNavigator";
-import { TEAL_DARK_ONE } from "../styles/Colors";
+import {
+  TEAL_DARK_ONE,
+  TEAL_DARK_THREE,
+  TEAL_DARK_TWO,
+  TEAL_LIGHT
+} from "../styles/Colors";
 
 const O_MenuBar = props => {
   return (
@@ -85,31 +90,33 @@ class O_MenuBar_Main_Pre extends Component {
     if (idx === 3) return this.navigateToProfilePage();
   };
 
-  activateMenu = () => {
-    if (this.state.menu_inactive) this.setState({ menu_inactive: false });
-    else return;
+  toggleMenu = () => {
+    this.setState({ menu_inactive: !this.state.menu_inactive });
   };
-  deactivateMenu = () => this.setState({ menu_inactive: true });
   render() {
     const current_route = this.props.navigation.state.routeName;
     if (current_route in UNAUTH_ROUTES) return null;
-    // const containerStyle = [style.mainFlavorContainer];
-    // containerStyle.push(style.horizontalContainer);
-    if (this.state.menu_inactive)
-      return (
-        <TouchableWithoutFeedback onPress={this.activateMenu}>
-          <A_View style={style.peekabooContainer} />
-        </TouchableWithoutFeedback>
-      );
     return (
-      <O_MenuBar
-        activeItem={this.state.activeIdx}
-        items={this.state.items}
-        containerStyle={[style.mainContainerStyle]}
-        onPress={this.activateMenu}
-        label="main"
-        onItemSelect={this.onItemSelect}
-      />
+      <A_View
+        style={[
+          style.peekabooContainer,
+          !this.state.menu_inactive && style.activeContainer
+        ]}
+      >
+        <A_Button_Opacity
+          style={style.containerHandleBar}
+          onPress={this.toggleMenu}
+        />
+        {!this.state.menu_inactive && (
+          <O_MenuBar
+            activeItem={this.state.activeIdx}
+            items={this.state.items}
+            containerStyle={[style.mainContainerStyle]}
+            label="main"
+            onItemSelect={this.onItemSelect}
+          />
+        )}
+      </A_View>
     );
   }
 }
@@ -122,45 +129,26 @@ const O_MenuBar_Main = connect(state => ({
 
 const style = StyleSheet.create({
   peekabooContainer: {
-    position: "absolute",
-    top: 0,
-    bottom: 0,
-    right: getResponsiveCSSFrom8(-10).width,
-    width: getResponsiveCSSFrom8(20).width,
-    backgroundColor: TEAL_DARK_ONE
+    height: getResponsiveCSSFrom8(20).width
   },
 
+  containerHandleBar: {
+    width: getResponsiveCSSFrom8(50).width,
+    height: getResponsiveCSSFrom8(10).height,
+    backgroundColor: TEAL_DARK_THREE,
+    marginTop: getResponsiveCSSFrom8(5).height,
+    alignSelf: "center",
+    borderRadius: getResponsiveCSSFrom8(5).width,
+    marginBottom: getResponsiveCSSFrom8(10).height
+  },
+  activeContainer: {
+    height: getResponsiveCSSFrom8(80).width
+  },
   mainContainerStyle: {
-    position: "absolute",
-    top: 0,
-    bottom: 0,
-    right: 0,
-    backgroundColor: TEAL_DARK_ONE,
-    paddingTop: getResponsiveCSSFrom8(100).height
+    flexDirection: "row",
+    flexWrap: "nowrap",
+    justifyContent: "space-between"
   }
-  // horizontalContainer: {
-  //   width: "100%",
-  //   height: getResponsiveCSSFrom8(50).height,
-  //   bottom: 0,
-  //   alignSelf: "center",
-  //   display: "flex",
-  //   flexDirection: "row",
-  //   flexWrap: "nowrap",
-  //   paddingBottom: getResponsiveCSSFrom8(50).height,
-  //   borderTopWidth: 1,
-  //   borderTopColor: "lightgrey"
-  // },
-  // menuItem: {
-  //   flex: 1,
-  //   alignItems: "center"
-  // },
-  // activeMenuItem: {
-  //   borderWidth: 1.5
-  // },
-  // mainFlavorContainer: {
-  //   position: "absolute",
-  //   backgroundColor: "white"
-  // }
 });
 
 export { O_MenuBar, O_MenuBar_Main };

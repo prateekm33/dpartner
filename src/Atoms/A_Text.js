@@ -12,7 +12,11 @@ const A_Text = props => {
   if (props.strong) styles_array.push(style.strong);
   styles_array = styles_array.concat(props.style);
   if (props.color) styles_array.push({ color: props.color });
-  return <Text style={styles_array}>{props.children}</Text>;
+  return (
+    <Text {...props} style={styles_array} adjustsFontSizeToFit={true}>
+      {props.children}
+    </Text>
+  );
 };
 A_Text.propTypes = {
   ...Text.propTypes
