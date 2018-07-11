@@ -64,27 +64,28 @@ class O_MenuBar_Main_Pre extends Component {
     A_Icon_Profile
   ];
   setActiveIdx = idx => {
-    if (this.state.activeIdx === idx) return;
+    if (this.state.activeIdx === idx) return false;
     this.setState({ activeIdx: idx });
+    return true;
   };
   navigateToDashboard = () => {
-    this.setActiveIdx(0);
+    if (!this.setActiveIdx(0)) return;
     this.props.navigation.resetTo(SCREEN_NAMES.Dashboard);
   };
   navigateToManagePage = () => {
-    this.setActiveIdx(1);
+    if (!this.setActiveIdx(1)) return;
     this.props.navigation.resetTo(SCREEN_NAMES.Deals_RewardsPage);
   };
   navigateToScanPage = () => {
-    this.setActiveIdx(2);
+    if (!this.setActiveIdx(2)) return;
     this.props.navigation.resetTo(SCREEN_NAMES.ScanPage);
   };
   navigateToManageEmployeesPage = () => {
-    this.setActiveIdx(3);
+    if (!this.setActiveIdx(3)) return;
     this.props.navigation.resetTo(SCREEN_NAMES.ManageEmployeesPage);
   };
   navigateToProfilePage = () => {
-    this.setActiveIdx(4);
+    if (!this.setActiveIdx(4)) return;
     this.props.navigation.resetTo(SCREEN_NAMES.ProfilePage);
   };
 
