@@ -15,7 +15,7 @@ import { SCREEN_NAMES } from "../AppNavigator";
 class Deals_RewardsPage extends Component {
   constructor(props) {
     super(props);
-    this.tabHeaders = ["Deals", "Loyalty Rewards Program"];
+    this.tabHeaders = ["Deals", "Rewards"];
     this.state = {
       activeTab: 0,
       data: [],
