@@ -20,6 +20,8 @@ import {
 import { isAccountAdmin } from "../Models/Employee.model";
 import { USER_ROLES } from "../utils/constants";
 import { SCREEN_NAMES } from "../AppNavigator";
+import { MODAL_SCREEN_NAMES } from "../ModalNavigator";
+import { MAIN_SCREEN_NAMES } from "../MainNavigator";
 
 class ManageEmployeesPage extends Component {
   constructor(props) {
@@ -147,8 +149,11 @@ class ManageEmployeesPage extends Component {
   };
 
   showNewEmployeeForm = () =>
-    this.props.navigation.navigate(SCREEN_NAMES.NewEmployeeFormPage, {
-      onDone: () => this.getOrgEmployees()
+    this.props.mainNavigation.navigate(MAIN_SCREEN_NAMES.ModalNavigator, {
+      routeName: MODAL_SCREEN_NAMES.NewEmployeeFormModal,
+      params: {
+        onDone: () => this.getOrgEmployees()
+      }
     });
 
   renderUnauthDisplay = () => {

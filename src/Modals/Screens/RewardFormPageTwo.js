@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { StyleSheet } from "react-native";
-import { A_View, A_Text, A_Button, A_Image } from "../Atoms";
+import { A_View, A_Text, A_Button, A_Image } from "../../Atoms";
 import ImagePicker from "react-native-image-picker";
 import RNFetchBlob from "react-native-fetch-blob";
-import { createNewLoyaltyRewardAction } from "../redux/actions/reward.actions";
-import { getResponsiveCSSFrom8 } from "../utils";
+import { createNewLoyaltyRewardAction } from "../../redux/actions/reward.actions";
+import { getResponsiveCSSFrom8 } from "../../utils";
 
 class RewardFormPageTwo extends Component {
   constructor(props) {

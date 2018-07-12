@@ -12,6 +12,8 @@ import { fetchOrgRewardsAction } from "../redux/actions/reward.actions";
 import { withEventDispatcher } from "../HOCs/EventDispatcher";
 import { SCREEN_NAMES } from "../AppNavigator";
 import { getResponsiveCSSFrom8 } from "../utils";
+import { MAIN_SCREEN_NAMES } from "../MainNavigator";
+import { MODAL_SCREEN_NAMES } from "../ModalNavigator";
 
 class Deals_RewardsPage extends Component {
   constructor(props) {
@@ -72,11 +74,15 @@ class Deals_RewardsPage extends Component {
   };
 
   showNewDealForm = () => {
-    this.props.navigation.navigate(SCREEN_NAMES.DealFormPageOne);
+    this.props.mainNavigation.navigate(MAIN_SCREEN_NAMES.ModalNavigator, {
+      routeName: MODAL_SCREEN_NAMES.DealFormModal
+    });
   };
 
   showNewRewardForm = () => {
-    this.props.navigation.navigate(SCREEN_NAMES.RewardFormPageOne);
+    this.props.mainNavigation.navigate(MAIN_SCREEN_NAMES.ModalNavigator, {
+      routeName: MODAL_SCREEN_NAMES.RewardFormModal
+    });
   };
 
   render() {

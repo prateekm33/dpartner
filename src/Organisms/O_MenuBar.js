@@ -21,6 +21,8 @@ import {
   TEAL_DARK_TWO,
   TEAL_LIGHT
 } from "../styles/Colors";
+import { MAIN_SCREEN_NAMES } from "../MainNavigator";
+import { MODAL_SCREEN_NAMES } from "../ModalNavigator";
 
 const O_MenuBar = props => {
   return (
@@ -77,8 +79,9 @@ class O_MenuBar_Main_Pre extends Component {
     this.props.navigation.resetTo(SCREEN_NAMES.Deals_RewardsPage);
   };
   navigateToScanPage = () => {
-    if (!this.setActiveIdx(2)) return;
-    this.props.navigation.resetTo(SCREEN_NAMES.ScanPage);
+    this.props.mainNavigation.navigate(MAIN_SCREEN_NAMES.ModalNavigator, {
+      routeName: MODAL_SCREEN_NAMES.ScanModal
+    });
   };
   navigateToManageEmployeesPage = () => {
     if (!this.setActiveIdx(3)) return;

@@ -1,14 +1,9 @@
 import React, { Component } from "react";
 import { StyleSheet } from "react-native";
-import {
-  A_View_Scroll,
-  A_Input,
-  A_Input_Date,
-  A_Button,
-  A_Text
-} from "../Atoms";
-import { SCREEN_NAMES } from "../AppNavigator";
-import { getResponsiveCSSFrom8 } from "../utils";
+import { A_Input, A_Input_Date, A_Button, A_Text } from "../../Atoms";
+import { getResponsiveCSSFrom8 } from "../../utils";
+import { DEAL_FORM_MODAL_SCREEN_NAMES } from "../DealFormModal";
+import ScreenContainer from "../../Templates/ScreenContainer";
 
 class DealFormPageOne extends Component {
   constructor(props) {
@@ -31,22 +26,18 @@ class DealFormPageOne extends Component {
   updateExpiration = expiration => this.setState({ expiration });
 
   goToNext = () =>
-    this.props.navigation.navigate(SCREEN_NAMES.DealFormPageTwo, {
-      data: this.state
-    });
+    this.props.navigation.navigate(
+      DEAL_FORM_MODAL_SCREEN_NAMES.DealFormPageTwo,
+      {
+        data: this.state
+      }
+    );
+
+  close = () => this.props.screenProps.mainNavigation.goBack();
 
   render() {
     return (
-      <A_View_Scroll contentContainerStyle={[style.scrollContainer]}>
-        <A_Text
-          strong
-          style={{
-            fontSize: getResponsiveCSSFrom8(25).height,
-            textAlign: "center"
-          }}
-        >
-          NEW DEAL
-        </A_Text>
+      <ScreenContainer scrollView onClose={this.close} title="New Deal">
         <A_Input
           placeholder="Name"
           onChangeText={this.updateName}
@@ -88,7 +79,7 @@ class DealFormPageOne extends Component {
           buttonTextStyles={style.nextButtonTextStyles}
           strong
         />
-      </A_View_Scroll>
+      </ScreenContainer>
     );
   }
 }
@@ -96,12 +87,6 @@ class DealFormPageOne extends Component {
 export default DealFormPageOne;
 
 const style = StyleSheet.create({
-  scrollContainer: {
-    flexDirection: "column",
-    paddingHorizontal: getResponsiveCSSFrom8(30).width,
-    paddingBottom: getResponsiveCSSFrom8(80).height,
-    marginTop: getResponsiveCSSFrom8(30).height
-  },
   formInputContainer: {
     marginVertical: getResponsiveCSSFrom8(30).height,
     borderBottomWidth: 1

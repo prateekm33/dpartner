@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import { StyleSheet } from "react-native";
-import { A_View, A_Text, A_Button, A_Image } from "../Atoms";
+import { A_View, A_Text, A_Button, A_Image } from "../../Atoms";
 import ImagePicker from "react-native-image-picker";
 import RNFetchBlob from "react-native-fetch-blob";
-import { getResponsiveCSSFrom8 } from "../utils";
+import { getResponsiveCSSFrom8 } from "../../utils";
+import ScreenContainer from "../../Templates/ScreenContainer";
 
 class DealFormPageTwo extends Component {
   constructor(props) {
@@ -63,9 +64,11 @@ class DealFormPageTwo extends Component {
     this.props.dispatch(createNewDealAction(this.state.data));
   };
 
+  close = () => this.props.screenProps.mainNavigation.goBack();
+
   render() {
     return (
-      <A_View style={{ alignItems: "center" }}>
+      <ScreenContainer title="New Deal" onClose={this.close} scrollView>
         <A_Text strong>UPLOAD AN IMAGE</A_Text>
         <A_Button value="Choose an image" onPress={this.choose} />
         <A_Image
@@ -79,7 +82,7 @@ class DealFormPageTwo extends Component {
           ]}
         />
         <A_Button onPress={this.submit} value="Submit" />
-      </A_View>
+      </ScreenContainer>
     );
   }
 }

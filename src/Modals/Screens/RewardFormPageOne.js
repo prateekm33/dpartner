@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { View, StyleSheet } from "react-native";
-import { A_Text, A_View, A_Input, A_Button, A_View_Scroll } from "../Atoms";
-import { SCREEN_NAMES } from "../AppNavigator";
-import { getResponsiveCSSFrom8 } from "../utils";
+import { A_Text, A_Input, A_Button, A_View_Scroll } from "../../Atoms";
+import { getResponsiveCSSFrom8 } from "../../utils";
+import { REWARD_FORM_MODAL_SCREEN_NAMES } from "../RewardFormModal";
 
 class RewardFormPageOne extends Component {
   constructor(props) {
@@ -18,9 +18,12 @@ class RewardFormPageOne extends Component {
   }
 
   goToNext = () =>
-    this.props.navigation.navigate(SCREEN_NAMES.RewardFormPageTwo, {
-      data: this.state
-    });
+    this.props.navigation.navigate(
+      REWARD_FORM_MODAL_SCREEN_NAMES.RewardFormPageTwo,
+      {
+        data: this.state
+      }
+    );
 
   updateName = name => this.setState({ name });
   updateCode = code => this.setState({ code });

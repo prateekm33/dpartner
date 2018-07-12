@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "../redux";
 import { View } from "react-native";
-import { withEventDispatcher, CUSTOM_EVENTS } from "./EventDispatcher";
+import { withEventDispatcher } from "./EventDispatcher";
 import { NavigationActions } from "react-navigation";
 
 class NavigationLinkedList {
@@ -89,7 +89,10 @@ export const withAppComponentInitiators = Component => {
       component={Component}
       screenProps={props.screenProps}
     >
-      <Component {...props} />
+      <Component
+        {...props}
+        mainNavigation={(props.screenProps || {}).mainNavigation}
+      />
     </AppComponentInitiatorWithEventDispatcher>
   ));
 };

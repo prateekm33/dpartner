@@ -13,6 +13,7 @@ export default props => (
         title={props.title}
         headerMainContainerStyle={props.headerMainContainerStyle}
         headerMainTitleTextStyle={props.headerMainTitleTextStyle}
+        onClose={props.onClose}
       />
     )}
     {props.scrollView ? (

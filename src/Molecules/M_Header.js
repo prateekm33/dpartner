@@ -1,6 +1,6 @@
 import React from "react";
 import { View, StyleSheet, StatusBar } from "react-native";
-import { A_Text } from "../Atoms";
+import { A_Text, A_Icon_Close } from "../Atoms";
 import { getResponsiveCSSFrom8 } from "../utils";
 import { TEAL, TEAL_DARK_ONE } from "../styles/Colors";
 
@@ -29,6 +29,7 @@ const M_Header_Main = props => (
     >
       {props.title}
     </A_Text>
+    {props.onClose && <A_Icon_Close onPress={props.onClose} />}
   </View>
 );
 
