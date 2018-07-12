@@ -1,5 +1,5 @@
 import React from "react";
-import { View } from "react-native";
+import { View, StatusBar } from "react-native";
 import { StackNavigator, NavigationActions } from "react-navigation";
 
 export const MODAL_SCREEN_NAMES = {
@@ -39,6 +39,7 @@ const SCREENS = Screens.reduce(
         }
         return (
           <View style={{ flex: 1 }}>
+            <StatusBar hidden={true} />
             <Component.default
               screenProps={{
                 mainNavigation: (props.screenProps || {}).mainNavigation,

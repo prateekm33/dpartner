@@ -71,7 +71,17 @@ class RewardFormPageTwo extends Component {
 
   render() {
     return (
-      <ScreenContainer title="Upload Image" scrollView onClose={this.close}>
+      <ScreenContainer
+        title="Upload Image"
+        scrollView
+        onClose={this.close}
+        headerMainContainerStyle={{
+          backgroundColor: "#26627d"
+        }}
+        headerMainTitleTextStyle={{
+          color: "white"
+        }}
+      >
         <A_Text strong>UPLOAD AN IMAGE</A_Text>
         <A_Button value="Choose an image" onPress={this.choose} />
         {this.state.image && (

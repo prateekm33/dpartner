@@ -67,6 +67,12 @@ class ProfilePage extends Component {
         title="Profile"
         scrollView
         containerStyle={style.containerStyle}
+        headerMainContainerStyle={{
+          backgroundColor: "#03a9f4"
+        }}
+        headerMainTitleTextStyle={{
+          color: "white"
+        }}
       >
         <A_View>
           <A_Text strong>BUSINESS INFORMATION</A_Text>

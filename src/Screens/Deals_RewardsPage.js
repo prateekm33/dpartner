@@ -109,7 +109,14 @@ class Deals_RewardsPage extends Component {
         break;
     }
     return (
-      <ScreenContainer title="Deals and Rewards" scrollView>
+      <ScreenContainer
+        title="Deals and Rewards"
+        scrollView
+        headerMainTitleTextStyle={{ color: "white" }}
+        headerMainContainerStyle={{
+          backgroundColor: "#5d0303"
+        }}
+      >
         <M_TabOptions
           label="deals-rewards-tabs"
           tabs={this.tabHeaders}

@@ -45,7 +45,17 @@ class NewEmployeeFormPage extends Component {
 
   render() {
     return (
-      <ScreenContainer title="New Employee" scrollView onClose={this.close}>
+      <ScreenContainer
+        title="New Employee"
+        scrollView
+        onClose={this.close}
+        headerMainContainerStyle={{
+          backgroundColor: "#26627d"
+        }}
+        headerMainTitleTextStyle={{
+          color: "white"
+        }}
+      >
         <A_Input placeholder="First name" onChangeText={this.changeFirstName} />
         <A_Input placeholder="Last name" onChangeText={this.changeLastName} />
         <A_Input placeholder="Email" onChangeText={this.changeEmail} />

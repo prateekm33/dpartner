@@ -139,6 +139,10 @@ const style = StyleSheet.create({
   statInnerContentTextStyle: {
     fontSize: getResponsiveCSSFrom8(40).height
   },
-  headerMainContainerStyle: {},
-  headerMainTitleTextStyle: {}
+  headerMainContainerStyle: {
+    backgroundColor: "#092c50"
+  },
+  headerMainTitleTextStyle: {
+    color: "white"
+  }
 });

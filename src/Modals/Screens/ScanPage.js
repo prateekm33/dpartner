@@ -21,7 +21,16 @@ class ScanPage extends Component {
 
   render() {
     return (
-      <ScreenContainer title="Scan" onClose={this.close}>
+      <ScreenContainer
+        title="Scan"
+        onClose={this.close}
+        headerMainContainerStyle={{
+          backgroundColor: "#000000"
+        }}
+        headerMainTitleTextStyle={{
+          color: "white"
+        }}
+      >
         <A_Text strong>Scan Loyalty Rewards Card or Discount</A_Text>
         <M_QRScanner
           takePicture={this.onScan}

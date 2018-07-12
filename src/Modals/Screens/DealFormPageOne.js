@@ -37,7 +37,17 @@ class DealFormPageOne extends Component {
 
   render() {
     return (
-      <ScreenContainer scrollView onClose={this.close} title="New Deal">
+      <ScreenContainer
+        scrollView
+        onClose={this.close}
+        title="New Deal"
+        headerMainContainerStyle={{
+          backgroundColor: "#26627d"
+        }}
+        headerMainTitleTextStyle={{
+          color: "white"
+        }}
+      >
         <A_Input
           placeholder="Name"
           onChangeText={this.updateName}

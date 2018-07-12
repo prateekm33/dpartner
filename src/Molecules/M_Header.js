@@ -22,7 +22,7 @@ const M_Header_Main = props => (
   <View
     style={[style.headerMainContainerStyle, props.headerMainContainerStyle]}
   >
-    {/* <StatusBar barStyle="dark-content" /> */}
+    <StatusBar barStyle={props.statusBarStyle || "light-content"} />
     <A_Text
       strong
       style={[style.headerMainTitleTextStyle, props.headerMainTitleTextStyle]}
@@ -50,10 +50,10 @@ const style = StyleSheet.create({
     shadowOpacity: 1,
     shadowColor: "lightgrey",
     shadowOffset: {
-      height: getResponsiveCSSFrom8(2).height,
+      height: getResponsiveCSSFrom8(3).height,
       width: 0
     },
-    shadowRadius: getResponsiveCSSFrom8(5).width,
+    shadowRadius: getResponsiveCSSFrom8(10).width,
     justifyContent: "center"
   },
   headerMainTitleTextStyle: {

@@ -37,7 +37,17 @@ class RewardFormPageOne extends Component {
 
   render() {
     return (
-      <ScreenContainer title="New Reward" scrollView onClose={this.close}>
+      <ScreenContainer
+        title="New Reward"
+        scrollView
+        onClose={this.close}
+        headerMainContainerStyle={{
+          backgroundColor: "#26627d"
+        }}
+        headerMainTitleTextStyle={{
+          color: "white"
+        }}
+      >
         <A_Input
           placeholder="Name"
           onChangeText={this.updateName}

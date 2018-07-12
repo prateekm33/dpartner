@@ -178,7 +178,14 @@ class ManageEmployeesPage extends Component {
   };
   render() {
     return (
-      <ScreenContainer title="Employees" scrollView>
+      <ScreenContainer
+        title="Employees"
+        scrollView
+        headerMainContainerStyle={{
+          backgroundColor: "#622f6b"
+        }}
+        headerMainTitleTextStyle={{ color: "white" }}
+      >
         {!this.props.employee.isAccountAdmin() ? (
           this.renderUnauthDisplay()
         ) : (
