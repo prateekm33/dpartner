@@ -4,6 +4,7 @@ import { A_Text } from "../../Atoms";
 import { M_QRScanner } from "../../Molecules";
 import { SCAN_MODAL_SCREEN_NAMES } from "../ScanModal";
 import { MAIN_SCREEN_NAMES } from "../../MainNavigator";
+import { getResponsiveCSSFrom8 } from "../../utils";
 
 class ScanPage extends Component {
   constructor(props) {
@@ -31,7 +32,16 @@ class ScanPage extends Component {
           color: "white"
         }}
       >
-        <A_Text strong>Scan Loyalty Rewards Card or Discount</A_Text>
+        <A_Text
+          strong
+          style={{
+            marginVertical: getResponsiveCSSFrom8(20).height,
+            textAlign: "center",
+            fontSize: getResponsiveCSSFrom8(25).height
+          }}
+        >
+          Scan Loyalty Rewards Card or Discount
+        </A_Text>
         <M_QRScanner
           takePicture={this.onScan}
           value="Scan"
