@@ -153,6 +153,8 @@ class ManageEmployeesPage extends Component {
           <A_Button_Opacity
             value="SAVE"
             onPress={() => this.saveEmployeeUpdates(employee, idx)}
+            style={style.saveButtonStyles}
+            buttonTextStyles={style.saveButtonTextStyles}
           />
         )}
       </A_View>
@@ -235,18 +237,17 @@ const style = StyleSheet.create({
   employeeNameContainerStyle: {
     paddingVertical: getResponsiveCSSFrom8(20).width,
     marginVertical: 0,
-    backgroundColor: "#9c8aa5",
+    backgroundColor: "#e4dcf2",
     flexDirection: "row",
     flexWrap: "nowrap",
     justifyContent: "space-between"
   },
   employeeNameTextStyle: {
-    color: "white",
+    color: "#3d2351",
     fontSize: getResponsiveCSSFrom8(23).height
   },
   employeeEmailTextStyle: {},
   employeeDetailLine: {
-    // marginVertical: getResponsiveCSSFrom8(10).height,
     paddingHorizontal: getResponsiveCSSFrom8(30).width,
     paddingVertical: getResponsiveCSSFrom8(10).height
   },
@@ -269,10 +270,19 @@ const style = StyleSheet.create({
     paddingVertical: getResponsiveCSSFrom8(10).height
   },
   dropdownOptionsContainerStyle: {
-    // top: getResponsiveCSSFrom8(50).height,
     position: "relative"
   },
   dropdownInputContainerStyle: {
     minHeight: getResponsiveCSSFrom8(50).height
+  },
+  saveButtonStyles: {
+    backgroundColor: "#3d2351",
+    borderWidth: 1,
+    borderRadius: 0
+  },
+  saveButtonTextStyles: {
+    color: "white",
+    textAlign: "center",
+    fontSize: getResponsiveCSSFrom8(20).height
   }
 });

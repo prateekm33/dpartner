@@ -9,8 +9,7 @@ import {
   A_Button,
   A_View,
   A_Text_Email,
-  A_Input_Dropdown_Role,
-  A_View_Scroll
+  A_Input_Dropdown_Role
 } from "../Atoms";
 import { USER_ROLES } from "../utils/constants";
 import { M_VendorHours } from "../Molecules";
