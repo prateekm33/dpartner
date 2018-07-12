@@ -50,7 +50,7 @@ class NewEmployeeFormPage extends Component {
         scrollView
         onClose={this.close}
         headerMainContainerStyle={{
-          backgroundColor: "#868AFF"
+          backgroundColor: "#622f6b"
         }}
         headerMainTitleTextStyle={{
           color: "white"
