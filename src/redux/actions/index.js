@@ -15,7 +15,6 @@ export const dispatchErrorActionOfType = type => error => {
 export const loadDataFromStorage = () => {
   return AsyncStorage.getItem("employee").then(stored_employee => {
     if (!stored_employee) {
-      // TODO...maybe consider moving asyncstorage setting and merging to reducers.
       return AsyncStorage.setItem("employee", JSON.stringify({}));
     }
     const employee = JSON.parse(stored_employee);
@@ -48,7 +47,6 @@ export const initAction = () => dispatch => {
       return employee;
     })
     .catch(error => {
-      // TODO...maybe consider moving asyncstorage setting and merging to reducers.
       AsyncStorage.setItem("employee", JSON.stringify({}));
       dispatch({ type: loading_types.INITIALIZING_APP, loading: false });
       dispatchErrorActionOfType(error_types.APP_INITIALIZATION_ERROR)(error);

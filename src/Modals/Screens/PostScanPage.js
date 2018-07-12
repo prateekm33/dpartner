@@ -33,10 +33,9 @@ class PostScanDealPage_Pre extends Component {
   }
 
   componentDidMount = () => {
-    // if (this.state.deal.vendor_uuid !== this.props.employee.vendor_uuid) {
-    //   console.warn("---tODO...this deal is from another vendor");
-    //   return;
-    // }
+    if (this.state.deal.vendor_uuid !== this.props.employee.vendor_uuid) {
+      return;
+    }
 
     if (this.state.deal.is_used) {
       console.warn("-----DEAL IS USED....no need to fetch details.");
@@ -80,10 +79,9 @@ class PostScanRewardPage_Pre extends Component {
   }
 
   componentDidMount = () => {
-    // if (this.state.reward.vendor_uuid !== this.props.employee.vendor_uuid) {
-    //   console.warn("---tODO...this rewards card is from another vendor");
-    //   return;
-    // }
+    if (this.state.reward.vendor_uuid !== this.props.employee.vendor_uuid) {
+      return;
+    }
 
     const one = this.props.dispatch(
       fetchCustomerRewardDetailsAction(
@@ -103,8 +101,6 @@ class PostScanRewardPage_Pre extends Component {
   };
 
   redeem = () => {
-    // TODO....only redeem the num of points that the customer requests
-    // --- this.props.reward.points_to_redeem
     this.props
       .dispatch(
         redeemCustomerRewardPointsAction(

@@ -9,7 +9,6 @@ import ScreenContainer from "../../Templates/ScreenContainer";
 class DealFormPageTwo extends Component {
   constructor(props) {
     super(props);
-    console.warn("-----image uploader...TODO...");
     this.state = {
       ...props.navigation.state.params.data,
       image: null

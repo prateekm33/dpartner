@@ -11,7 +11,6 @@ import { initAction } from "../redux/actions";
 
 class SplashScreen extends Component {
   componentWillMount = () => {
-    // TODO...dispatch init action to fetch data
     this.props.dispatch(initAction());
   };
 

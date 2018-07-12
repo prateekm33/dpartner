@@ -22,8 +22,6 @@ class M_Deal_Card_Options_Pre extends Component {
     console.warn("----TODO...delete deal...");
   };
 
-  // pauseDeal = () => console.warn("------TODO...pause deal...");
-
   render() {
     return (
       <View
