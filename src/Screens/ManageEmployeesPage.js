@@ -118,19 +118,29 @@ class ManageEmployeesPage extends Component {
   renderEmployee = (employee, idx) => {
     const full_name = employee.fullName();
     return (
-      <A_View>
-        {full_name && (
-          <A_View>
-            <A_Text strong>Name</A_Text>
-            <A_Text>{full_name}</A_Text>
-          </A_View>
-        )}
-        {employee.email && (
-          <A_View>
-            <A_Text strong>Email</A_Text>
-            <A_Text>{employee.email}</A_Text>
-          </A_View>
-        )}
+      <A_View style={style.employeeContainerStyle}>
+        <A_View
+          style={[style.employeeDetailLine, style.employeeNameContainerStyle]}
+        >
+          <A_Text strong>Name</A_Text>
+          {full_name ? (
+            <A_Text style={style.employeeNameTextStyle}>{full_name}</A_Text>
+          ) : (
+            <A_Text style={style.emptyDetailText}>---</A_Text>
+          )}
+        </A_View>
+        <A_View
+          style={[style.employeeDetailLine, style.employeeEmailContainerStyle]}
+        >
+          <A_Text strong>Email</A_Text>
+          {employee.email ? (
+            <A_Text style={style.employeeEmailTextStyle}>
+              {employee.email}
+            </A_Text>
+          ) : (
+            <A_Text style={style.emptyDetailText}>---</A_Text>
+          )}
+        </A_View>
         <A_Input_Dropdown_Role
           role={employee.role}
           changeRole={role => this.changeRole(role, employee, idx)}
@@ -168,7 +178,7 @@ class ManageEmployeesPage extends Component {
   };
   render() {
     return (
-      <ScreenContainer title="Employees">
+      <ScreenContainer title="Employees" scrollView>
         {!this.props.employee.isAccountAdmin() ? (
           this.renderUnauthDisplay()
         ) : (
@@ -198,9 +208,30 @@ export default connect(mapStateToProps)(ManageEmployeesPage);
 
 const style = StyleSheet.create({
   containerStyle: {
-    // paddingBottom: getResponsiveCSSFrom8(100).height,
     marginBottom: getResponsiveCSSFrom8(200).height
   },
   listContainerStyle: {},
-  listContentContainerStyle: {}
+  listContentContainerStyle: {},
+  employeeContainerStyle: {
+    // shadowRadius: getResponsiveCSSFrom8(8).width,
+    // shadowOffset: {
+    //   width: 0,
+    //   height: 0
+    // },
+    // shadowColor: "lightgrey",
+    // shadowOpacity: 1,
+    backgroundColor: "white",
+    paddingVertical: getResponsiveCSSFrom8(30).height,
+    borderBottomWidth: 1
+  },
+  employeeNameContainerStyle: {},
+  employeeNameTextStyle: {},
+  employeeEmailTextStyle: {},
+  employeeDetailLine: {
+    marginVertical: getResponsiveCSSFrom8(10).height
+  },
+  emptyDetailText: {
+    marginLeft: getResponsiveCSSFrom8(10).width,
+    color: "grey"
+  }
 });

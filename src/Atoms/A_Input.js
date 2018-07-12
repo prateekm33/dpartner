@@ -158,13 +158,19 @@ class A_Input_Dropdown extends Component {
 
   renderDropdown = () => {
     return (
-      <A_View>
+      <A_View
+        style={[
+          style.dropdownOptionsContainerStyle,
+          this.props.dropdownOptionsContainerStyle
+        ]}
+      >
         {this.props.values.map(val => {
           const value = this.getValue(val);
           return (
             <A_Button_Opacity
               onPress={() => this.onValueSelected(val)}
               key={`dd-option-${value}`}
+              style={style.ddOptionStyle}
             >
               <A_Text>{value}</A_Text>
             </A_Button_Opacity>
@@ -182,8 +188,15 @@ class A_Input_Dropdown extends Component {
       <A_View>
         <A_Text strong>{this.props.title}</A_Text>
         <A_View style={[style.dropdownInputContainer]}>
-          <A_Text>{this.getValue(this.props.selectedValue)}</A_Text>
-          <A_Icon_DropdownToggle onPress={this.toggleDropdown} />
+          <A_Text
+            style={[style.selectedValueStyle, this.props.selectedValueStyle]}
+          >
+            {this.getValue(this.props.selectedValue)}
+          </A_Text>
+          <A_Icon_DropdownToggle
+            onPress={this.toggleDropdown}
+            style={[style.ddIconStyle]}
+          />
         </A_View>
         {this.state.show_dropdown && this.renderDropdown()}
       </A_View>
@@ -256,6 +269,19 @@ const style = StyleSheet.create({
   },
   dropdownInputContainer: {
     flexDirection: "row",
-    flexWrap: "nowrap"
+    flexWrap: "nowrap",
+    borderWidth: 1
+  },
+  selectedValueStyle: {
+    padding: getResponsiveCSSFrom8(10).width,
+    flex: 1
+  },
+  dropdownOptionsContainerStyle: {
+    borderWidth: 1
+  },
+  ddIconStyle: {},
+  ddOptionStyle: {
+    borderBottomWidth: 0.6,
+    padding: getResponsiveCSSFrom8(10).width
   }
 });

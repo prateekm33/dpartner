@@ -109,7 +109,7 @@ class Deals_RewardsPage extends Component {
         break;
     }
     return (
-      <ScreenContainer title="Deals and Rewards">
+      <ScreenContainer title="Deals and Rewards" scrollView>
         <M_TabOptions
           label="deals-rewards-tabs"
           tabs={this.tabHeaders}
