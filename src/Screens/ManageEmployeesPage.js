@@ -126,6 +126,9 @@ class ManageEmployeesPage extends Component {
           <A_Text strong style={style.employeeNameTextStyle}>
             {full_name}
           </A_Text>
+          {employee.role !== USER_ROLES.VENDOR_ACCOUNT_OWNER && (
+            <A_Icon_Delete onPress={() => this.deleteEmployee(employee, idx)} />
+          )}
         </A_View>
         <A_View
           style={[style.employeeDetailLine, style.employeeEmailContainerStyle]}
@@ -151,9 +154,6 @@ class ManageEmployeesPage extends Component {
             value="SAVE"
             onPress={() => this.saveEmployeeUpdates(employee, idx)}
           />
-        )}
-        {employee.role !== USER_ROLES.VENDOR_ACCOUNT_OWNER && (
-          <A_Icon_Delete onPress={() => this.deleteEmployee(employee, idx)} />
         )}
       </A_View>
     );
@@ -235,7 +235,10 @@ const style = StyleSheet.create({
   employeeNameContainerStyle: {
     paddingVertical: getResponsiveCSSFrom8(20).width,
     marginVertical: 0,
-    backgroundColor: "#9c8aa5"
+    backgroundColor: "#9c8aa5",
+    flexDirection: "row",
+    flexWrap: "nowrap",
+    justifyContent: "space-between"
   },
   employeeNameTextStyle: {
     color: "white",
@@ -266,7 +269,8 @@ const style = StyleSheet.create({
     paddingVertical: getResponsiveCSSFrom8(10).height
   },
   dropdownOptionsContainerStyle: {
-    top: getResponsiveCSSFrom8(50).height
+    // top: getResponsiveCSSFrom8(50).height,
+    position: "relative"
   },
   dropdownInputContainerStyle: {
     minHeight: getResponsiveCSSFrom8(50).height

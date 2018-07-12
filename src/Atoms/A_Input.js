@@ -141,7 +141,7 @@ class A_Input_Dropdown extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      show_dropdown: true
+      show_dropdown: false
     };
   }
 
