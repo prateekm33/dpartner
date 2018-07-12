@@ -151,7 +151,12 @@ class M_Editable extends Component {
         >
           <A_Text
             strong
-            style={[{ flex: 0.6 }, style.titleStyles, this.props.titleStyles]}
+            style={[
+              { flex: 0.6 },
+              style.titleStyles,
+              this.props.titleStyles,
+              this.props.titleTextStyles
+            ]}
             multiline={true}
             numberOfLines={3}
           >
@@ -176,16 +181,24 @@ class M_Editable extends Component {
         <A_Button_Opacity
           value="Cancel"
           onPress={this.toggleEdit}
-          buttonTextStyles={{
-            fontSize: getResponsiveCSSFrom8(18).height,
-            marginRight: getResponsiveCSSFrom8(20).width
-          }}
+          buttonTextStyles={[
+            {
+              fontSize: getResponsiveCSSFrom8(20).height,
+              marginRight: getResponsiveCSSFrom8(20).width
+            },
+            this.props.titleTextStyles
+          ]}
+          strong
         />
       )}
       <A_Button_Opacity
         value={this.state.editable ? "Save" : "Edit"}
         onPress={this.state.editable ? this.save : this.toggleEdit}
-        buttonTextStyles={{ fontSize: getResponsiveCSSFrom8(18).height }}
+        buttonTextStyles={[
+          { fontSize: getResponsiveCSSFrom8(20).height },
+          this.props.titleTextStyles
+        ]}
+        strong
       />
     </A_View>
   );
@@ -207,7 +220,9 @@ class M_Editable extends Component {
     }
     return (
       <A_View style={[style.containerStyle, this.props.containerStyle]}>
-        <A_View style={style.titleContainerStyle}>
+        <A_View
+          style={[style.titleContainerStyle, this.props.titleContainerStyle]}
+        >
           {this.props.title && this.renderTitle()}
         </A_View>
         {nodes}
@@ -220,13 +235,15 @@ export { M_Editable };
 
 const style = StyleSheet.create({
   containerStyle: {
-    marginVertical: getResponsiveCSSFrom8(20).height
+    marginBottom: getResponsiveCSSFrom8(40).height
   },
   titleContainerStyle: {
     flexDirection: "row",
     flexWrap: "nowrap",
     justifyContent: "space-between",
-    alignItems: "center"
+    alignItems: "center",
+    marginBottom: getResponsiveCSSFrom8(10).height,
+    paddingHorizontal: getResponsiveCSSFrom8(10).width
   },
   titleStyles: {
     fontSize: getResponsiveCSSFrom8(20).height,

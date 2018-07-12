@@ -50,8 +50,7 @@ class DealPage extends Component {
           onComplete={this.onSaveName}
           titleEditable
           containerStyle={{
-            marginVertical: 0,
-            marginBottom: getResponsiveCSSFrom8(10).height
+            marginBottom: getResponsiveCSSFrom8(0).height
           }}
           titleStyles={{
             fontSize: getResponsiveCSSFrom8(25).height
@@ -62,6 +61,12 @@ class DealPage extends Component {
           type="image"
           content={this.state.deal.image}
           onComplete={this.onSaveImage}
+          titleContainerStyle={{
+            backgroundColor: "#d45353"
+          }}
+          titleTextStyles={{
+            color: "white"
+          }}
         />
         <M_Editable
           title="Short Description"
@@ -69,6 +74,12 @@ class DealPage extends Component {
           content={this.state.deal.short_desc}
           onComplete={this.onSaveShortDesc}
           editableInputStyle={style.editableInputStyle}
+          titleContainerStyle={{
+            backgroundColor: "#b92f2f" //"#6d2e68"
+          }}
+          titleTextStyles={{
+            color: "white"
+          }}
         />
         <M_Editable
           title="Long Description"
@@ -76,14 +87,40 @@ class DealPage extends Component {
           content={this.state.deal.long_desc}
           onComplete={this.onSaveLongDesc}
           editableInputStyle={style.editableInputStyle}
+          titleContainerStyle={{
+            backgroundColor: "#982929" //"#791c1c" //"#213450"
+          }}
+          titleTextStyles={{
+            color: "white"
+          }}
         />
         <M_Editable
           title="Good Until"
           type="date"
           content={this.state.deal.expiration}
           onComplete={this.onSaveExpiration}
+          titleContainerStyle={{
+            backgroundColor: "#791b1b"
+          }}
+          titleTextStyles={{
+            color: "white"
+          }}
         />
-        <A_Button value="DELETE" onPress={this.delete} />
+        <A_Button
+          value="DELETE"
+          onPress={this.delete}
+          style={{
+            backgroundColor: "white",
+            alignItems: "center",
+            borderColor: "#5d0303",
+            borderWidth: 1
+          }}
+          buttonTextStyles={{
+            color: "#5d0303",
+            fontSize: getResponsiveCSSFrom8(23).height
+          }}
+          strong
+        />
       </ScreenContainer>
     );
   }
