@@ -46,7 +46,10 @@ const openEmailClient = email => {
 };
 export const A_Text_Email = props => {
   return (
-    <A_Button_Opacity onPress={() => openEmailClient(props.children)}>
+    <A_Button_Opacity
+      onPress={() => openEmailClient(props.children)}
+      style={props.buttonStyles}
+    >
       <A_Text {...props} style={{ color: "blue" }} />
     </A_Button_Opacity>
   );

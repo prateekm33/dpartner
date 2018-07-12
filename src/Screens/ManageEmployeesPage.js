@@ -123,7 +123,12 @@ class ManageEmployeesPage extends Component {
         <A_View
           style={[style.employeeDetailLine, style.employeeNameContainerStyle]}
         >
-          <A_Text strong style={style.employeeNameTextStyle}>
+          <A_Text
+            strong
+            style={style.employeeNameTextStyle}
+            ellipsizeMode="tail"
+            numberOfLines={1}
+          >
             {full_name}
           </A_Text>
           {employee.role !== USER_ROLES.VENDOR_ACCOUNT_OWNER && (

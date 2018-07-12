@@ -6,14 +6,18 @@ import ScreenContainer from "../Templates/ScreenContainer";
 import {
   A_Text,
   A_Input,
-  A_Button,
   A_View,
   A_Text_Email,
-  A_Input_Dropdown_Role
+  A_Input_Dropdown_Role,
+  A_Button_Opacity
 } from "../Atoms";
 import { USER_ROLES } from "../utils/constants";
 import { M_VendorHours } from "../Molecules";
-import { logoutAction } from "../redux/actions/employee.actions";
+import {
+  logoutAction,
+  updateEmployeeAction,
+  getOrgEmployeesAction
+} from "../redux/actions/employee.actions";
 import { SCREEN_NAMES } from "../AppNavigator";
 import { getResponsiveCSSFrom8 } from "../utils";
 import { RED_TWO } from "../styles/Colors";
@@ -36,15 +40,21 @@ class ProfilePage extends Component {
       role = EMPLOYEE_DROPDOWN_OPTION;
     this.state = {
       role,
-      first_name: "",
-      last_name: "",
-      email: ""
+      first_name: props.employee.first_name,
+      last_name: props.employee.last_name,
+      email: props.employee.email
     };
   }
 
   savePersonalInfo = () => {
-    console.warn("---TODO...");
-    // this.props.dispatch();
+    const { role, first_name, last_name, email } = this.state;
+    const updates = {
+      role,
+      first_name,
+      last_name,
+      email
+    };
+    this.props.dispatch(updateEmployeeAction(this.props.employee, updates));
   };
 
   changeRole = (role, employee, idx) => {
@@ -75,47 +85,102 @@ class ProfilePage extends Component {
           color: "white"
         }}
       >
-        <A_View>
-          <A_Text strong>BUSINESS INFORMATION</A_Text>
-          <A_Text>
+        <A_View
+          style={{
+            marginBottom: getResponsiveCSSFrom8(25).height,
+            borderBottomWidth: 1,
+            borderBottomColor: "lightgrey"
+          }}
+        >
+          <A_Text
+            strong
+            style={{ marginBottom: getResponsiveCSSFrom8(5).height }}
+          >
+            BUSINESS INFORMATION
+          </A_Text>
+          <A_Text style={{ marginBottom: getResponsiveCSSFrom8(25).height }}>
             Please contact us at{" "}
-            <A_Text_Email>{config.email_addresses.merchants}</A_Text_Email> if
-            you notice any issues and/or you need to update your business's
+            <A_Text_Email
+              buttonStyles={{ height: getResponsiveCSSFrom8(20).height }}
+            >
+              {config.email_addresses.merchants}
+            </A_Text_Email>{" "}
+            if you notice any issues and/or you need to update your business's
             information
           </A_Text>
           <A_Text strong>Business name</A_Text>
-          <A_Text>{vendor.name}</A_Text>
+          <A_Text style={{ marginBottom: getResponsiveCSSFrom8(25).height }}>
+            {vendor.name}
+          </A_Text>
           <A_Text strong>Business phone</A_Text>
-          <A_Text>{vendor.business_phone}</A_Text>
-          <M_VendorHours hours={vendor.hours} />
+          <A_Text style={{ marginBottom: getResponsiveCSSFrom8(25).height }}>
+            {vendor.business_phone}
+          </A_Text>
+          <M_VendorHours
+            hours={vendor.hours}
+            containerStyles={{ marginBottom: getResponsiveCSSFrom8(25).height }}
+          />
         </A_View>
         <A_View>
-          <A_Text strong>PERSONAL INFORMATION</A_Text>
+          <A_Text
+            strong
+            style={{ marginBottom: getResponsiveCSSFrom8(20).height }}
+          >
+            PERSONAL INFORMATION
+          </A_Text>
           <A_Text strong>First Name</A_Text>
           <A_Input
             placeholder="First name"
             defaultValue={employee.first_name}
             onChangeText={this.changeFirstName}
+            style={{
+              borderWidth: 1
+            }}
           />
-          <A_Text strong>Last Name</A_Text>
+          <A_Text
+            strong
+            style={{ marginTop: getResponsiveCSSFrom8(25).height }}
+          >
+            Last Name
+          </A_Text>
           <A_Input
             placeholder="Last name"
             defaultValue={employee.last_name}
             onChangeText={this.changeLastName}
+            style={{
+              borderWidth: 1
+            }}
           />
           <A_Input_Dropdown_Role
             role={employee.role}
             changeRole={role => this.changeRole(role, employee, idx)}
+            dropdownContainerStyle={{
+              marginTop: getResponsiveCSSFrom8(25).height
+            }}
           />
-          <A_Text strong>Email</A_Text>
+          <A_Text
+            strong
+            style={{ marginTop: getResponsiveCSSFrom8(25).height }}
+          >
+            Email
+          </A_Text>
           <A_Input
             placeholder="Email"
             defaultValue={employee.email}
             onChangeText={this.changeEmail}
+            style={{
+              borderWidth: 1
+            }}
           />
-          <A_Button value="SAVE" onPress={this.savePersonalInfo} />
+          <A_Button_Opacity
+            strong
+            value="SAVE"
+            onPress={this.savePersonalInfo}
+            style={[style.saveButtonStyles]}
+            buttonTextStyles={style.saveButtonTextStyles}
+          />
         </A_View>
-        <A_Button
+        <A_Button_Opacity
           onPress={this.logout}
           value="Logout"
           style={style.logoutButtonStyles}
@@ -140,6 +205,15 @@ const style = StyleSheet.create({
     alignItems: "center"
   },
   logoutButtonTextStyles: {
+    color: "white",
+    fontSize: getResponsiveCSSFrom8(20).height
+  },
+  saveButtonStyles: {
+    alignItems: "center",
+    marginVertical: getResponsiveCSSFrom8(20).height,
+    backgroundColor: "#3D9990"
+  },
+  saveButtonTextStyles: {
     color: "white",
     fontSize: getResponsiveCSSFrom8(20).height
   }

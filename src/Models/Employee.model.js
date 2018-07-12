@@ -25,7 +25,7 @@ export class Employee extends DataModel {
     }
   };
 
-  fullName = () => (this.first_name || "") + (this.last_name || "");
+  fullName = () => (this.first_name || "") + " " + (this.last_name || "");
 
   isAccountAdmin = () => isAccountAdmin(this.role);
 }
