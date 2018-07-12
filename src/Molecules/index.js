@@ -7,6 +7,7 @@ import { M_Card_Deal_Mini, M_Card_LoyaltyReward_Mini } from "./M_Card";
 import { M_TabOptions } from "./M_TabOptions";
 import { M_VendorHours } from "./M_VendorHours";
 import { M_Search } from "./M_Search";
+import { M_Editable } from "./M_Editable";
 export {
   M_Header,
   M_Header_Main,
@@ -18,5 +19,6 @@ export {
   M_Card_LoyaltyReward_Mini,
   M_TabOptions,
   M_VendorHours,
-  M_Search
+  M_Search,
+  M_Editable
 };

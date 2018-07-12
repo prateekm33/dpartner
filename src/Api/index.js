@@ -340,6 +340,30 @@ class Api {
     this.post(config.api.vendors.employees + "/" + this.employee.vendor_uuid, {
       employee
     }).then(res => createEmployee(res.employee));
+
+  updateDeal = (deal_uuid, updates) =>
+    this.put(
+      config.api.vendors.deals +
+        "/" +
+        this.employee.vendor_uuid +
+        "/" +
+        deal_uuid,
+      {
+        updates
+      }
+    ).then(res => createDeal(res.deal));
+
+  updateReward = (reward_uuid, updates) =>
+    this.put(
+      config.api.vendors.rewards +
+        "/" +
+        this.employee.vendor_uuid +
+        "/" +
+        reward_uuid,
+      {
+        updates
+      }
+    ).then(res => createLoyaltyReward(res.loyalty_reward));
 }
 
 export default new Api(config.api.root);

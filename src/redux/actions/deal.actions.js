@@ -67,3 +67,26 @@ export const createNewDealAction = data => dispatch => {
       return false;
     });
 };
+
+export const updateDealAction = (deal_uuid, updates) => dispatch => {
+  dispatch({
+    type: loading_types.UPDATING_DEAL,
+    loading: true
+  });
+  return Api.updateDeal(deal_uuid, updates)
+    .then(deal => {
+      dispatch({
+        type: loading_types.UPDATING_DEAL,
+        loading: false
+      });
+      return deal;
+    })
+    .catch(error => {
+      dispatch({
+        type: loading_types.UPDATING_DEAL,
+        loading: false
+      });
+      dispatchErrorActionOfType(error_types.UPDATING_DEAL_ERROR)(error);
+      return false;
+    });
+};

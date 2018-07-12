@@ -27,12 +27,26 @@ A_Input.propTypes = {
 class A_Input_Date extends Component {
   constructor(props) {
     super(props);
+    const date = this.props.defaultValue;
+    let m = "",
+      d = "",
+      y = "";
+    if (date) {
+      m = date.format("MM");
+      d = date.format("DD");
+      y = date.format("YYYY");
+    }
     this.state = {
-      m: "",
-      d: "",
-      y: ""
+      m,
+      d,
+      y
     };
   }
+
+  componentWillReceiveProps = nextProps => {
+    if (nextProps.defaultValue === this.props.defaultValue) return;
+    this.setState({ defaultValue });
+  };
 
   updateMonth = m => {
     this.setState({ m }, () => {
@@ -57,7 +71,7 @@ class A_Input_Date extends Component {
     this.setState({ y }, () => {
       const isComplete = this.isComplete();
       if (!isComplete) return;
-      this.yearEl.blue();
+      this.yearEl.blur();
     });
 
   isComplete = () => {
@@ -76,9 +90,9 @@ class A_Input_Date extends Component {
   render() {
     return (
       <A_View style={{ marginVertical: getResponsiveCSSFrom8(10).height }}>
-        <A_Text strong style={{ fontSize: getResponsiveCSSFrom8(20).height }}>
+        {/* <A_Text strong style={{ fontSize: getResponsiveCSSFrom8(20).height }}>
           Expires on
-        </A_Text>
+        </A_Text> */}
         <A_View
           style={{
             flexDirection: "row",
@@ -93,6 +107,9 @@ class A_Input_Date extends Component {
             keyboardType="numeric"
             maxLength={2}
             inputRef={el => (this.monthEl = el)}
+            defaultValue={this.state.m}
+            editable={this.props.editable !== false}
+            inputRef={this.props.monthRef}
           />
           <A_Text>/</A_Text>
           <A_Input
@@ -101,14 +118,18 @@ class A_Input_Date extends Component {
             keyboardType="numeric"
             maxLength={2}
             inputRef={el => (this.dayEl = el)}
+            defaultValue={this.state.d}
+            editable={this.props.editable !== false}
           />
           <A_Text>/</A_Text>
           <A_Input
             placeholder="YYYY"
-            onChangeText={this.udpateYear}
+            onChangeText={this.updateYear}
             keyboardType="numeric"
             maxLength={4}
             inputRef={el => (this.yearEl = el)}
+            defaultValue={this.state.y}
+            editable={this.props.editable !== false}
           />
         </A_View>
       </A_View>
