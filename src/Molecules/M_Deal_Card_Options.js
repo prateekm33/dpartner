@@ -103,11 +103,16 @@ export { M_Deal_Card_Options, M_LoyaltyReward_Card_Options };
 const style = StyleSheet.create({
   cardOptionsContainerStyle: {
     flexDirection: "row",
-    flexWrap: "nowrap"
+    flexWrap: "nowrap",
+    borderTopWidth: 0.8,
+    borderTopColor: "lightgrey",
+    marginTop: getResponsiveCSSFrom8(10).height,
+    paddingHorizontal: getResponsiveCSSFrom8(10).width,
+    backgroundColor: "white"
   },
   cardOptionsIconStyle: {
     width: getResponsiveCSSFrom8(30).width,
     height: getResponsiveCSSFrom8(30).height,
-    marginRight: getResponsiveCSSFrom8(20).width
+    marginRight: getResponsiveCSSFrom8(30).width
   }
 });
