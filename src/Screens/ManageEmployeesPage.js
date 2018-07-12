@@ -211,6 +211,7 @@ class ManageEmployeesPage extends Component {
             />
           </A_View>
         )}
+        <A_View style={{ marginBottom: getResponsiveCSSFrom8(100).height }} />
       </ScreenContainer>
     );
   }

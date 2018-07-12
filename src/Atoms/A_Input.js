@@ -7,6 +7,7 @@ import { A_Button_Opacity } from "./A_Button";
 import { A_Icon_DropdownToggle } from "./A_Icon";
 import { USER_ROLES } from "../utils/constants";
 import { getResponsiveCSSFrom8 } from "../utils";
+import { A_View_Scroll } from "./A_View";
 
 const A_Input = props => {
   return (
@@ -157,6 +158,7 @@ class A_Input_Dropdown extends Component {
     this.setState({ show_dropdown: !this.state.show_dropdown });
 
   renderDropdown = () => {
+    // TODO...convert to scrollview
     return (
       <A_View
         style={[
@@ -164,18 +166,20 @@ class A_Input_Dropdown extends Component {
           this.props.dropdownOptionsContainerStyle
         ]}
       >
-        {this.props.values.map(val => {
-          const value = this.getValue(val);
-          return (
-            <A_Button_Opacity
-              onPress={() => this.onValueSelected(val)}
-              key={`dd-option-${value}`}
-              style={style.ddOptionStyle}
-            >
-              <A_Text>{value}</A_Text>
-            </A_Button_Opacity>
-          );
-        })}
+        <A_View_Scroll>
+          {this.props.values.map(val => {
+            const value = this.getValue(val);
+            return (
+              <A_Button_Opacity
+                onPress={() => this.onValueSelected(val)}
+                key={`dd-option-${value}`}
+                style={style.ddOptionStyle}
+              >
+                <A_Text>{value}</A_Text>
+              </A_Button_Opacity>
+            );
+          })}
+        </A_View_Scroll>
       </A_View>
     );
   };
