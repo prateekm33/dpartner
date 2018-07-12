@@ -10,6 +10,7 @@ import {
 import { USER_ROLES } from "../../utils/constants";
 import { createNewEmployeeAction } from "../../redux/actions/employee.actions";
 import ScreenContainer from "../../Templates/ScreenContainer";
+import { getResponsiveCSSFrom8 } from "../../utils";
 
 class NewEmployeeFormPage extends Component {
   constructor(props) {
@@ -64,8 +65,29 @@ class NewEmployeeFormPage extends Component {
           onChangeText={this.changePassword}
           secureTextEntry
         />
-        <A_Input_Dropdown_Role changeRole={role => this.changeRole(role)} />
-        <A_Button value="CREATE" onPress={this.submit} />
+        <A_Input_Dropdown_Role
+          changeRole={role => this.changeRole(role)}
+          dropdownContainerStyle={{
+            marginTop: getResponsiveCSSFrom8(20).height,
+            paddingHorizontal: getResponsiveCSSFrom8(10).width
+          }}
+        />
+        <A_Button
+          value="CREATE"
+          strong
+          onPress={this.submit}
+          style={{
+            backgroundColor: "white",
+            marginVertical: getResponsiveCSSFrom8(50).height,
+            borderWidth: 1,
+            borderColor: "#622f6b"
+          }}
+          buttonTextStyles={{
+            color: "#622f6b",
+            fontSize: getResponsiveCSSFrom8(20).height,
+            textAlign: "center"
+          }}
+        />
       </ScreenContainer>
     );
   }

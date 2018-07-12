@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "../redux";
-import { View, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import ScreenContainer from "../Templates/ScreenContainer";
 import { A_Text, A_View } from "../Atoms";
 import { M_Stat } from "../Molecules";
 import { getResponsiveCSSFrom8 } from "../utils";
+import moment from "moment";
 
 class Dashboard extends Component {
   constructor(props) {
@@ -25,7 +26,36 @@ class Dashboard extends Component {
         headerMainContainerStyle={style.headerMainContainerStyle}
       >
         <M_Stat
-          title="At a Glance"
+          title={
+            <A_View
+              style={{
+                flexDirection: "row",
+                flexWrap: "nowrap",
+                justifyContent: "space-between",
+                padding: getResponsiveCSSFrom8(10).width,
+                backgroundColor: "#50498c"
+              }}
+            >
+              <A_Text
+                strong
+                style={{
+                  color: "white",
+                  fontSize: getResponsiveCSSFrom8(20).height
+                }}
+              >
+                At a Glance
+              </A_Text>
+              <A_Text
+                strong
+                style={{
+                  color: "white",
+                  fontSize: getResponsiveCSSFrom8(20).height
+                }}
+              >
+                {moment().format("MMM 'YY")}
+              </A_Text>
+            </A_View>
+          }
           statContainerStyle={[
             style.revenueContainerStyle,
             style.cardShadowStyle

@@ -1,14 +1,20 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
-import { A_Text } from "../Atoms";
+import { A_Text, A_View } from "../Atoms";
 import { getResponsiveCSSFrom8 } from "../utils";
 
 const M_Stat = props => {
-  return (
-    <View style={[style.statContainer, props.statContainerStyle]}>
+  let titleNode;
+  if (typeof props.title === "string")
+    titleNode = (
       <A_Text strong style={[style.statTitle, props.statTitleStyle]}>
         {props.title}
       </A_Text>
+    );
+  else titleNode = props.title;
+  return (
+    <View style={[style.statContainer, props.statContainerStyle]}>
+      {titleNode}
       {props.children}
     </View>
   );

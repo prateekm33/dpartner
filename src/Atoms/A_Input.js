@@ -293,9 +293,9 @@ const style = StyleSheet.create({
   },
   dropdownOptionsContainerStyle: {
     borderWidth: 1,
-    position: "absolute",
-    left: 0,
-    right: 0,
+    // position: "absolute",
+    // left: 0,
+    // right: 0,
     backgroundColor: "white"
   },
   ddIconStyle: {},

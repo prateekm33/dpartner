@@ -275,9 +275,7 @@ const style = StyleSheet.create({
     marginHorizontal: getResponsiveCSSFrom8(30).width,
     paddingVertical: getResponsiveCSSFrom8(10).height
   },
-  dropdownOptionsContainerStyle: {
-    position: "relative"
-  },
+  dropdownOptionsContainerStyle: {},
   dropdownInputContainerStyle: {
     minHeight: getResponsiveCSSFrom8(50).height
   },
