@@ -40,7 +40,9 @@ const M_Card_LoyaltyReward_Mini = withNavigation(props => {
       style={[style.cardContainerStyle, props.containerStyle]}
     >
       <A_View style={style.detailsContainerStyle}>
-        <A_Image source={reward.image} style={style.imageContainerStyles} />
+        <A_View style={style.imageContainerStyles}>
+          <A_Image source={reward.image} style={style.imageContainerStyles} />
+        </A_View>
         <A_Text strong style={[style.nameStyles, props.nameStyles]}>
           {reward.name}
         </A_Text>

@@ -73,7 +73,12 @@ class M_LoyaltyReward_Card_Options_Pre extends Component {
 
   render() {
     return (
-      <View style={style.cardOptionsContainerStyle}>
+      <View
+        style={[
+          style.cardOptionsContainerStyle,
+          this.props.cardOptionsContainerStyle
+        ]}
+      >
         <A_Icon_View
           onPress={this.viewReward}
           style={style.cardOptionsIconStyle}
