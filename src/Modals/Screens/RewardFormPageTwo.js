@@ -10,7 +10,6 @@ import ScreenContainer from "../../Templates/ScreenContainer";
 class RewardFormPageTwo extends Component {
   constructor(props) {
     super(props);
-    console.warn("-----image uploader...TODO...");
     const data = props.navigation.state.params.data;
     this.state = {
       ...data,

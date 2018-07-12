@@ -45,11 +45,34 @@ class Deals_RewardsPage extends Component {
 
   renderDeal = ({ item }) => {
     const deal = item;
-    return <M_Card_Deal_Mini deal={deal} />;
+    return (
+      <M_Card_Deal_Mini
+        deal={deal}
+        onPress={() => {
+          return this.props.mainNavigation.navigate(
+            MAIN_SCREEN_NAMES.ModalNavigator,
+            {
+              routeName: MODAL_SCREEN_NAMES.DealModal,
+              params: { deal }
+            }
+          );
+        }}
+      />
+    );
   };
 
   renderLoyaltyReward = ({ item }) => {
-    return <M_Card_LoyaltyReward_Mini reward={item} />;
+    return (
+      <M_Card_LoyaltyReward_Mini
+        reward={item}
+        onPress={() =>
+          this.props.mainNavigation.navigate(MAIN_SCREEN_NAMES.ModalNavigator, {
+            routeName: MODAL_SCREEN_NAMES.RewardModal,
+            params: { reward: item }
+          })
+        }
+      />
+    );
   };
 
   onTabSelect = idx => {

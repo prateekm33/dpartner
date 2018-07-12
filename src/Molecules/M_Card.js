@@ -13,7 +13,7 @@ const M_Card_Deal_Mini = withNavigation(props => {
   const deal = props.deal;
   return (
     <A_Button
-      onPress={() => props.navigation.navigate(SCREEN_NAMES.DealPage, { deal })}
+      onPress={props.onPress}
       style={[style.cardContainerStyle, props.containerStyle]}
     >
       <A_View style={style.detailsContainerStyle}>
@@ -34,9 +34,7 @@ const M_Card_LoyaltyReward_Mini = withNavigation(props => {
   const reward = props.reward;
   return (
     <A_Button
-      onPress={() =>
-        props.navigation.navigate(SCREEN_NAMES.LoyaltyRewardPage, { reward })
-      }
+      onPress={props.onPress}
       style={[style.cardContainerStyle, props.containerStyle]}
     >
       <A_View style={style.detailsContainerStyle}>

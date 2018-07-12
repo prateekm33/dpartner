@@ -1,18 +1,18 @@
 import React, { Component } from "react";
-import { connect } from "../redux";
-import { View, StyleSheet } from "react-native";
-import ScreenContainer from "../Templates/ScreenContainer";
-import { A_Text, A_Image, A_View, A_Button_Opacity, A_Button } from "../Atoms";
-import { getResponsiveCSSFrom8 } from "../utils";
-import { M_Editable } from "../Molecules";
-import { updateDealAction } from "../redux/actions/deal.actions";
-import { RED_ONE } from "../styles/Colors";
+import { connect } from "../../redux";
+import { StyleSheet } from "react-native";
+import ScreenContainer from "../../Templates/ScreenContainer";
+import { A_Button } from "../../Atoms";
+import { getResponsiveCSSFrom8 } from "../../utils";
+import { M_Editable } from "../../Molecules";
+import { updateDealAction } from "../../redux/actions/deal.actions";
+import { RED_ONE } from "../../styles/Colors";
 
 class DealPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      deal: props.navigation.state.params.deal
+      deal: props.screenProps.params.deal
     };
   }
 
@@ -43,9 +43,25 @@ class DealPage extends Component {
     console.warn("---DELETE TODO...");
   };
 
+  close = () => this.props.screenProps.mainNavigation.goBack();
+
   render() {
     return (
-      <ScreenContainer title={`Deal #${this.state.deal.code}`} scrollView>
+      <ScreenContainer
+        title={`Deal #${this.state.deal.code}`}
+        scrollView
+        headerMainContainerStyle={{
+          backgroundColor: "#851200",
+          shadowOffset: {
+            height: getResponsiveCSSFrom8(20).height,
+            width: 0
+          }
+        }}
+        headerMainTitleTextStyle={{
+          color: "white"
+        }}
+        onClose={this.close}
+      >
         <M_Editable
           title={this.state.deal.name}
           onComplete={this.onSaveName}
@@ -114,7 +130,8 @@ class DealPage extends Component {
             backgroundColor: "white",
             alignItems: "center",
             borderColor: RED_ONE,
-            borderWidth: 1
+            borderWidth: 1,
+            marginBottom: getResponsiveCSSFrom8(50).height
           }}
           buttonTextStyles={{
             color: RED_ONE,

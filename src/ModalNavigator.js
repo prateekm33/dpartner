@@ -6,7 +6,9 @@ export const MODAL_SCREEN_NAMES = {
   ScanModal: "ScanModal",
   RewardFormModal: "RewardFormModal",
   DealFormModal: "DealFormModal",
-  NewEmployeeFormModal: "NewEmployeeFormModal"
+  NewEmployeeFormModal: "NewEmployeeFormModal",
+  DealModal: "DealModal",
+  RewardModal: "RewardModal"
 };
 
 export const INITIAL_ROUTE_NAME = null;
@@ -18,7 +20,9 @@ const Screens = [
   [
     MODAL_SCREEN_NAMES.NewEmployeeFormModal,
     require("./Modals/NewEmployeeFormModal")
-  ]
+  ],
+  [MODAL_SCREEN_NAMES.DealModal, require("./Modals/DealModal")],
+  [MODAL_SCREEN_NAMES.RewardModal, require("./Modals/RewardModal")]
 ];
 
 const SCREENS = Screens.reduce(
@@ -27,7 +31,6 @@ const SCREENS = Screens.reduce(
       screen: props => {
         const { modalInitialRouteName } = props.screenProps || {};
         const Component = screen[1];
-
         if (props.navigation.state.routeName !== modalInitialRouteName) {
           const action = NavigationActions.reset({
             index: 0,
@@ -36,6 +39,7 @@ const SCREENS = Screens.reduce(
             ]
           });
           props.navigation.dispatch(action);
+          return null;
         }
         return (
           <View style={{ flex: 1 }}>
