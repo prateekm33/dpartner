@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { TextInput, StyleSheet } from "react-native";
+import { TextInput, StyleSheet, Platform } from "react-native";
 import { A_Text, A_View } from ".";
 import moment from "moment";
 import { A_Button_Opacity } from "./A_Button";
@@ -141,7 +141,7 @@ class A_Input_Dropdown extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      show_dropdown: false
+      show_dropdown: true
     };
   }
 
@@ -158,7 +158,12 @@ class A_Input_Dropdown extends Component {
 
   renderDropdown = () => {
     return (
-      <A_View style={[style.dropdownOptionsContainerStyle]}>
+      <A_View
+        style={[
+          style.dropdownOptionsContainerStyle,
+          this.props.dropdownOptionsContainerStyle
+        ]}
+      >
         {this.props.values.map(val => {
           const value = this.getValue(val);
           return (
@@ -180,9 +185,19 @@ class A_Input_Dropdown extends Component {
   };
   render() {
     return (
-      <A_View style={this.props.dropdownContainerStyle}>
+      <A_View
+        style={[
+          style.dropdownContainerStyle,
+          this.props.dropdownContainerStyle
+        ]}
+      >
         <A_Text strong>{this.props.title}</A_Text>
-        <A_View style={[style.dropdownInputContainer]}>
+        <A_View
+          style={[
+            style.dropdownInputContainer,
+            this.props.dropdownInputContainerStyle
+          ]}
+        >
           <A_Text
             style={[style.selectedValueStyle, this.props.selectedValueStyle]}
           >
@@ -249,6 +264,8 @@ class A_Input_Dropdown_Role extends Component {
         onValueSelected={this.changeRole}
         selectedValue={this.state.role}
         dropdownContainerStyle={this.props.dropdownContainerStyle}
+        dropdownOptionsContainerStyle={this.props.dropdownOptionsContainerStyle}
+        dropdownInputContainerStyle={this.props.dropdownInputContainerStyle}
       />
     );
   }
@@ -265,19 +282,27 @@ const style = StyleSheet.create({
   },
   dropdownInputContainer: {
     flexDirection: "row",
-    flexWrap: "nowrap",
-    borderWidth: 1
+    flexWrap: "nowrap"
   },
   selectedValueStyle: {
-    padding: getResponsiveCSSFrom8(10).width,
     flex: 1
   },
   dropdownOptionsContainerStyle: {
-    borderWidth: 1
+    borderWidth: 1,
+    position: "absolute",
+    left: 0,
+    right: 0,
+    backgroundColor: "white"
   },
   ddIconStyle: {},
   ddOptionStyle: {
     borderBottomWidth: 0.6,
     padding: getResponsiveCSSFrom8(10).width
+  },
+  dropdownContainerStyle: {
+    ...Platform.select({
+      ios: { zIndex: 1000 },
+      android: { elevation: 1000 }
+    })
   }
 });

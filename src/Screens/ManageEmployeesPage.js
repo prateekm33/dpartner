@@ -143,6 +143,8 @@ class ManageEmployeesPage extends Component {
           role={employee.role}
           changeRole={role => this.changeRole(role, employee, idx)}
           dropdownContainerStyle={style.dropdownContainerStyle}
+          dropdownOptionsContainerStyle={style.dropdownOptionsContainerStyle}
+          dropdownInputContainerStyle={style.dropdownInputContainerStyle}
         />
         {this.state.updates[idx] && (
           <A_Button_Opacity
@@ -260,7 +262,13 @@ const style = StyleSheet.create({
     color: "white"
   },
   dropdownContainerStyle: {
-    paddingHorizontal: getResponsiveCSSFrom8(30).width,
+    marginHorizontal: getResponsiveCSSFrom8(30).width,
     paddingVertical: getResponsiveCSSFrom8(10).height
+  },
+  dropdownOptionsContainerStyle: {
+    top: getResponsiveCSSFrom8(50).height
+  },
+  dropdownInputContainerStyle: {
+    minHeight: getResponsiveCSSFrom8(50).height
   }
 });
