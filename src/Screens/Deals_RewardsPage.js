@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { StyleSheet } from "react-native";
 import { connect } from "../redux";
 import ScreenContainer from "../Templates/ScreenContainer";
 import {
@@ -6,7 +7,7 @@ import {
   M_Card_LoyaltyReward_Mini,
   M_TabOptions
 } from "../Molecules";
-import { A_ListContainer, A_Button } from "../Atoms";
+import { A_ListContainer, A_Button, A_Button_Opacity } from "../Atoms";
 import { fetchOrgDealsAction } from "../redux/actions/deal.actions";
 import { fetchOrgRewardsAction } from "../redux/actions/reward.actions";
 import { withEventDispatcher } from "../HOCs/EventDispatcher";
@@ -146,7 +147,13 @@ class Deals_RewardsPage extends Component {
           onTabSelect={this.onTabSelect}
           activeTab={this.state.activeTab}
         />
-        <A_Button onPress={this.createNew} value="CREATE NEW" />
+        <A_Button_Opacity
+          onPress={this.createNew}
+          value="NEW"
+          style={style.createNewButtonStyles}
+          buttonTextStyles={style.createNewButtonTextStyles}
+          strong
+        />
         {tabContent}
       </ScreenContainer>
     );
@@ -157,3 +164,16 @@ const mapStateToProps = state => ({
   deals: state.deals
 });
 export default connect(mapStateToProps)(withEventDispatcher(Deals_RewardsPage));
+
+const style = StyleSheet.create({
+  createNewButtonStyles: {
+    width: getResponsiveCSSFrom8(100).width,
+    alignSelf: "flex-end",
+    backgroundColor: "#36A0B2",
+    marginVertical: getResponsiveCSSFrom8(20).height
+  },
+  createNewButtonTextStyles: {
+    color: "white",
+    textAlign: "center"
+  }
+});

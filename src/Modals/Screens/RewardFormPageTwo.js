@@ -75,7 +75,7 @@ class RewardFormPageTwo extends Component {
         scrollView
         onClose={this.close}
         headerMainContainerStyle={{
-          backgroundColor: "#26627d"
+          backgroundColor: "#36A0B2"
         }}
         headerMainTitleTextStyle={{
           color: "white"

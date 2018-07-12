@@ -8,6 +8,7 @@ import {
 } from "./M_Deal_Card_Options";
 import { SCREEN_NAMES } from "../AppNavigator";
 import { getResponsiveCSSFrom8 } from "../utils";
+import { DEFAULT_CARD_SHADOW } from "../styles/defaults";
 
 const M_Card_Deal_Mini = withNavigation(props => {
   const deal = props.deal;
@@ -57,13 +58,7 @@ const style = StyleSheet.create({
     marginVertical: getResponsiveCSSFrom8(10).height,
     minHeight: getResponsiveCSSFrom8(300).height,
     justifyContent: "flex-end",
-    shadowRadius: getResponsiveCSSFrom8(5).width,
-    shadowColor: "lightgrey",
-    shadowOpacity: 1,
-    shadowOffset: {
-      width: 0,
-      height: 0
-    },
+    ...DEFAULT_CARD_SHADOW,
     paddingTop: getResponsiveCSSFrom8(10).height
   },
   nameStyles: {

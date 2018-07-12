@@ -19,9 +19,10 @@ import {
 } from "../Atoms";
 import { isAccountAdmin } from "../Models/Employee.model";
 import { USER_ROLES } from "../utils/constants";
-import { SCREEN_NAMES } from "../AppNavigator";
 import { MODAL_SCREEN_NAMES } from "../ModalNavigator";
 import { MAIN_SCREEN_NAMES } from "../MainNavigator";
+import { TEAL_LIGHT } from "../styles/Colors";
+import { DEFAULT_CARD_SHADOW } from "../styles/defaults";
 
 class ManageEmployeesPage extends Component {
   constructor(props) {
@@ -190,7 +191,13 @@ class ManageEmployeesPage extends Component {
           this.renderUnauthDisplay()
         ) : (
           <A_View>
-            <A_Button value="NEW" onPress={this.showNewEmployeeForm} />
+            <A_Button_Opacity
+              value="NEW"
+              onPress={this.showNewEmployeeForm}
+              style={style.newButtonStyle}
+              buttonTextStyles={style.newButtonTextStyles}
+              strong
+            />
             <M_Search
               onSearch={this.onSearch}
               data={this.state.employees}
@@ -220,16 +227,10 @@ const style = StyleSheet.create({
   listContainerStyle: {},
   listContentContainerStyle: {},
   employeeContainerStyle: {
-    // shadowRadius: getResponsiveCSSFrom8(8).width,
-    // shadowOffset: {
-    //   width: 0,
-    //   height: 0
-    // },
-    // shadowColor: "lightgrey",
-    // shadowOpacity: 1,
+    ...DEFAULT_CARD_SHADOW,
     backgroundColor: "white",
-    paddingVertical: getResponsiveCSSFrom8(30).height,
-    borderBottomWidth: 1
+    padding: getResponsiveCSSFrom8(30).height,
+    marginVertical: getResponsiveCSSFrom8(20).height
   },
   employeeNameContainerStyle: {},
   employeeNameTextStyle: {},
@@ -240,5 +241,15 @@ const style = StyleSheet.create({
   emptyDetailText: {
     marginLeft: getResponsiveCSSFrom8(10).width,
     color: "grey"
+  },
+  newButtonStyle: {
+    backgroundColor: "#868AFF",
+    width: getResponsiveCSSFrom8(100).width,
+    alignSelf: "flex-end",
+    marginBottom: getResponsiveCSSFrom8(20).height
+  },
+  newButtonTextStyles: {
+    textAlign: "center",
+    color: "white"
   }
 });

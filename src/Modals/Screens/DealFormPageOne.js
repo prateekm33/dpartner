@@ -42,7 +42,7 @@ class DealFormPageOne extends Component {
         onClose={this.close}
         title="New Deal"
         headerMainContainerStyle={{
-          backgroundColor: "#26627d"
+          backgroundColor: "#36A0B2"
         }}
         headerMainTitleTextStyle={{
           color: "white"
@@ -103,7 +103,8 @@ const style = StyleSheet.create({
   },
   headlineInput: {
     height: getResponsiveCSSFrom8(100).height,
-    borderWidth: 0.4
+    borderWidth: 1.6,
+    borderColor: "lightgrey"
   },
   detailsInput: { height: getResponsiveCSSFrom8(200).height, borderWidth: 0.4 },
   nextButtonStyle: {

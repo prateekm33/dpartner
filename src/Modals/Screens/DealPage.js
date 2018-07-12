@@ -51,9 +51,9 @@ class DealPage extends Component {
         title={`Deal #${this.state.deal.code}`}
         scrollView
         headerMainContainerStyle={{
-          backgroundColor: "#851200",
+          backgroundColor: "#842323",
           shadowOffset: {
-            height: getResponsiveCSSFrom8(20).height,
+            height: getResponsiveCSSFrom8(15).height,
             width: 0
           }
         }}

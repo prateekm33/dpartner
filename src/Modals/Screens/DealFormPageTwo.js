@@ -72,7 +72,7 @@ class DealFormPageTwo extends Component {
         onClose={this.close}
         scrollView
         headerMainContainerStyle={{
-          backgroundColor: "#26627d"
+          backgroundColor: "#36A0B2"
         }}
         headerMainTitleTextStyle={{
           color: "white"

@@ -35,6 +35,10 @@ class M_Search extends Component {
         <A_Input
           placeholder={this.props.search_text || "Search"}
           onChangeText={this.onChangeText}
+          style={{
+            borderWidth: 1.6,
+            borderColor: "lightgrey"
+          }}
         />
         <A_ListContainer
           data={this.state.data}
