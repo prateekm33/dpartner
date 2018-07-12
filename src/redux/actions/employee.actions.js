@@ -11,6 +11,7 @@ export const logoutAction = () => dispatch => {
   return Api.logout()
     .then(done => {
       dispatch({ type: loading_types.LOGGING_OUT_EMPLOYEE, loading: false });
+      dispatch({ type: employee_types.LOGGED_OUT_EMPLOYEE });
       return done;
     })
     .catch(error => {

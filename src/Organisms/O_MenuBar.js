@@ -51,12 +51,21 @@ O_MenuBar.propTypes = {
 class O_MenuBar_Main_Pre extends Component {
   constructor(props) {
     super(props);
-    this.state = {
+    this.state = this.getFreshState();
+  }
+  componentWillReceiveProps = nextProps => {
+    if (nextProps.employee.uuid !== this.props.employee.uuid) {
+      this.setState(this.getFreshState());
+    }
+  };
+
+  getFreshState = () => {
+    return {
       activeIdx: 0,
       items: this.getInitialItems(),
       menu_inactive: true
     };
-  }
+  };
 
   getInitialItems = () => [
     A_Icon_Dashboard,
@@ -135,7 +144,8 @@ O_MenuBar_Main_Pre.propTypes = {
   vertical: PropTypes.bool
 };
 const O_MenuBar_Main = connect(state => ({
-  navigation: state.navigation
+  navigation: state.navigation,
+  employee: state.employee
 }))(O_MenuBar_Main_Pre);
 
 const style = StyleSheet.create({
