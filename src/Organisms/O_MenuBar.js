@@ -67,7 +67,7 @@ class O_MenuBar_Main_Pre extends Component {
   ];
   setActiveIdx = idx => {
     if (this.state.activeIdx === idx) return false;
-    this.setState({ activeIdx: idx });
+    this.setState({ activeIdx: idx, menu_inactive: true });
     return true;
   };
   navigateToDashboard = () => {
@@ -79,6 +79,7 @@ class O_MenuBar_Main_Pre extends Component {
     this.props.navigation.resetTo(SCREEN_NAMES.Deals_RewardsPage);
   };
   navigateToScanPage = () => {
+    this.setState({ menu_inactive: true });
     this.props.mainNavigation.navigate(MAIN_SCREEN_NAMES.ModalNavigator, {
       routeName: MODAL_SCREEN_NAMES.ScanModal
     });
