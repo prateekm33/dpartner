@@ -6,6 +6,7 @@ import { A_Text, A_Image, A_View, A_Button_Opacity, A_Button } from "../Atoms";
 import { getResponsiveCSSFrom8 } from "../utils";
 import { M_Editable } from "../Molecules";
 import { updateDealAction } from "../redux/actions/deal.actions";
+import { RED_ONE } from "../styles/Colors";
 
 class DealPage extends Component {
   constructor(props) {
@@ -112,11 +113,11 @@ class DealPage extends Component {
           style={{
             backgroundColor: "white",
             alignItems: "center",
-            borderColor: "#5d0303",
+            borderColor: RED_ONE,
             borderWidth: 1
           }}
           buttonTextStyles={{
-            color: "#5d0303",
+            color: RED_ONE,
             fontSize: getResponsiveCSSFrom8(23).height
           }}
           strong

@@ -19,7 +19,7 @@ class SplashScreen extends Component {
     if (nextProps.loading === false) {
       this.props.navigation.resetTo(
         nextProps.is_authenticated
-          ? SCREEN_NAMES.Dashboard
+          ? SCREEN_NAMES.ProfilePage
           : SCREEN_NAMES.LoginPage
       );
     }

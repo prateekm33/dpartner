@@ -17,6 +17,7 @@ import { M_VendorHours } from "../Molecules";
 import { logoutAction } from "../redux/actions/employee.actions";
 import { SCREEN_NAMES } from "../AppNavigator";
 import { getResponsiveCSSFrom8 } from "../utils";
+import { RED_TWO } from "../styles/Colors";
 
 const ADMIN_DROPDOWN_OPTION = {
   text: "ADMIN",
@@ -56,7 +57,8 @@ class ProfilePage extends Component {
   changeEmail = email => this.setState({ email });
 
   logout = () =>
-    this.props.dispatch(logoutAction()).then(() => {
+    this.props.dispatch(logoutAction()).then(success => {
+      if (!success) return;
       this.props.navigation.resetTo(SCREEN_NAMES.SplashScreen);
     });
 
@@ -68,7 +70,7 @@ class ProfilePage extends Component {
         scrollView
         containerStyle={style.containerStyle}
         headerMainContainerStyle={{
-          backgroundColor: "#03a9f4"
+          backgroundColor: "#3D9990" //"#03a9f4"
         }}
         headerMainTitleTextStyle={{
           color: "white"
@@ -114,7 +116,13 @@ class ProfilePage extends Component {
           />
           <A_Button value="SAVE" onPress={this.savePersonalInfo} />
         </A_View>
-        <A_Button onPress={this.logout} value="Logout" />
+        <A_Button
+          onPress={this.logout}
+          value="Logout"
+          style={style.logoutButtonStyles}
+          buttonTextStyles={style.logoutButtonTextStyles}
+          strong
+        />
       </ScreenContainer>
     );
   }
@@ -126,7 +134,14 @@ export default connect(state => ({
 }))(ProfilePage);
 
 const style = StyleSheet.create({
-  containerStyle: {
-    marginBottom: getResponsiveCSSFrom8(100).height
+  containerStyle: {},
+  logoutButtonStyles: {
+    marginBottom: getResponsiveCSSFrom8(50).height,
+    backgroundColor: RED_TWO,
+    alignItems: "center"
+  },
+  logoutButtonTextStyles: {
+    color: "white",
+    fontSize: getResponsiveCSSFrom8(20).height
   }
 });
