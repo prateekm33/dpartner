@@ -68,7 +68,7 @@ class DealFormPageTwo extends Component {
 
   render() {
     return (
-      <ScreenContainer title="New Deal" onClose={this.close} scrollView>
+      <ScreenContainer title="Upload Image" onClose={this.close} scrollView>
         <A_Text strong>UPLOAD AN IMAGE</A_Text>
         <A_Button value="Choose an image" onPress={this.choose} />
         <A_Image

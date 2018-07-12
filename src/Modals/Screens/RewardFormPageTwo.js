@@ -5,6 +5,7 @@ import ImagePicker from "react-native-image-picker";
 import RNFetchBlob from "react-native-fetch-blob";
 import { createNewLoyaltyRewardAction } from "../../redux/actions/reward.actions";
 import { getResponsiveCSSFrom8 } from "../../utils";
+import ScreenContainer from "../../Templates/ScreenContainer";
 
 class RewardFormPageTwo extends Component {
   constructor(props) {
@@ -66,9 +67,11 @@ class RewardFormPageTwo extends Component {
     this.props.dispatch(createNewLoyaltyRewardAction(this.state.data));
   };
 
+  close = () => this.props.screenProps.mainNavigation.goBack();
+
   render() {
     return (
-      <A_View style={{ alignItems: "center" }}>
+      <ScreenContainer title="Upload Image" scrollView onClose={this.close}>
         <A_Text strong>UPLOAD AN IMAGE</A_Text>
         <A_Button value="Choose an image" onPress={this.choose} />
         {this.state.image && (
@@ -83,7 +86,7 @@ class RewardFormPageTwo extends Component {
             ]}
           />
         )}
-      </A_View>
+      </ScreenContainer>
     );
   }
 }

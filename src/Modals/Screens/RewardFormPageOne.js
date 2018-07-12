@@ -3,6 +3,7 @@ import { View, StyleSheet } from "react-native";
 import { A_Text, A_Input, A_Button, A_View_Scroll } from "../../Atoms";
 import { getResponsiveCSSFrom8 } from "../../utils";
 import { REWARD_FORM_MODAL_SCREEN_NAMES } from "../RewardFormModal";
+import ScreenContainer from "../../Templates/ScreenContainer";
 
 class RewardFormPageOne extends Component {
   constructor(props) {
@@ -32,9 +33,11 @@ class RewardFormPageOne extends Component {
   updateHeadline = headline => this.setState({ headline });
   updateDetails = details => this.setState({ details });
 
+  close = () => this.props.screenProps.mainNavigation.goBack();
+
   render() {
     return (
-      <A_View_Scroll contentContainerStyle={[style.scrollContainer]}>
+      <ScreenContainer title="New Reward" scrollView onClose={this.close}>
         <A_Input
           placeholder="Name"
           onChangeText={this.updateName}
@@ -49,13 +52,13 @@ class RewardFormPageOne extends Component {
           <A_Input
             placeholder="Amt Spent"
             onChangeText={this.updateAmountSpent}
-            style={[style.formInput]}
+            style={[style.formInput, { width: "40%" }]}
           />
           <A_Text>/</A_Text>
           <A_Input
-            placeholder="Points Rewarded"
+            placeholder="Pts Rewarded"
             onChangeText={this.updatePointsRewarded}
-            style={[style.formInput]}
+            style={[style.formInput, { width: "45%" }]}
           />
         </View>
         <A_Input
@@ -76,8 +79,13 @@ class RewardFormPageOne extends Component {
             style.detailsInput
           ]}
         />
-        <A_Button value="Next" onPress={this.goToNext} />
-      </A_View_Scroll>
+        <A_Button
+          value="Next"
+          onPress={this.goToNext}
+          style={style.nextButtonStyles}
+          buttonTextStyles={style.nextButtonTextStyles}
+        />
+      </ScreenContainer>
     );
   }
 }
@@ -92,13 +100,27 @@ const style = StyleSheet.create({
     marginTop: getResponsiveCSSFrom8(30).height
   },
   formInputContainer: {
-    marginVertical: getResponsiveCSSFrom8(30).height
+    marginVertical: getResponsiveCSSFrom8(30).height,
+    borderBottomWidth: 1
   },
   ratioInputContainer: {
     flexDirection: "row",
     flexWrap: "nowrap",
-    justifyContent: "space-between"
+    justifyContent: "space-between",
+    alignItems: "center"
   },
-  headlineInput: { height: getResponsiveCSSFrom8(100).height },
-  detailsInput: { height: getResponsiveCSSFrom8(200).height }
+  headlineInput: {
+    height: getResponsiveCSSFrom8(100).height,
+    borderWidth: 0.4
+  },
+  detailsInput: { height: getResponsiveCSSFrom8(200).height, borderWidth: 0.4 },
+  nextButtonStyles: {
+    alignItems: "center",
+    backgroundColor: "#7b2525",
+    marginBottom: getResponsiveCSSFrom8(25).height
+  },
+  nextButtonTextStyles: {
+    fontSize: getResponsiveCSSFrom8(20).height,
+    color: "white"
+  }
 });

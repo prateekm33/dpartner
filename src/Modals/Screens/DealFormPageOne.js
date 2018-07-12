@@ -98,7 +98,8 @@ const style = StyleSheet.create({
   detailsInput: { height: getResponsiveCSSFrom8(200).height, borderWidth: 0.4 },
   nextButtonStyle: {
     alignItems: "center",
-    backgroundColor: "#7b2525"
+    backgroundColor: "#7b2525",
+    marginBottom: getResponsiveCSSFrom8(25).height
   },
   nextButtonTextStyles: {
     fontSize: getResponsiveCSSFrom8(20).height,
