@@ -158,12 +158,7 @@ class A_Input_Dropdown extends Component {
 
   renderDropdown = () => {
     return (
-      <A_View
-        style={[
-          style.dropdownOptionsContainerStyle,
-          this.props.dropdownOptionsContainerStyle
-        ]}
-      >
+      <A_View style={[style.dropdownOptionsContainerStyle]}>
         {this.props.values.map(val => {
           const value = this.getValue(val);
           return (
@@ -185,7 +180,7 @@ class A_Input_Dropdown extends Component {
   };
   render() {
     return (
-      <A_View>
+      <A_View style={this.props.dropdownContainerStyle}>
         <A_Text strong>{this.props.title}</A_Text>
         <A_View style={[style.dropdownInputContainer]}>
           <A_Text
@@ -237,7 +232,7 @@ class A_Input_Dropdown_Role extends Component {
   render() {
     if (this.props.role === USER_ROLES.VENDOR_ACCOUNT_OWNER)
       return (
-        <A_View>
+        <A_View style={[this.props.dropdownContainerStyle]}>
           <A_Text strong>Role</A_Text>
           <A_Text>
             {this.props.role
@@ -253,6 +248,7 @@ class A_Input_Dropdown_Role extends Component {
         values={[ADMIN_DROPDOWN_OPTION, EMPLOYEE_DROPDOWN_OPTION]}
         onValueSelected={this.changeRole}
         selectedValue={this.state.role}
+        dropdownContainerStyle={this.props.dropdownContainerStyle}
       />
     );
   }

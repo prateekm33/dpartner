@@ -123,12 +123,9 @@ class ManageEmployeesPage extends Component {
         <A_View
           style={[style.employeeDetailLine, style.employeeNameContainerStyle]}
         >
-          <A_Text strong>Name</A_Text>
-          {full_name ? (
-            <A_Text style={style.employeeNameTextStyle}>{full_name}</A_Text>
-          ) : (
-            <A_Text style={style.emptyDetailText}>---</A_Text>
-          )}
+          <A_Text strong style={style.employeeNameTextStyle}>
+            {full_name}
+          </A_Text>
         </A_View>
         <A_View
           style={[style.employeeDetailLine, style.employeeEmailContainerStyle]}
@@ -139,12 +136,13 @@ class ManageEmployeesPage extends Component {
               {employee.email}
             </A_Text>
           ) : (
-            <A_Text style={style.emptyDetailText}>---</A_Text>
+            <A_Text style={style.emptyDetailText}>--EMPTY--</A_Text>
           )}
         </A_View>
         <A_Input_Dropdown_Role
           role={employee.role}
           changeRole={role => this.changeRole(role, employee, idx)}
+          dropdownContainerStyle={style.dropdownContainerStyle}
         />
         {this.state.updates[idx] && (
           <A_Button_Opacity
@@ -183,7 +181,7 @@ class ManageEmployeesPage extends Component {
         title="Employees"
         scrollView
         headerMainContainerStyle={{
-          backgroundColor: "#622f6b"
+          backgroundColor: "#443266"
         }}
         headerMainTitleTextStyle={{ color: "white" }}
       >
@@ -229,21 +227,30 @@ const style = StyleSheet.create({
   employeeContainerStyle: {
     ...DEFAULT_CARD_SHADOW,
     backgroundColor: "white",
-    padding: getResponsiveCSSFrom8(30).height,
+    paddingTop: 0,
     marginVertical: getResponsiveCSSFrom8(20).height
   },
-  employeeNameContainerStyle: {},
-  employeeNameTextStyle: {},
+  employeeNameContainerStyle: {
+    paddingVertical: getResponsiveCSSFrom8(20).width,
+    marginVertical: 0,
+    backgroundColor: "#9c8aa5"
+  },
+  employeeNameTextStyle: {
+    color: "white",
+    fontSize: getResponsiveCSSFrom8(23).height
+  },
   employeeEmailTextStyle: {},
   employeeDetailLine: {
-    marginVertical: getResponsiveCSSFrom8(10).height
+    // marginVertical: getResponsiveCSSFrom8(10).height,
+    paddingHorizontal: getResponsiveCSSFrom8(30).width,
+    paddingVertical: getResponsiveCSSFrom8(10).height
   },
   emptyDetailText: {
     marginLeft: getResponsiveCSSFrom8(10).width,
     color: "grey"
   },
   newButtonStyle: {
-    backgroundColor: "#868AFF",
+    backgroundColor: "#622f6b",
     width: getResponsiveCSSFrom8(100).width,
     alignSelf: "flex-end",
     marginBottom: getResponsiveCSSFrom8(20).height
@@ -251,5 +258,9 @@ const style = StyleSheet.create({
   newButtonTextStyles: {
     textAlign: "center",
     color: "white"
+  },
+  dropdownContainerStyle: {
+    paddingHorizontal: getResponsiveCSSFrom8(30).width,
+    paddingVertical: getResponsiveCSSFrom8(10).height
   }
 });

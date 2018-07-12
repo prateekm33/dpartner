@@ -59,7 +59,11 @@ class NewEmployeeFormPage extends Component {
         <A_Input placeholder="First name" onChangeText={this.changeFirstName} />
         <A_Input placeholder="Last name" onChangeText={this.changeLastName} />
         <A_Input placeholder="Email" onChangeText={this.changeEmail} />
-        <A_Input placeholder="Password" onChangeText={this.changePassword} />
+        <A_Input
+          placeholder="Password"
+          onChangeText={this.changePassword}
+          secureTextEntry
+        />
         <A_Input_Dropdown_Role changeRole={role => this.changeRole(role)} />
         <A_Button value="CREATE" onPress={this.submit} />
       </ScreenContainer>
