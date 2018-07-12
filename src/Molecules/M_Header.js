@@ -1,6 +1,6 @@
 import React from "react";
 import { View, StyleSheet, StatusBar } from "react-native";
-import { A_Text, A_Icon_Close } from "../Atoms";
+import { A_Text, A_Icon_Close, A_View } from "../Atoms";
 import { getResponsiveCSSFrom8 } from "../utils";
 import { TEAL, TEAL_DARK_ONE } from "../styles/Colors";
 
@@ -29,7 +29,9 @@ const M_Header_Main = props => (
     >
       {props.title}
     </A_Text>
-    {props.onClose && <A_Icon_Close onPress={props.onClose} />}
+    <A_View style={style.closeIconContainerStyles}>
+      {props.onClose && <A_Icon_Close onPress={props.onClose} />}
+    </A_View>
   </View>
 );
 
@@ -43,7 +45,6 @@ const style = StyleSheet.create({
     backgroundColor: "white",
     borderBottomWidth: 1,
     borderBottomColor: "lightgrey",
-    justifyContent: "center",
     alignItems: "center",
     paddingTop: getResponsiveCSSFrom8(15).height,
     shadowOpacity: 1,
@@ -52,9 +53,14 @@ const style = StyleSheet.create({
       height: getResponsiveCSSFrom8(2).height,
       width: 0
     },
-    shadowRadius: getResponsiveCSSFrom8(5).width
+    shadowRadius: getResponsiveCSSFrom8(5).width,
+    justifyContent: "center"
   },
   headerMainTitleTextStyle: {
-    fontSize: getResponsiveCSSFrom8(30).height
+    fontSize: getResponsiveCSSFrom8(25).height
+  },
+  closeIconContainerStyles: {
+    position: "absolute",
+    right: getResponsiveCSSFrom8(5).width
   }
 });
