@@ -1,8 +1,17 @@
-import React from "react";
+import React, { Component } from "react";
+import { connect } from "./redux";
 import { View } from "react-native";
 import { StackNavigator } from "react-navigation";
-import { withAppComponentInitiators } from "./HOCs/AppComponentInitiator";
-import { O_MenuBar_Main } from "./Organisms";
+import { O_MenuBar_Main } from "chemics/Organisms";
+import {
+  A_Icon_Dashboard,
+  A_Icon_Scan,
+  A_Icon_Manage,
+  A_Icon_Employees,
+  A_Icon_Profile
+} from "chemics/Atoms";
+import { SCREEN_NAMES } from "./AppNavigator";
+import { MODAL_SCREEN_NAMES } from "./ModalNavigator";
 
 export const MAIN_SCREEN_NAMES = {
   AppNavigator: "AppNavigator",
@@ -37,7 +46,7 @@ const SCREENS = Screens.reduce(
               }}
             />
             {screen[0] === MAIN_SCREEN_NAMES.AppNavigator && (
-              <O_MenuBar_Main mainNavigation={props.navigation} />
+              <MenuBarMain mainNavigation={props.navigation} />
             )}
           </View>
         );
@@ -57,3 +66,59 @@ const MainNavigator = StackNavigator(SCREENS, {
 });
 
 export default MainNavigator;
+
+class MenuBarMain_Pre extends Component {
+  constructor(props) {
+    super(props);
+  }
+  shouldGetFreshState = nextProps => {
+    if (nextProps.employee.uuid !== this.props.employee.uuid) return true;
+    return false;
+  };
+
+  navigateTo = idx => {
+    if (idx === 0) return this.navigateToDashboard();
+    if (idx === 1) return this.navigateToManagePage();
+    if (idx === 2) return this.navigateToScanPage();
+    if (idx === 3) return this.navigateToManageEmployeesPage();
+    if (idx === 4) return this.navigateToProfilePage();
+  };
+  navigateToDashboard = () => {
+    this.props.navigation.resetTo(SCREEN_NAMES.Dashboard);
+  };
+  navigateToManagePage = () => {
+    this.props.navigation.resetTo(SCREEN_NAMES.Deals_RewardsPage);
+  };
+  navigateToScanPage = () => {
+    this.setState({ menu_inactive: true });
+    this.props.mainNavigation.navigate(MAIN_SCREEN_NAMES.ModalNavigator, {
+      routeName: MODAL_SCREEN_NAMES.ScanModal
+    });
+  };
+  navigateToManageEmployeesPage = () => {
+    this.props.navigation.resetTo(SCREEN_NAMES.ManageEmployeesPage);
+  };
+  navigateToProfilePage = () => {
+    this.props.navigation.resetTo(SCREEN_NAMES.ProfilePage);
+  };
+
+  render() {
+    return (
+      <O_MenuBar_Main
+        items={[
+          A_Icon_Dashboard,
+          A_Icon_Manage,
+          A_Icon_Scan,
+          A_Icon_Employees,
+          A_Icon_Profile
+        ]}
+        navigateTo={this.navigateTo}
+        shouldGetFreshState={this.shouldGetFreshState}
+      />
+    );
+  }
+}
+
+const MenuBarMain = connect(state => ({
+  navigation: state.navigation
+}))(MenuBarMain_Pre);

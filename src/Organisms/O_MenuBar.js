@@ -150,6 +150,10 @@ const O_MenuBar_Main = connect(state => ({
 
 const style = StyleSheet.create({
   peekabooContainer: {
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    right: 0,
     height: getResponsiveCSSFrom8(30).width,
     backgroundColor: "white",
     borderTopWidth: 0.5,

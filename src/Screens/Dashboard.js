@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "../redux";
 import { StyleSheet } from "react-native";
-import ScreenContainer from "../Templates/ScreenContainer";
-import { A_Text, A_View } from "../Atoms";
-import { M_Stat } from "../Molecules";
+import ScreenContainer from "chemics/Templates/ScreenContainer";
+import { A_Text, A_View } from "chemics/Atoms";
+import { M_Stat } from "chemics/Molecules";
 import { getResponsiveCSSFrom8 } from "../utils";
 import moment from "moment";
 

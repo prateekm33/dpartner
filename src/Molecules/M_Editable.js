@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { StyleSheet } from "react-native";
 import ImagePicker from "react-native-image-picker";
-import RNFetchBlob from "react-native-fetch-blob";
 import {
   A_View,
   A_Text,
@@ -9,7 +8,7 @@ import {
   A_Input,
   A_Button_Opacity,
   A_Input_Date
-} from "../Atoms";
+} from "chemics/Atoms";
 import { getResponsiveCSSFrom8 } from "../utils";
 import { WEIGHT } from "../styles/defaults";
 

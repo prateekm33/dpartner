@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "../../redux";
-import ScreenContainer from "../../Templates/ScreenContainer";
-import { A_Text, A_Button, A_Input } from "../../Atoms";
+import ScreenContainer from "chemics/Templates/ScreenContainer";
+import { A_Text, A_Button, A_Input } from "chemics/Atoms";
 import {
   createCustomerDeal,
   createCustomerLoyaltyRewardCard

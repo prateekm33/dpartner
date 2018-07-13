@@ -3,7 +3,7 @@ import { connect } from "../redux";
 
 import { SCREEN_NAMES } from "../AppNavigator";
 import ScreenContainer from "../Templates/ScreenContainer";
-import { A_Text } from "../Atoms";
+import { A_Text } from "chemics/Atoms";
 import { employeeIsAuthenticated } from "../utils";
 
 import loading_types from "../redux/types/loading.types";

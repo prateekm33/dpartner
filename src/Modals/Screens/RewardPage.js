@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "../../redux";
-import ScreenContainer from "../../Templates/ScreenContainer";
+import ScreenContainer from "chemics/Templates/ScreenContainer";
 
 class RewardPage extends Component {
   constructor(props) {

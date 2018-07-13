@@ -1,9 +1,8 @@
 import React, { Component } from "react";
-import ScreenContainer from "../../Templates/ScreenContainer";
-import { A_Text } from "../../Atoms";
-import { M_QRScanner } from "../../Molecules";
+import ScreenContainer from "chemics/Templates/ScreenContainer";
+import { A_Text } from "chemics/Atoms";
+import { M_QRScanner } from "chemics/Molecules";
 import { SCAN_MODAL_SCREEN_NAMES } from "../ScanModal";
-import { MAIN_SCREEN_NAMES } from "../../MainNavigator";
 import { getResponsiveCSSFrom8 } from "../../utils";
 
 class ScanPage extends Component {

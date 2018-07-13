@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { View, StyleSheet } from "react-native";
-import { A_Text, A_Input, A_Button, A_View_Scroll } from "../../Atoms";
+import { A_Text, A_Input, A_Button } from "chemics/Atoms";
 import { getResponsiveCSSFrom8 } from "../../utils";
 import { REWARD_FORM_MODAL_SCREEN_NAMES } from "../RewardFormModal";
-import ScreenContainer from "../../Templates/ScreenContainer";
+import ScreenContainer from "chemics/Templates/ScreenContainer";
 
 class RewardFormPageOne extends Component {
   constructor(props) {

@@ -1,17 +1,20 @@
 import React, { Component } from "react";
 import { StyleSheet } from "react-native";
 import { connect } from "../redux";
-import ScreenContainer from "../Templates/ScreenContainer";
+import ScreenContainer from "chemics/Templates/ScreenContainer";
 import {
+  M_TabOptions,
   M_Card_Deal_Mini,
-  M_Card_LoyaltyReward_Mini,
-  M_TabOptions
-} from "../Molecules";
-import { A_ListContainer, A_Button, A_Button_Opacity } from "../Atoms";
+  M_Card_LoyaltyReward_Mini
+} from "chemics/Molecules";
+import { A_ListContainer, A_Button_Opacity } from "chemics/Atoms";
+import {
+  M_LoyaltyReward_Card_Options,
+  M_Deal_Card_Options
+} from "../Molecules/M_Deal_Card_Options";
 import { fetchOrgDealsAction } from "../redux/actions/deal.actions";
 import { fetchOrgRewardsAction } from "../redux/actions/reward.actions";
 import { withEventDispatcher } from "../HOCs/EventDispatcher";
-import { SCREEN_NAMES } from "../AppNavigator";
 import { getResponsiveCSSFrom8 } from "../utils";
 import { MAIN_SCREEN_NAMES } from "../MainNavigator";
 import { MODAL_SCREEN_NAMES } from "../ModalNavigator";
@@ -58,7 +61,9 @@ class Deals_RewardsPage extends Component {
             }
           );
         }}
-      />
+      >
+        <M_Deal_Card_Options deal={deal} cardOptionsContainerStyle={{}} />
+      </M_Card_Deal_Mini>
     );
   };
 
@@ -72,7 +77,9 @@ class Deals_RewardsPage extends Component {
             params: { reward: item }
           })
         }
-      />
+      >
+        <M_LoyaltyReward_Card_Options reward={item} />
+      </M_Card_LoyaltyReward_Mini>
     );
   };
 

@@ -1,15 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "../../redux";
-import {
-  A_View,
-  A_Text,
-  A_Input,
-  A_Input_Dropdown_Role,
-  A_Button
-} from "../../Atoms";
+import { A_Input, A_Input_Dropdown_Role, A_Button } from "chemics/Atoms";
+import ScreenContainer from "chemics/Templates/ScreenContainer";
 import { USER_ROLES } from "../../utils/constants";
 import { createNewEmployeeAction } from "../../redux/actions/employee.actions";
-import ScreenContainer from "../../Templates/ScreenContainer";
 import { getResponsiveCSSFrom8 } from "../../utils";
 
 class NewEmployeeFormPage extends Component {

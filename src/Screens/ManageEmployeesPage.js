@@ -3,25 +3,23 @@ import { connect } from "../redux";
 import { StyleSheet } from "react-native";
 import ScreenContainer from "../Templates/ScreenContainer";
 import { stringMatches, getResponsiveCSSFrom8 } from "../utils";
-import { M_Search } from "../Molecules";
-import {
-  getOrgEmployeesAction,
-  updateEmployeeAction,
-  deleteEmployeeAction
-} from "../redux/actions/employee.actions";
+import { M_Search } from "chemics/Molecules";
 import {
   A_View,
   A_Text,
   A_Input_Dropdown_Role,
   A_Button_Opacity,
-  A_Icon_Delete,
-  A_Button
-} from "../Atoms";
+  A_Icon_Delete
+} from "chemics/Atoms";
+import {
+  getOrgEmployeesAction,
+  updateEmployeeAction,
+  deleteEmployeeAction
+} from "../redux/actions/employee.actions";
 import { isAccountAdmin } from "../Models/Employee.model";
 import { USER_ROLES } from "../utils/constants";
 import { MODAL_SCREEN_NAMES } from "../ModalNavigator";
 import { MAIN_SCREEN_NAMES } from "../MainNavigator";
-import { TEAL_LIGHT } from "../styles/Colors";
 import { DEFAULT_CARD_SHADOW } from "../styles/defaults";
 
 class ManageEmployeesPage extends Component {

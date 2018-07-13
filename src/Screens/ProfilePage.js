@@ -10,13 +10,12 @@ import {
   A_Text_Email,
   A_Input_Dropdown_Role,
   A_Button_Opacity
-} from "../Atoms";
+} from "chemics/Atoms";
 import { USER_ROLES } from "../utils/constants";
-import { M_VendorHours } from "../Molecules";
+import { M_VendorHours } from "chemics/Molecules";
 import {
   logoutAction,
-  updateEmployeeAction,
-  getOrgEmployeesAction
+  updateEmployeeAction
 } from "../redux/actions/employee.actions";
 import { SCREEN_NAMES } from "../AppNavigator";
 import { getResponsiveCSSFrom8 } from "../utils";

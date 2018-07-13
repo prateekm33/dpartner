@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "../../redux";
 import { StyleSheet } from "react-native";
-import ScreenContainer from "../../Templates/ScreenContainer";
-import { A_Button } from "../../Atoms";
 import { getResponsiveCSSFrom8 } from "../../utils";
-import { M_Editable } from "../../Molecules";
+import ScreenContainer from "chemics/Templates/ScreenContainer";
+import { A_Button } from "chemics/Atoms";
+import { M_Editable } from "chemics/Molecules";
 import { updateDealAction } from "../../redux/actions/deal.actions";
 import { RED_ONE } from "../../styles/Colors";
 

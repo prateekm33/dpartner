@@ -1,19 +1,18 @@
 import React from "react";
 import { StyleSheet } from "react-native";
 import { withNavigation } from "react-navigation";
-import { A_Text, A_Button, A_View, A_Image } from "../Atoms";
+import { A_Text, A_Button_Opacity, A_View, A_Image } from "chemics/Atoms";
 import {
   M_Deal_Card_Options,
   M_LoyaltyReward_Card_Options
 } from "./M_Deal_Card_Options";
-import { SCREEN_NAMES } from "../AppNavigator";
 import { getResponsiveCSSFrom8 } from "../utils";
 import { DEFAULT_CARD_SHADOW } from "../styles/defaults";
 
 const M_Card_Deal_Mini = withNavigation(props => {
   const deal = props.deal;
   return (
-    <A_Button
+    <A_Button_Opacity
       onPress={props.onPress}
       style={[style.cardContainerStyle, props.containerStyle]}
     >
@@ -27,14 +26,14 @@ const M_Card_Deal_Mini = withNavigation(props => {
         <A_Text>{deal.short_desc}</A_Text>
       </A_View>
       <M_Deal_Card_Options deal={deal} cardOptionsContainerStyle={{}} />
-    </A_Button>
+    </A_Button_Opacity>
   );
 });
 
 const M_Card_LoyaltyReward_Mini = withNavigation(props => {
   const reward = props.reward;
   return (
-    <A_Button
+    <A_Button_Opacity
       onPress={props.onPress}
       style={[style.cardContainerStyle, props.containerStyle]}
     >
@@ -48,7 +47,7 @@ const M_Card_LoyaltyReward_Mini = withNavigation(props => {
         <A_Text>{reward.short_desc}</A_Text>
       </A_View>
       <M_LoyaltyReward_Card_Options reward={reward} />
-    </A_Button>
+    </A_Button_Opacity>
   );
 });
 export { M_Card_Deal_Mini, M_Card_LoyaltyReward_Mini };
@@ -59,7 +58,8 @@ const style = StyleSheet.create({
     minHeight: getResponsiveCSSFrom8(300).height,
     justifyContent: "flex-end",
     ...DEFAULT_CARD_SHADOW,
-    paddingTop: getResponsiveCSSFrom8(10).height
+    paddingTop: getResponsiveCSSFrom8(10).height,
+    backgroundColor: "white"
   },
   nameStyles: {
     fontSize: getResponsiveCSSFrom8(20).height

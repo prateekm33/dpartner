@@ -2,10 +2,9 @@ import React, { Component } from "react";
 import { View, StyleSheet } from "react-native";
 import { withNavigation } from "react-navigation";
 import { connect } from "../redux";
-import { A_Icon_Delete, A_Icon_Pause, A_Icon_View } from "../Atoms";
+import { A_Icon_Delete, A_Icon_View } from "chemics/Atoms";
 import { SCREEN_NAMES } from "../AppNavigator";
 import { getResponsiveCSSFrom8 } from "../utils";
-import { USER_ROLES } from "../utils/constants";
 
 class M_Deal_Card_Options_Pre extends Component {
   constructor(props) {
