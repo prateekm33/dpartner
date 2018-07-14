@@ -58,7 +58,7 @@ class RewardFormPageOne extends Component {
           onChangeText={this.updateCode}
           style={[style.formInputContainer, style.formInput]}
         />
-        <View style={[style.ratioInputContainer, { borderBottomWidth: 1 }]}>
+        <View style={[style.ratioInputContainer, style.formInputContainer]}>
           <A_Input
             placeholder="Amt Spent"
             onChangeText={this.updateAmountSpent}
