@@ -4,7 +4,7 @@ import { StyleSheet } from "react-native";
 import { getResponsiveCSSFrom8 } from "../../utils";
 import ScreenContainer from "chemics/Templates/ScreenContainer";
 import { A_Button } from "chemics/Atoms";
-import { M_Editable } from "chemics/Molecules";
+import { M_Editable } from "../../Molecules";
 import { updateDealAction } from "../../redux/actions/deal.actions";
 import { RED_ONE } from "../../styles/Colors";
 

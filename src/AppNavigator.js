@@ -64,11 +64,7 @@ const SCREENS = Screens.reduce(
             <InitiatedComponent {...props} />
           </View>
         );
-      },
-      navigationOptions: {
-        // gesturesEnabled: false
-      },
-      mode: "modal"
+      }
     },
     ...stack
   }),

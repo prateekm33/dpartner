@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import ScreenContainer from "chemics/Templates/ScreenContainer";
 import { A_Text } from "chemics/Atoms";
-import { M_QRScanner } from "chemics/Molecules";
+import { M_QRScanner } from "../../Molecules";
 import { SCAN_MODAL_SCREEN_NAMES } from "../ScanModal";
 import { getResponsiveCSSFrom8 } from "../../utils";
 

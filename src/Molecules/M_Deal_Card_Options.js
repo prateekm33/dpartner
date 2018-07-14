@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import { View, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import { withNavigation } from "react-navigation";
 import { connect } from "../redux";
-import { A_Icon_Delete, A_Icon_View } from "chemics/Atoms";
+import { A_Icon_Delete, A_Icon_View, A_View } from "chemics/Atoms";
 import { SCREEN_NAMES } from "../AppNavigator";
 import { getResponsiveCSSFrom8 } from "../utils";
 
@@ -23,7 +23,7 @@ class M_Deal_Card_Options_Pre extends Component {
 
   render() {
     return (
-      <View
+      <A_View
         style={[
           style.cardOptionsContainerStyle,
           this.props.cardOptionsContainerStyle
@@ -45,7 +45,7 @@ class M_Deal_Card_Options_Pre extends Component {
             style={style.cardOptionsIconStyle}
           />
         )} */}
-      </View>
+      </A_View>
     );
   }
 }
@@ -70,7 +70,7 @@ class M_LoyaltyReward_Card_Options_Pre extends Component {
 
   render() {
     return (
-      <View
+      <A_View
         style={[
           style.cardOptionsContainerStyle,
           this.props.cardOptionsContainerStyle
@@ -92,7 +92,7 @@ class M_LoyaltyReward_Card_Options_Pre extends Component {
             style={style.cardOptionsIconStyle}
           />
         )} */}
-      </View>
+      </A_View>
     );
   }
 }
@@ -106,15 +106,12 @@ const style = StyleSheet.create({
   cardOptionsContainerStyle: {
     flexDirection: "row",
     flexWrap: "nowrap",
-    borderTopWidth: 0.8,
-    borderTopColor: "lightgrey",
-    marginTop: getResponsiveCSSFrom8(10).height,
-    paddingHorizontal: getResponsiveCSSFrom8(10).width,
-    backgroundColor: "white"
+    justifyContent: "flex-end",
+    paddingHorizontal: getResponsiveCSSFrom8(10).width
   },
   cardOptionsIconStyle: {
     width: getResponsiveCSSFrom8(30).width,
     height: getResponsiveCSSFrom8(30).height,
-    marginRight: getResponsiveCSSFrom8(30).width
+    marginLeft: getResponsiveCSSFrom8(30).width
   }
 });

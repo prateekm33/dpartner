@@ -10,10 +10,7 @@ export class Deal extends DataModel {
     long_desc: { type: String, default: "" },
     vendor: {
       type: Vendor,
-      default: () => new Vendor(),
-      verifyValue: value => {
-        return value instanceof Vendor ? value : createVendor(value);
-      }
+      default: params => new Vendor(params)
     },
     vendor_uuid: { type: Number, default: null },
     code: { type: String, default: "" },

@@ -76,28 +76,25 @@ class ProfilePage extends Component {
       <ScreenContainer
         title="Profile"
         scrollView
-        containerStyle={style.containerStyle}
         headerMainContainerStyle={{
           backgroundColor: "#3D9990" //"#03a9f4"
         }}
         headerMainTitleTextStyle={{
           color: "white"
         }}
+        containerStyle={style.scrollContainerStyles}
+        innerContainerStyle={style.scrollInnerContainerStyles}
       >
-        <A_View
-          style={{
-            marginBottom: getResponsiveCSSFrom8(25).height,
-            borderBottomWidth: 1,
-            borderBottomColor: "lightgrey"
-          }}
-        >
-          <A_Text
-            strong
-            style={{ marginBottom: getResponsiveCSSFrom8(5).height }}
-          >
+        <A_View style={[style.sectionContainerStyles]}>
+          <A_Text style={[style.sectionTitleStyles]}>
             BUSINESS INFORMATION
           </A_Text>
-          <A_Text style={{ marginBottom: getResponsiveCSSFrom8(25).height }}>
+          <A_Text
+            style={{
+              color: "grey",
+              marginBottom: getResponsiveCSSFrom8(25).height
+            }}
+          >
             Please contact us at{" "}
             <A_Text_Email
               buttonStyles={{ height: getResponsiveCSSFrom8(20).height }}
@@ -107,70 +104,92 @@ class ProfilePage extends Component {
             if you notice any issues and/or you need to update your business's
             information
           </A_Text>
-          <A_Text strong>Business name</A_Text>
-          <A_Text style={{ marginBottom: getResponsiveCSSFrom8(25).height }}>
-            {vendor.name}
-          </A_Text>
-          <A_Text strong>Business phone</A_Text>
-          <A_Text style={{ marginBottom: getResponsiveCSSFrom8(25).height }}>
-            {vendor.business_phone}
-          </A_Text>
+          <A_View
+            style={[style.infoDetailLineStyles, style.paddedContentStyles]}
+          >
+            <A_Text style={[style.infoLabelStyles]}>Business name</A_Text>
+            <A_Input
+              style={[style.infoDetailStyles]}
+              editable={false}
+              defaultValue={vendor.name}
+              placeholder="Business name"
+            />
+          </A_View>
+          <A_View
+            style={[style.infoDetailLineStyles, style.paddedContentStyles]}
+          >
+            <A_Text style={[style.infoLabelStyles]}>Business phone</A_Text>
+            <A_Input
+              style={[style.infoDetailStyles]}
+              editable={false}
+              defaultValue={vendor.business_phone}
+              placeholder="(123) 456 7890"
+            />
+          </A_View>
           <M_VendorHours
             hours={vendor.hours}
-            containerStyles={{ marginBottom: getResponsiveCSSFrom8(25).height }}
+            containerStyles={{
+              marginVertical: getResponsiveCSSFrom8(25).height
+            }}
           />
         </A_View>
-        <A_View>
-          <A_Text
-            strong
-            style={{ marginBottom: getResponsiveCSSFrom8(20).height }}
-          >
+        <A_View style={[style.sectionContainerStyles]}>
+          <A_Text style={[style.sectionTitleStyles]}>
             PERSONAL INFORMATION
           </A_Text>
-          <A_Text strong>First Name</A_Text>
-          <A_Input
-            placeholder="First name"
-            defaultValue={employee.first_name}
-            onChangeText={this.changeFirstName}
-            style={{
-              borderWidth: 1
-            }}
-          />
-          <A_Text
-            strong
-            style={{ marginTop: getResponsiveCSSFrom8(25).height }}
+          <A_View
+            style={[style.infoDetailLineStyles, style.paddedContentStyles]}
           >
-            Last Name
-          </A_Text>
-          <A_Input
-            placeholder="Last name"
-            defaultValue={employee.last_name}
-            onChangeText={this.changeLastName}
-            style={{
-              borderWidth: 1
-            }}
-          />
-          <A_Input_Dropdown_Role
-            role={employee.role}
-            changeRole={role => this.changeRole(role, employee, idx)}
-            dropdownContainerStyle={{
-              marginTop: getResponsiveCSSFrom8(25).height
-            }}
-          />
-          <A_Text
-            strong
-            style={{ marginTop: getResponsiveCSSFrom8(25).height }}
+            <A_Text style={[style.infoLabelStyles]}>First Name</A_Text>
+            <A_Input
+              placeholder="First name"
+              defaultValue={employee.first_name}
+              onChangeText={this.changeFirstName}
+              style={[style.infoDetailStyles]}
+            />
+          </A_View>
+          <A_View
+            style={[style.infoDetailLineStyles, style.paddedContentStyles]}
           >
-            Email
-          </A_Text>
-          <A_Input
-            placeholder="Email"
-            defaultValue={employee.email}
-            onChangeText={this.changeEmail}
-            style={{
-              borderWidth: 1
-            }}
-          />
+            <A_Text style={[style.infoLabelStyles]}>Last Name</A_Text>
+            <A_Input
+              placeholder="Last name"
+              defaultValue={employee.last_name}
+              onChangeText={this.changeLastName}
+              style={[style.infoDetailStyles]}
+            />
+          </A_View>
+          <A_View
+            style={[style.infoDetailLineStyles, style.paddedContentStyles]}
+          >
+            <A_Text style={[style.infoLabelStyles]}>Email</A_Text>
+            <A_Input
+              placeholder="Email"
+              defaultValue={employee.email}
+              onChangeText={this.changeEmail}
+              style={[style.infoDetailStyles]}
+            />
+          </A_View>
+          <A_View
+            style={[style.infoDetailLineStyles, style.paddedContentStyles]}
+          >
+            <A_Text style={[style.infoLabelStyles]}>Role</A_Text>
+            <A_Input
+              placeholder="Role"
+              defaultValue={employee.role.split("_").join(" ")}
+              editable={false}
+              style={[style.infoDetailStyles]}
+            />
+          </A_View>
+          {/* <A_Input_Dropdown_Role
+              role={employee.role}
+              changeRole={role => this.changeRole(role, employee, idx)}
+              dropdownContainerStyle={{
+                marginTop: getResponsiveCSSFrom8(25).height
+              }}
+            /> */}
+        </A_View>
+        <A_View style={[style.paddedContentStyles]}>
           <A_Button_Opacity
             strong
             value="SAVE"
@@ -178,14 +197,14 @@ class ProfilePage extends Component {
             style={[style.saveButtonStyles]}
             buttonTextStyles={style.saveButtonTextStyles}
           />
+          <A_Button_Opacity
+            onPress={this.logout}
+            value="LOGOUT"
+            style={style.logoutButtonStyles}
+            buttonTextStyles={style.logoutButtonTextStyles}
+            strong
+          />
         </A_View>
-        <A_Button_Opacity
-          onPress={this.logout}
-          value="Logout"
-          style={style.logoutButtonStyles}
-          buttonTextStyles={style.logoutButtonTextStyles}
-          strong
-        />
       </ScreenContainer>
     );
   }
@@ -197,7 +216,6 @@ export default connect(state => ({
 }))(ProfilePage);
 
 const style = StyleSheet.create({
-  containerStyle: {},
   logoutButtonStyles: {
     marginBottom: getResponsiveCSSFrom8(50).height,
     backgroundColor: RED_TWO,
@@ -215,5 +233,31 @@ const style = StyleSheet.create({
   saveButtonTextStyles: {
     color: "white",
     fontSize: getResponsiveCSSFrom8(20).height
-  }
+  },
+  infoDetailLineStyles: {
+    flexDirection: "row",
+    flexWrap: "nowrap",
+    justifyContent: "space-between",
+    borderWidth: 1,
+    borderColor: "lightgrey",
+    backgroundColor: "white",
+    alignItems: "center"
+  },
+  sectionTitleStyles: {
+    color: "grey",
+    fontSize: getResponsiveCSSFrom8(20).height,
+    marginBottom: getResponsiveCSSFrom8(5).height
+  },
+  sectionContainerStyles: {
+    marginTop: getResponsiveCSSFrom8(30).height
+  },
+  scrollContainerStyles: { backgroundColor: "rgba(255,255,255,0.6)" },
+  scrollInnerContainerStyles: { padding: 0 },
+  infoDetailStyles: {
+    fontSize: getResponsiveCSSFrom8(18).height
+  },
+  infoLabelStyles: {
+    fontSize: getResponsiveCSSFrom8(20).height
+  },
+  paddedContentStyles: { paddingHorizontal: getResponsiveCSSFrom8(10).width }
 });

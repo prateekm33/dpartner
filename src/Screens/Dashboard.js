@@ -120,14 +120,14 @@ class Dashboard extends Component {
           title="Deals Performance"
           statContainerStyle={[
             style.genericStatContainerStyle,
-            style.cardShadowStyle,
-            { marginBottom: getResponsiveCSSFrom8(20).height }
+            style.cardShadowStyle
           ]}
           statTitleStyle={{
             backgroundColor: "#0270a5", //"#154e7f", // "#77f59e",
             color: "white"
           }}
         />
+        <A_View style={{ marginBottom: getResponsiveCSSFrom8(50).height }} />
       </ScreenContainer>
     );
   }
@@ -150,6 +150,7 @@ const style = StyleSheet.create({
   genericStatContainerStyle: {
     flex: 1,
     margin: getResponsiveCSSFrom8(5).width,
+    marginBottom: getResponsiveCSSFrom8(15).height,
     minHeight: getResponsiveCSSFrom8(150).height
   },
   cardShadowStyle: {

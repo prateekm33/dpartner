@@ -103,6 +103,8 @@ class MenuBarMain_Pre extends Component {
   };
 
   render() {
+    if (!this.props.employee || !this.props.employee.is_authenticated)
+      return null;
     return (
       <O_MenuBar_Main
         items={[
@@ -120,5 +122,6 @@ class MenuBarMain_Pre extends Component {
 }
 
 const MenuBarMain = connect(state => ({
-  navigation: state.navigation
+  navigation: state.navigation,
+  employee: state.employee
 }))(MenuBarMain_Pre);
