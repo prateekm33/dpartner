@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { StyleSheet } from "react-native";
-import { A_Input, A_Input_Date, A_Button } from "chemics/Atoms";
+import { A_Input, A_Input_Date, A_Button, A_Text } from "chemics/Atoms";
 import { getResponsiveCSSFrom8 } from "../../utils";
 import { DEAL_FORM_MODAL_SCREEN_NAMES } from "../DealFormModal";
 import ScreenContainer from "chemics/Templates/ScreenContainer";
@@ -63,6 +63,11 @@ class DealFormPageOne extends Component {
           onChangeText={this.updateDiscountAmount}
           style={[style.formInputContainer]}
         />
+        <A_Text
+          style={{ color: "grey", fontSize: getResponsiveCSSFrom8(20).height }}
+        >
+          Good Until
+        </A_Text>
         <A_Input_Date
           onComplete={this.updateExpiration}
           style={[style.formInputContainer]}
