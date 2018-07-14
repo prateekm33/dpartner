@@ -58,7 +58,7 @@ class RewardFormPageOne extends Component {
           onChangeText={this.updateCode}
           style={[style.formInputContainer, style.formInput]}
         />
-        <View style={[style.ratioInputContainer, style.formInputContainer]}>
+        <View style={[style.ratioInputContainer, { borderBottomWidth: 1 }]}>
           <A_Input
             placeholder="Amt Spent"
             onChangeText={this.updateAmountSpent}
@@ -71,6 +71,9 @@ class RewardFormPageOne extends Component {
             style={[style.formInput, { width: "45%" }]}
           />
         </View>
+        <A_Text style={style.inputCaptionStyles}>
+          Amount spent to number of points rewarded ratio
+        </A_Text>
         <A_Input
           placeholder="Headline"
           onChangeText={this.updateHeadline}
@@ -80,6 +83,9 @@ class RewardFormPageOne extends Component {
             style.headlineInput
           ]}
         />
+        <A_Text style={style.inputCaptionStyles}>
+          Short tagline description for thumbnail views
+        </A_Text>
         <A_Input
           placeholder="Details"
           onChangeText={this.updateDetails}
@@ -89,6 +95,9 @@ class RewardFormPageOne extends Component {
             style.detailsInput
           ]}
         />
+        <A_Text style={style.inputCaptionStyles}>
+          Longer description of details for detailed views
+        </A_Text>
         <A_Button
           value="Next"
           onPress={this.goToNext}
@@ -110,7 +119,7 @@ const style = StyleSheet.create({
     marginTop: getResponsiveCSSFrom8(30).height
   },
   formInputContainer: {
-    marginVertical: getResponsiveCSSFrom8(30).height,
+    marginTop: getResponsiveCSSFrom8(30).height,
     borderBottomWidth: 1
   },
   ratioInputContainer: {
@@ -128,10 +137,15 @@ const style = StyleSheet.create({
   nextButtonStyles: {
     alignItems: "center",
     backgroundColor: "#7b2525",
-    marginBottom: getResponsiveCSSFrom8(25).height
+    marginVertical: getResponsiveCSSFrom8(25).height
   },
   nextButtonTextStyles: {
     fontSize: getResponsiveCSSFrom8(20).height,
     color: "white"
+  },
+  inputCaptionStyles: {
+    color: "grey",
+    fontSize: getResponsiveCSSFrom8(18).height,
+    marginVertical: getResponsiveCSSFrom8(8).height
   }
 });

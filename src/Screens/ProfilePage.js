@@ -176,7 +176,10 @@ class ProfilePage extends Component {
             <A_Text style={[style.infoLabelStyles]}>Role</A_Text>
             <A_Input
               placeholder="Role"
-              defaultValue={employee.role.split("_").join(" ")}
+              defaultValue={employee.role
+                .split("_")
+                .slice(1)
+                .join(" ")}
               editable={false}
               style={[style.infoDetailStyles]}
             />
