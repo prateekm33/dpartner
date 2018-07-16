@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import { StyleSheet } from "react-native";
 import ImagePicker from "react-native-image-picker";
-import RNFetchBlob from "react-native-fetch-blob";
+import RNFetchBlob from "rn-fetch-blob";
 import { A_View, A_Text, A_Button, A_Image } from "chemics/Atoms";
 import ScreenContainer from "chemics/Templates/ScreenContainer";
 import { getResponsiveCSSFrom8 } from "../../utils";
+import base64 from "base-64";
 
 class DealFormPageTwo extends Component {
   constructor(props) {
@@ -36,9 +37,16 @@ class DealFormPageTwo extends Component {
         // check for appropriate size
         // width/height and most importantly: fileSize
         // although cloudinary may be able to dumb down the file size if needed...
-        this.setState({ image: response });
+        this.setState({ image_uri: response.uri });
         // let source = "data:image/jpeg;base64," + response.data;
-        // this.uploadFile(source)
+        this.uploadFile(response)
+          .then(res => res.json())
+          .then(result => {
+            console.warn("---results: ", result);
+          })
+          .catch(error => {
+            console.warn("--nvm errro", error);
+          });
         //   .then(res => res.text())
         //   .then(result => {
         //     console.warn("------url : ", result);
@@ -48,13 +56,24 @@ class DealFormPageTwo extends Component {
   };
 
   uploadFile = file => {
+    console.warn(file.uri, file.uri.split("file://")[1]);
+
     return RNFetchBlob.fetch(
       "POST",
       "https://api.cloudinary.com/v1_1/dlk4o3ttz/image/upload?upload_preset=dineable_dev_upload_preset",
       {
-        "Content-Type": "application/octet-stream"
+        "Content-Type": "application/json"
       },
-      RNFetchBlob.wrap(file.origURL)
+      // [
+      //   {
+      //     name: "file",
+      //     filename: file.fileName,
+      //     data:
+      //   }
+      // ]
+      JSON.stringify({
+        file: base64.encode(file.data)
+      })
     );
   };
 
@@ -81,14 +100,8 @@ class DealFormPageTwo extends Component {
         <A_Text strong>UPLOAD AN IMAGE</A_Text>
         <A_Button value="Choose an image" onPress={this.choose} />
         <A_Image
-          source={this.state.image ? { uri: this.state.image.uri } : null}
-          style={[
-            style.stockImageStyle,
-            this.state.image && {
-              height: this.state.image.height,
-              width: this.state.image.width
-            }
-          ]}
+          source={{ uri: this.state.image_uri }}
+          style={[style.stockImageStyle]}
         />
         <A_Button onPress={this.submit} value="Submit" />
       </ScreenContainer>
@@ -100,7 +113,7 @@ export default DealFormPageTwo;
 
 const style = StyleSheet.create({
   stockImageStyle: {
-    height: getResponsiveCSSFrom8(200).height,
-    width: "95%"
+    height: getResponsiveCSSFrom8(300).height,
+    width: getResponsiveCSSFrom8(300).width
   }
 });

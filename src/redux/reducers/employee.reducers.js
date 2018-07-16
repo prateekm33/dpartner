@@ -1,4 +1,4 @@
-import { createEmployee, updateEmployee } from "../../Models";
+import { createEmployee, updateEmployee, Employee } from "../../Models";
 import employee_types from "../types/employee.types";
 
 export default {

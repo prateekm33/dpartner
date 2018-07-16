@@ -127,7 +127,7 @@ class Api {
   loginEmployee = employee => {
     return this.post(config.api.employees.login, { employee })
       .then(this.saveTokenAndEmployeeFromResponse)
-      .then(res => createEmployee(res.employee));
+      .then(res => createEmployee({ ...res.employee, is_authenticated: true }));
   };
 
   signupEmployee = employee => {
