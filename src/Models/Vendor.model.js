@@ -7,13 +7,6 @@ import phone from "phone";
 export class Vendor extends DataModel {
   static validProperties = {
     name: { type: String, default: "" },
-    // location: {
-    //   type: Location,
-    //   default: () => new Location(),
-    //   verifyValue: value => {
-    //     return value instanceof Location ? value : new Location(value);
-    //   }
-    // },
     business_phone: {
       type: String,
       default: "",
@@ -42,7 +35,14 @@ export class Vendor extends DataModel {
           hour => (hour instanceof Hour ? hour : new Hour(hour))
         );
       }
-    }
+    },
+    cuisines: {
+      type: Array,
+      default: () => []
+    },
+    address: { type: String, default: "" },
+    latitude: { type: Number, default: 0 },
+    longitude: { type: Number, default: 0 }
   };
 }
 

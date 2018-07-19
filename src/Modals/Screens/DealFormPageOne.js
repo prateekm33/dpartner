@@ -14,7 +14,8 @@ class DealFormPageOne extends Component {
       headline: "",
       details: "",
       expiration: null,
-      discount_amount: 0
+      discount_amount: 0,
+      tags: ""
     };
   }
 
@@ -24,6 +25,7 @@ class DealFormPageOne extends Component {
   updateHeadline = headline => this.setState({ headline });
   updateDetails = details => this.setState({ details });
   updateExpiration = expiration => this.setState({ expiration });
+  updateTags = tags => this.setState({ tags });
 
   goToNext = () =>
     this.props.navigation.navigate(
@@ -59,7 +61,7 @@ class DealFormPageOne extends Component {
           style={[style.formInputContainer]}
         />
         <A_Input
-          placeholder="Discount amount"
+          placeholder="Discount amount (%)"
           onChangeText={this.updateDiscountAmount}
           style={[style.formInputContainer]}
         />
@@ -84,9 +86,16 @@ class DealFormPageOne extends Component {
           onChangeText={this.updateDetails}
           numberOfLines={5}
           multiline={true}
-          style={{ height: getResponsiveCSSFrom8(200).height }}
           style={[style.formInputContainer, style.detailsInput]}
         />
+        <A_Input
+          placeholder="Tags"
+          numberOfLines={3}
+          multiline={true}
+          style={[style.formInputContainer]}
+          onChangeText={this.updateTags}
+        />
+        <A_Text>Enter as many tags as you'd like separated by commas.</A_Text>
         <A_Button
           value="Next"
           onPress={this.goToNext}

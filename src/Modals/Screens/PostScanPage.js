@@ -12,7 +12,10 @@ import {
   fetchCustomerRewardDetailsAction
 } from "../../redux/actions/reward.actions";
 import { fetchCustomerDealDetailsAction } from "../../redux/actions/deal.actions";
-import { fetchCustomerDetailsAction } from "../../redux/actions/customer.actions";
+import {
+  fetchCustomerDetailsAction,
+  addCustomerVisitAction
+} from "../../redux/actions/customer.actions";
 
 /**
  * data shape
@@ -90,7 +93,7 @@ class PostScanRewardPage_Pre extends Component {
       )
     );
     const two = this.props.dispatch(
-      fetchCustomerDetailsAction(this.props.reward.customer_uuid)
+      fetchCustomerDetailsAction(this.state.reward.customer_uuid)
     );
 
     Promise.all([one, two]).then(results => {
@@ -104,14 +107,19 @@ class PostScanRewardPage_Pre extends Component {
     this.props
       .dispatch(
         redeemCustomerRewardPointsAction(
-          this.props.reward.points_to_redeem,
-          this.props.reward
+          this.state.reward.points_to_redeem,
+          this.state.reward
         )
       )
       .then(reward => {
         if (!reward) return;
         this.setState({ reward });
       });
+    this.props.dispatch(
+      addCustomerVisitAction({
+        customer_uuid: this.state.reward.customer_uuid
+      })
+    );
   };
 
   reward = () => {
@@ -121,6 +129,12 @@ class PostScanRewardPage_Pre extends Component {
         this.state.amount_spent,
         this.state.reward
       )
+    );
+    this.props.dispatch(
+      addCustomerVisitAction({
+        customer_uuid: this.state.reward.customer_uuid,
+        amount_spent: this.state.amount_spent
+      })
     );
   };
 
@@ -164,7 +178,7 @@ class PostScanRewardPage_Pre extends Component {
               justifyContent: "space-between"
             }}
           >
-            <A_Text strong>POIINTS CALCULATOR</A_Text>
+            <A_Text strong>POINTS CALCULATOR</A_Text>
             <A_Input
               placeholder="Amount spent"
               value={this.state.amount_spent}

@@ -23,3 +23,28 @@ export const fetchCustomerDetailsAction = customer_uuid => dispatch => {
       );
     });
 };
+
+export const addCustomerVisitAction = ({ customer_uuid }) => dispatch => {
+  dispatch({
+    type: loading_types.ADDING_CUSTOMER_VISITS,
+    loading: true
+  });
+  return Api.addCustomerVisitAction({ customer_uuid })
+    .then(visits => {
+      dispatch({
+        type: loading_types.ADDING_CUSTOMER_VISITS,
+        loading: false
+      });
+      return visits;
+    })
+    .catch(error => {
+      dispatch({
+        type: loading_types.ADDING_CUSTOMER_VISITS,
+        loading: false
+      });
+      dispatchErrorActionOfType(error_types.ADDING_CUSTOMER_VISITS_ERROR)(
+        error
+      );
+      return false;
+    });
+};

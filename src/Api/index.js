@@ -63,14 +63,22 @@ class Api {
   };
 
   post = (url, body, options) => {
+    options = options || {};
+    options.headers = options.headers || {};
+    if (
+      options.headers["content-type"] === "multipart/form-data" ||
+      options.headers["Content-Type"] === "multipart/form-data"
+    ) {
+      body = body;
+    } else body = JSON.stringify(body);
     return this.fetch(url, {
       ...(options || {}),
       method: "post",
       headers: {
         "content-type": "application/json",
-        ...((options || {}).headers || {})
+        ...(options.headers || {})
       },
-      body: JSON.stringify(body)
+      body
     });
   };
 
@@ -133,7 +141,7 @@ class Api {
   signupEmployee = employee => {
     return this.post(config.api.vendors.employees, { employee })
       .then(this.saveTokenAndEmployeeFromResponse)
-      .then(res => createEmployee(res.employee));
+      .then(res => createEmployee({ ...res.employee, is_authenticated: true }));
   };
 
   getEmployee = (employee, vendor_uuid) => {
@@ -326,10 +334,30 @@ class Api {
       createCustomer(res.customer)
     );
 
-  createNewDeal = deal =>
-    this.post(config.api.vendors.deals + "/" + this.employee.vendor_uuid, {
-      deal
-    }).then(res => createDeal(res.deal));
+  createNewDeal = deal => {
+    const image = deal.image;
+    const form_data = new FormData();
+    form_data.append("image", image);
+    delete deal.image;
+    return this.post(
+      config.api.vendors.deals + "/" + this.employee.vendor_uuid,
+      {
+        deal
+      }
+    ).then(res => {
+      form_data.append("deal_uuid", res.deal.uuid);
+      this.post(
+        config.api.vendors.deals + "/images/" + this.employee.vendor_uuid,
+        form_data,
+        {
+          headers: {
+            "content-type": "multipart/form-data"
+          }
+        }
+      ).catch(() => {});
+      return createDeal(res.deal);
+    });
+  };
 
   createNewLoyaltyProgram = loyalty_reward =>
     this.post(config.api.vendors.rewards + "/" + this.employee.vendor_uuid, {
@@ -364,6 +392,15 @@ class Api {
         updates
       }
     ).then(res => createLoyaltyReward(res.loyalty_reward));
+
+  addCustomerVisitAction = ({ customer_uuid }) =>
+    this.post(
+      config.api.customers.visits +
+        "/" +
+        customer_uuid +
+        "/" +
+        this.employee.vendor_uuid
+    );
 }
 
 export default new Api(config.api.root);

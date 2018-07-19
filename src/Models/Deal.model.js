@@ -31,6 +31,10 @@ export class Deal extends DataModel {
         if (!date.isValid()) return null;
         return date;
       }
+    },
+    tags: {
+      type: Array,
+      default: () => []
     }
   };
 
